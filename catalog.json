@@ -24,6 +24,18 @@
       "requires": {
         "env": ["USR_ETHERSCAN_API_KEY"]
       }
+    },
+    {
+      "slug": "wordpress",
+      "name": "WordPress",
+      "description": "Create and manage content on a WordPress site via the REST API: draft/publish/update posts and pages, upload images and set featured images, manage categories & tags, and moderate comments. Authenticates with an Application Password.",
+      "category": "content",
+      "tags": ["cms", "content", "blog", "publishing"],
+      "path": "skills/wordpress/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": ["USR_WORDPRESS_URL", "USR_WORDPRESS_USER", "USR_WORDPRESS_PWD"]
+      }
     }
   ]
 }
