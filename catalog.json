@@ -5,7 +5,8 @@
       "slug": "coingecko",
       "name": "CoinGecko",
       "description": "Live cryptocurrency prices and market data from CoinGecko. Ask for the current price, 24h change, or market cap of any coin or token.",
-      "category": "data",
+      "category": "crypto",
+      "tags": ["crypto", "defi", "market-data"],
       "path": "skills/coingecko/SKILL.md",
       "version": "0.2.0",
       "requires": {
@@ -13,21 +14,11 @@
       }
     },
     {
-      "slug": "weather",
-      "name": "Weather",
-      "description": "Current conditions and a multi-day forecast for any city via Open-Meteo. No API key needed — ask about the weather, forecast, temperature, or rain anywhere.",
-      "category": "data",
-      "path": "skills/weather/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": []
-      }
-    },
-    {
       "slug": "etherscan",
       "name": "Etherscan (Pro)",
       "description": "On-chain data for Ethereum + 60 EVM chains via Etherscan API V2: balances, transactions, ERC-20 transfers & holdings, contract ABI/source, gas, ETH price, plus PRO analytics (historical balances, token info, daily stats).",
-      "category": "data",
+      "category": "crypto",
+      "tags": ["crypto", "defi", "onchain"],
       "path": "skills/etherscan/SKILL.md",
       "version": "0.1.0",
       "requires": {
