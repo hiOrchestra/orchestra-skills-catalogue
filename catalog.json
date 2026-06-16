@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "slug": "coingecko",
+      "name": "CoinGecko",
+      "description": "Live cryptocurrency prices and market data from CoinGecko. Ask for the current price, 24h change, or market cap of any coin or token.",
+      "category": "data",
+      "path": "skills/coingecko/SKILL.md",
+      "version": "0.2.0",
+      "requires": {
+        "env": ["USR_COINGECKO_API_KEY"]
+      }
+    }
+  ]
+}
