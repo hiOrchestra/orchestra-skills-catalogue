@@ -22,6 +22,17 @@
       "requires": {
         "env": []
       }
+    },
+    {
+      "slug": "etherscan",
+      "name": "Etherscan (Pro)",
+      "description": "On-chain data for Ethereum + 60 EVM chains via Etherscan API V2: balances, transactions, ERC-20 transfers & holdings, contract ABI/source, gas, ETH price, plus PRO analytics (historical balances, token info, daily stats).",
+      "category": "data",
+      "path": "skills/etherscan/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": ["USR_ETHERSCAN_API_KEY"]
+      }
     }
   ]
 }
