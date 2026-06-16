@@ -11,6 +11,17 @@
       "requires": {
         "env": ["USR_COINGECKO_API_KEY"]
       }
+    },
+    {
+      "slug": "weather",
+      "name": "Weather",
+      "description": "Current conditions and a multi-day forecast for any city via Open-Meteo. No API key needed — ask about the weather, forecast, temperature, or rain anywhere.",
+      "category": "data",
+      "path": "skills/weather/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      }
     }
   ]
 }
