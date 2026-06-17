@@ -32,7 +32,7 @@
       "category": "content",
       "tags": ["cms", "content", "blog", "publishing"],
       "path": "skills/wordpress/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "requires": {
         "env": ["USR_WORDPRESS_URL", "USR_WORDPRESS_USER", "USR_WORDPRESS_PWD"]
       }

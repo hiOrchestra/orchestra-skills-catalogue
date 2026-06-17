@@ -1,6 +1,6 @@
 ---
 name: wordpress
-version: 0.1.0
+version: 0.2.0
 description: >-
   Create and manage content on a WordPress site via the WordPress REST API (v2):
   draft/publish/update posts and pages, upload images to the media library and
@@ -46,26 +46,51 @@ Three values are stored in config and available as env vars in `exec`:
 - `USR_WORDPRESS_URL` — the site root, e.g. `https://myblog.com` (no trailing slash)
 - `USR_WORDPRESS_USER` — the WordPress username
 - `USR_WORDPRESS_PWD` — an **Application Password** (WordPress 5.6+, generated under
-  Users → Profile → Application Passwords). It looks like `abcd EFGH ijkl 1234`;
-  the spaces are fine.
+  Users → Profile → Application Passwords). It looks like `abcd EFGH ijkl 1234`
+  (six 4-char groups); the spaces are fine.
+
+> **⚠️ This MUST be an Application Password, NOT the user's normal login
+> password.** The REST API rejects the regular wp-admin login password and
+> returns `401 rest_not_logged_in` — this is the #1 cause of auth failures. If
+> the value in `USR_WORDPRESS_PWD` doesn't look like six space-separated 4-char
+> groups, it's almost certainly the wrong password; tell the user to generate an
+> Application Password and store *that*.
 
 Authenticate with curl's `-u` flag on **every** request — this sends an
 `Authorization: Basic` header and keeps the password out of the URL. **Never
 print or echo `USR_WORDPRESS_PWD`** in your reply or in command output.
 
-API base: `$USR_WORDPRESS_URL/wp-json/wp/v2`
+### Resolve the API base first (once)
 
-### Verify auth first (once)
+WordPress exposes the REST API two ways. Try the pretty path first; if it returns
+a server **404 (HTML, not JSON)**, the host doesn't rewrite `/wp-json/` — fall
+back to the query-string form, which always works regardless of permalink config:
+
+| Form | Endpoint example | Extra params |
+|------|------------------|--------------|
+| Pretty (preferred) | `$USR_WORDPRESS_URL/wp-json/wp/v2/posts/123` | `?per_page=5&status=any` |
+| Query (`?rest_route=`, universal) | `$USR_WORDPRESS_URL/?rest_route=/wp/v2/posts/123` | `&per_page=5&status=any` |
+
+**Important for the query form:** the route lives in the `rest_route` value, so
+every *additional* parameter is joined with `&` (not `?`), e.g.
+`...?rest_route=/wp/v2/posts&per_page=5&context=edit`.
+
+Probe auth + base in one shot (try pretty, then query form on a 404):
 
 ```bash
 exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
   "$USR_WORDPRESS_URL/wp-json/wp/v2/users/me?context=edit"
+# If that returns an HTML 404 page, use the query form instead:
+exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
+  "$USR_WORDPRESS_URL/?rest_route=/wp/v2/users/me&context=edit"
 ```
 
-Returns the current user JSON on success. `401`/`403` with code
-`rest_not_logged_in` / `incorrect_password` means the credentials are wrong or
-Application Passwords are disabled — tell the user to check
-`USR_WORDPRESS_URL`, `USR_WORDPRESS_USER`, and `USR_WORDPRESS_PWD` in config.
+A `200` with the user JSON (note `roles` — needs an author/editor/admin to write)
+means you're good; keep using whichever form worked for every call below. The
+examples below use the pretty path — translate to the query form if that's the
+one that worked. `401 rest_not_logged_in` / `403 incorrect_password` means the
+credentials are wrong — almost always because `USR_WORDPRESS_PWD` is a login
+password instead of an Application Password (see the warning above).
 
 ## Posts
 
