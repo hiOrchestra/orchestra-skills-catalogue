@@ -26,6 +26,18 @@
       }
     },
     {
+      "slug": "tweetclaw",
+      "name": "TweetClaw",
+      "description": "Install and use the TweetClaw OpenClaw plugin for approved X/Twitter reads, writes, media, monitor, draw, and export workflows.",
+      "category": "social",
+      "tags": ["twitter", "x", "social-media", "automation"],
+      "path": "skills/tweetclaw/SKILL.md",
+      "version": "1.6.32",
+      "requires": {
+        "env": ["XQUIK_API_KEY"]
+      }
+    },
+    {
       "slug": "wordpress",
       "name": "WordPress",
       "description": "Create and manage content on a WordPress site via the REST API: draft/publish/update posts and pages, upload images and set featured images, manage categories & tags, and moderate comments. Authenticates with an Application Password.",
