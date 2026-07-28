@@ -6,11 +6,17 @@
       "name": "CoinGecko",
       "description": "Live cryptocurrency prices and market data from CoinGecko. Ask for the current price, 24h change, or market cap of any coin or token.",
       "category": "crypto",
-      "tags": ["crypto", "defi", "market-data"],
+      "tags": [
+        "crypto",
+        "defi",
+        "market-data"
+      ],
       "path": "skills/coingecko/SKILL.md",
       "version": "0.2.0",
       "requires": {
-        "env": ["USR_COINGECKO_API_KEY"]
+        "env": [
+          "USR_COINGECKO_API_KEY"
+        ]
       }
     },
     {
@@ -18,11 +24,17 @@
       "name": "Etherscan (Pro)",
       "description": "On-chain data for Ethereum + 60 EVM chains via Etherscan API V2: balances, transactions, ERC-20 transfers & holdings, contract ABI/source, gas, ETH price, plus PRO analytics (historical balances, token info, daily stats).",
       "category": "crypto",
-      "tags": ["crypto", "defi", "onchain"],
+      "tags": [
+        "crypto",
+        "defi",
+        "onchain"
+      ],
       "path": "skills/etherscan/SKILL.md",
       "version": "0.1.0",
       "requires": {
-        "env": ["USR_ETHERSCAN_API_KEY"]
+        "env": [
+          "USR_ETHERSCAN_API_KEY"
+        ]
       }
     },
     {
@@ -30,11 +42,213 @@
       "name": "WordPress",
       "description": "Create and manage content on a WordPress site via the REST API: draft/publish/update posts and pages, upload images and set featured images, manage categories & tags, and moderate comments. Authenticates with an Application Password.",
       "category": "content",
-      "tags": ["cms", "content", "blog", "publishing"],
+      "tags": [
+        "cms",
+        "content",
+        "blog",
+        "publishing"
+      ],
       "path": "skills/wordpress/SKILL.md",
       "version": "0.2.0",
       "requires": {
-        "env": ["USR_WORDPRESS_URL", "USR_WORDPRESS_USER", "USR_WORDPRESS_PWD"]
+        "env": [
+          "USR_WORDPRESS_URL",
+          "USR_WORDPRESS_USER",
+          "USR_WORDPRESS_PWD"
+        ]
+      }
+    },
+    {
+      "slug": "research-brief",
+      "name": "Research Brief",
+      "description": "Turn a research question into a structured, sourced brief — corroborated findings with a clear bottom line, not a link dump. Use for research / look into / brief me on / background on a topic, company, market, competitor, or person.",
+      "category": "methodology",
+      "tags": [
+        "research",
+        "analysis",
+        "synthesis",
+        "behavioral"
+      ],
+      "path": "skills/research-brief/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      }
+    },
+    {
+      "slug": "fact-check",
+      "name": "Fact Check",
+      "description": "Verify a specific factual claim — or a list of claims — against primary",
+      "category": "methodology",
+      "tags": [
+        "research",
+        "verification",
+        "behavioral"
+      ],
+      "path": "skills/fact-check/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      }
+    },
+    {
+      "slug": "content-plan",
+      "name": "Content Plan",
+      "description": "Plan a content calendar or strategy for a channel, campaign, or period —",
+      "category": "content",
+      "tags": [
+        "content",
+        "planning",
+        "marketing"
+      ],
+      "path": "skills/content-plan/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      }
+    },
+    {
+      "slug": "write-article",
+      "name": "Write Article",
+      "description": "Draft long-form written content — a blog post, article, or newsletter — from a",
+      "category": "content",
+      "tags": [
+        "content",
+        "writing",
+        "copywriting"
+      ],
+      "path": "skills/write-article/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      }
+    },
+    {
+      "slug": "build-report",
+      "name": "Build Report",
+      "description": "Turn findings, analysis, or data you already have into a polished, well-structured",
+      "category": "content",
+      "tags": [
+        "documents",
+        "reporting",
+        "deliverable"
+      ],
+      "path": "skills/build-report/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      }
+    },
+    {
+      "slug": "distill",
+      "name": "Distill",
+      "description": "Compress long source material — a document, transcript, thread, or paper —",
+      "category": "content",
+      "tags": [
+        "summarization",
+        "synthesis",
+        "behavioral"
+      ],
+      "path": "skills/distill/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      }
+    },
+    {
+      "slug": "proofread-edit",
+      "name": "Proofread & Edit",
+      "description": "Copy-edit and tighten an existing draft — grammar, clarity, concision, tone,",
+      "category": "content",
+      "tags": [
+        "editing",
+        "proofreading",
+        "writing"
+      ],
+      "path": "skills/proofread-edit/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      }
+    },
+    {
+      "slug": "analyze-data-quality",
+      "name": "Analyze Data Quality",
+      "description": "Assess whether a dataset can be trusted before anyone analyzes it — check",
+      "category": "analytics",
+      "tags": [
+        "data",
+        "quality",
+        "analysis"
+      ],
+      "path": "skills/analyze-data-quality/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      }
+    },
+    {
+      "slug": "explore-dataset",
+      "name": "Explore Dataset",
+      "description": "Explore a dataset to understand its shape and surface what matters —",
+      "category": "analytics",
+      "tags": [
+        "data",
+        "analysis",
+        "eda"
+      ],
+      "path": "skills/explore-dataset/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      }
+    },
+    {
+      "slug": "build-dashboard",
+      "name": "Build Dashboard",
+      "description": "Turn a dataset into a visual dashboard — the handful of KPIs and charts that",
+      "category": "analytics",
+      "tags": [
+        "data",
+        "dashboard",
+        "visualization"
+      ],
+      "path": "skills/build-dashboard/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      }
+    },
+    {
+      "slug": "plan-work",
+      "name": "Plan Work",
+      "description": "Break a goal or project into a concrete, sequenced plan — tasks in the right",
+      "category": "methodology",
+      "tags": [
+        "planning",
+        "project",
+        "behavioral"
+      ],
+      "path": "skills/plan-work/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      }
+    },
+    {
+      "slug": "decision-brief",
+      "name": "Decision Brief",
+      "description": "Weigh options against explicit criteria and recommend one, with the tradeoffs,",
+      "category": "methodology",
+      "tags": [
+        "decision",
+        "analysis",
+        "behavioral"
+      ],
+      "path": "skills/decision-brief/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
       }
     }
   ]
