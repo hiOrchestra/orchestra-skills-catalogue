@@ -78,7 +78,7 @@
     {
       "slug": "fact-check",
       "name": "Fact Check",
-      "description": "Verify a specific factual claim — or a list of claims — against primary",
+      "description": "Verify a specific factual claim — or a list of claims — against primary sources, ruling each True / False / Misleading / Unverifiable with the evidence and a confidence level.",
       "category": "methodology",
       "tags": [
         "research",
@@ -94,7 +94,7 @@
     {
       "slug": "content-plan",
       "name": "Content Plan",
-      "description": "Plan a content calendar or strategy for a channel, campaign, or period —",
+      "description": "Plan a content calendar or strategy for a channel, campaign, or period — audience, content pillars, formats, cadence, and a concrete dated schedule of pieces.",
       "category": "content",
       "tags": [
         "content",
@@ -110,7 +110,7 @@
     {
       "slug": "write-article",
       "name": "Write Article",
-      "description": "Draft long-form written content — a blog post, article, or newsletter — from a",
+      "description": "Draft long-form written content — a blog post, article, or newsletter — from a brief, outline, or topic, in the voice and length you ask for.",
       "category": "content",
       "tags": [
         "content",
@@ -126,7 +126,7 @@
     {
       "slug": "build-report",
       "name": "Build Report",
-      "description": "Turn findings, analysis, or data you already have into a polished, well-structured",
+      "description": "Turn findings, analysis, or data you already have into a polished deliverable document — a report, DOCX, PDF, or slide deck.",
       "category": "content",
       "tags": [
         "documents",
@@ -142,7 +142,7 @@
     {
       "slug": "distill",
       "name": "Distill",
-      "description": "Compress long source material — a document, transcript, thread, or paper —",
+      "description": "Compress long source material — a document, transcript, thread, or paper — into a faithful, tight summary at the length you need, bottom line first.",
       "category": "content",
       "tags": [
         "summarization",
@@ -158,7 +158,7 @@
     {
       "slug": "proofread-edit",
       "name": "Proofread & Edit",
-      "description": "Copy-edit and tighten an existing draft — grammar, clarity, concision, tone,",
+      "description": "Copy-edit and tighten an existing draft — grammar, clarity, concision, tone, consistency — returning a cleaner version plus a short list of the changes made.",
       "category": "content",
       "tags": [
         "editing",
@@ -174,7 +174,7 @@
     {
       "slug": "analyze-data-quality",
       "name": "Analyze Data Quality",
-      "description": "Assess whether a dataset can be trusted before anyone analyzes it — check",
+      "description": "Assess whether a dataset can be trusted before anyone analyzes it — completeness, validity, duplicates, outliers, consistency and freshness — with each issue rated by severity and a go / caution / no-go verdict.",
       "category": "analytics",
       "tags": [
         "data",
@@ -190,7 +190,7 @@
     {
       "slug": "explore-dataset",
       "name": "Explore Dataset",
-      "description": "Explore a dataset to understand its shape and surface what matters —",
+      "description": "Explore a dataset to understand its shape and surface what matters — distributions, segments, trends, outliers and relationships — before committing to a report or dashboard.",
       "category": "analytics",
       "tags": [
         "data",
@@ -206,7 +206,7 @@
     {
       "slug": "build-dashboard",
       "name": "Build Dashboard",
-      "description": "Turn a dataset into a visual dashboard — the handful of KPIs and charts that",
+      "description": "Turn a dataset into a visual dashboard on the Canvas — the handful of KPIs and charts that answer the stakeholder's question, each labelled with its data window and source.",
       "category": "analytics",
       "tags": [
         "data",
@@ -220,9 +220,26 @@
       }
     },
     {
+      "slug": "build-data-view",
+      "name": "Build Data View",
+      "description": "Build a screen people work in, not just look at — a list of records with search, filters, sorting, paging, empty and error states, and safe status changes, on the Canvas.",
+      "category": "analytics",
+      "tags": [
+        "data",
+        "interface",
+        "canvas",
+        "ux"
+      ],
+      "path": "skills/build-data-view/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      }
+    },
+    {
       "slug": "plan-work",
       "name": "Plan Work",
-      "description": "Break a goal or project into a concrete, sequenced plan — tasks in the right",
+      "description": "Break a goal or project into a concrete, sequenced plan — tasks in the right order, dependencies, owners, effort, and a realistic timeline someone can actually execute.",
       "category": "methodology",
       "tags": [
         "planning",
@@ -238,7 +255,7 @@
     {
       "slug": "decision-brief",
       "name": "Decision Brief",
-      "description": "Weigh options against explicit criteria and recommend one, with the tradeoffs,",
+      "description": "Weigh options against explicit criteria and recommend one, with the tradeoffs, risks and reasoning laid out — a defensible call, not a pros-and-cons dump.",
       "category": "methodology",
       "tags": [
         "decision",

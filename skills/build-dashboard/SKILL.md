@@ -45,6 +45,10 @@ window of data it covers and where it came from.
 - **build-report** — when the deliverable should be a static document
   (DOCX/PDF/deck) rather than an interactive Canvas surface. Hand it the chosen
   metrics and charts.
+- **build-data-view** — when people need to *work in* the records rather than
+  read the numbers: find a row, filter, open it, change its status. A dashboard
+  is read; a data view is operated. They pair well — KPI tiles on top, the
+  filterable list below.
 (If a referenced skill is not installed, do the equivalent inline.)
 
 ## When to use
