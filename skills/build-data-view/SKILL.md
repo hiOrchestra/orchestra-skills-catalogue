@@ -3,34 +3,17 @@ name: build-data-view
 version: 0.1.0
 description: >-
   Build a screen people work *in*, not just look at — a list of records with
-  filters, sorting, paging and status changes that behaves the way users expect.
-  Use when the user says "build a screen to manage X", "a table of our orders /
-  leads / tickets", "I need to filter and update these", "a view of the database",
-  "admin screen", "make this list usable", or asks to add filters, search, paging
-  or a status toggle to an existing view. Not for choosing which KPIs to show
-  (build-dashboard) and not for a static document (build-report).
-triggers:
-  - build a screen to manage
-  - screen to manage our data
-  - table of our records
-  - list of orders
-  - list of leads
-  - admin screen
-  - manage this data
-  - view of the database
-  - add filters to this
-  - make this list usable
-  - let me update the status
-  - I need to filter and sort this
+  filters, sorting, paging and status changes that behaves the way users
+  expect. Use when the user says "build a screen to manage X", "a table of our
+  orders / leads / tickets", "I need to filter and update these", "a view of
+  the database", "admin screen", "make this list usable", or asks to add
+  filters, search, paging or a status toggle to an existing view. Not for
+  choosing which KPIs to show (build-dashboard) and not for a static document
+  (build-report).
 metadata:
   openclaw:
     emoji: "🗂️"
-requires:
-  bins: []
-  env: []
-  config: []
 ---
-
 # Build Data View — records people can find, read and change
 
 Build a working surface over a set of records: a list someone opens every day to
