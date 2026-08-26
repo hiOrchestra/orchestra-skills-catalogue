@@ -2,37 +2,22 @@
 name: wordpress
 version: 0.2.0
 description: >-
-  Create and manage content on a WordPress site via the WordPress REST API (v2):
-  draft/publish/update posts and pages, upload images to the media library and
-  set featured images, manage categories & tags, and moderate comments.
-  Authenticates with an Application Password using Basic auth — site URL in
-  USR_WORDPRESS_URL, username in USR_WORDPRESS_USER, app password in
-  USR_WORDPRESS_PWD.
-triggers:
-  - wordpress
-  - wp
-  - blog post
-  - publish post
-  - draft post
-  - cms
-  - article
-  - featured image
-  - wp media
-  - categories
-  - tags
-  - moderate comments
+  Create and manage content on a WordPress site via the WordPress REST API
+  (v2): draft/publish/update posts and pages, upload images to the media
+  library and set featured images, manage categories & tags, and moderate
+  comments. Authenticates with an Application Password using Basic auth — site
+  URL in USR_WORDPRESS_URL, username in USR_WORDPRESS_USER, app password in
+  USR_WORDPRESS_PWD. Use when the user says "wp", "blog post", "cms",
+  "article".
 metadata:
   openclaw:
     emoji: "📝"
-requires:
-  bins: []
-  env:
-    - USR_WORDPRESS_URL
-    - USR_WORDPRESS_USER
-    - USR_WORDPRESS_PWD
-  config: []
+    requires:
+      env:
+        - USR_WORDPRESS_URL
+        - USR_WORDPRESS_USER
+        - USR_WORDPRESS_PWD
 ---
-
 # WordPress — create & manage content
 
 Manage a WordPress site by calling its REST API (v2) directly with `exec curl`.

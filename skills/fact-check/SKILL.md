@@ -4,30 +4,16 @@ version: 0.1.0
 description: >-
   Verify a specific factual claim — or a list of claims — against primary
   sources and rule each True / False / Misleading / Unverifiable with evidence
-  and a confidence level. Use when the user says "fact-check this", "is it true
-  that…", "verify this claim", "did X really happen", "debunk", "is this
-  accurate", or pastes a statement/quote/stat and wants it checked. Not for
-  open-ended research on a topic (that is research-brief), and not for opinions
-  or predictions that cannot be verified.
-triggers:
-  - fact-check this
-  - is it true that
-  - verify this claim
-  - is this accurate
-  - did X really happen
-  - debunk
-  - is this real
-  - check whether
-  - verify these numbers
+  and a confidence level. Use when the user says "fact-check this", "is it
+  true that…", "verify this claim", "did X really happen", "debunk", "is this
+  accurate", or pastes a statement/quote/stat and wants it checked, "check
+  whether", "verify these numbers". Not for open-ended research on a topic
+  (that is research-brief), and not for opinions or predictions that cannot be
+  verified.
 metadata:
   openclaw:
     emoji: "✅"
-requires:
-  bins: []
-  env: []
-  config: []
 ---
-
 # Fact-Check — verify specific claims against primary sources
 
 Take a specific claim (or a list of them) and rule on each one: True, False,

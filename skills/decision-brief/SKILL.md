@@ -2,31 +2,17 @@
 name: decision-brief
 version: 0.1.0
 description: >-
-  Weigh options against explicit criteria and recommend one, with the tradeoffs,
-  risks, and reasoning laid out. Use when the user says "should we", "which
-  option", "help me decide", "A vs B", "make the case for", "what should I
-  choose", or "recommend one" — a defensible call, not a pros/cons dump. Not for
-  executing an already-made decision, and not for open research with no choice
-  attached.
-triggers:
-  - should we
-  - which option
-  - help me decide
-  - which one should we pick
-  - A vs B
-  - make a recommendation
-  - what should I choose
-  - weigh the options
-  - build vs buy
+  Weigh options against explicit criteria and recommend one, with the
+  tradeoffs, risks, and reasoning laid out. Use when the user says "should
+  we", "which option", "help me decide", "A vs B", "make the case for", "what
+  should I choose", or "recommend one" — a defensible call, not a pros/cons
+  dump, "which one should we pick", "make a recommendation", "build vs buy".
+  Not for executing an already-made decision, and not for open research with
+  no choice attached.
 metadata:
   openclaw:
     emoji: "⚖️"
-requires:
-  bins: []
-  env: []
-  config: []
 ---
-
 # Decision Brief — options → a defensible recommendation
 
 Turn a choice into a defensible decision: frame what is being decided, lay out

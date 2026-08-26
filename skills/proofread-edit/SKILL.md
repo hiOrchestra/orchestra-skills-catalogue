@@ -4,29 +4,14 @@ version: 0.1.0
 description: >-
   Copy-edit and tighten an existing draft — grammar, clarity, concision, tone,
   consistency — and return a cleaner version plus a short list of the changes.
-  Use when the user says "proofread", "edit this", "copy-edit", "clean this up",
-  "tighten this", "polish", "fix the grammar", or hands you text and asks for a
-  once-over. Not for writing from scratch, and not for checking whether the
-  content is true.
-triggers:
-  - proofread
-  - edit this
-  - copy-edit
-  - clean this up
-  - tighten this
-  - polish this
-  - fix the grammar
-  - give this a once-over
-  - make this read better
+  Use when the user says "proofread", "edit this", "copy-edit", "clean this
+  up", "tighten this", "polish", "fix the grammar", or hands you text and asks
+  for a once-over, "give this a once-over", "make this read better". Not for
+  writing from scratch, and not for checking whether the content is true.
 metadata:
   openclaw:
     emoji: "🖊️"
-requires:
-  bins: []
-  env: []
-  config: []
 ---
-
 # Proofread & Edit — tighten a draft, keep the author's voice
 
 Take an existing draft and return a cleaner version — correct, clear, and tight —

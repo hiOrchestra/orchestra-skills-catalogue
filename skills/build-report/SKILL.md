@@ -2,30 +2,16 @@
 name: build-report
 version: 0.1.0
 description: >-
-  Turn findings, analysis, or data you already have into a polished, well-structured
-  deliverable document — a report, DOCX, PDF, or slide deck — built with orch-docs.
-  Use when the user says "write up a report", "make a PDF", "turn this into a deck",
-  "put together a document", "format this into a report", or "create a presentation"
-  from material that already exists. Not for gathering the findings themselves.
-triggers:
-  - write up a report
-  - turn this into a report
-  - make a PDF
-  - make a deck
-  - build a presentation
-  - put together a document
-  - format this into a report
-  - create a slide deck
-  - polished document
+  Turn findings, analysis, or data you already have into a polished,
+  well-structured deliverable document — a report, DOCX, PDF, or slide deck —
+  built with orch-docs. Use when the user says "write up a report", "make a
+  PDF", "turn this into a deck", "put together a document", "format this into
+  a report", or "create a presentation" from material that already exists,
+  "build a presentation". Not for gathering the findings themselves.
 metadata:
   openclaw:
     emoji: "📄"
-requires:
-  bins: []
-  env: []
-  config: []
 ---
-
 # Build Report — findings → polished deliverable document
 
 Take material that already exists — research, analysis, a dataset's key findings —

@@ -3,31 +3,17 @@ name: analyze-data-quality
 version: 0.1.0
 description: >-
   Assess whether a dataset can be trusted before anyone analyzes it — check
-  completeness, validity, duplicates, outliers, consistency, and freshness, then
-  report each issue with a severity and a go / caution / no-go verdict. Use when
-  the user says "is this data clean?", "can I trust this data?", "check the data
-  quality", "audit this dataset", "any problems with this CSV", or "is this table
-  reliable". Not for finding insights (explore-dataset) or building a visual
+  completeness, validity, duplicates, outliers, consistency, and freshness,
+  then report each issue with a severity and a go / caution / no-go verdict.
+  Use when the user says "is this data clean?", "can I trust this data?",
+  "check the data quality", "audit this dataset", "any problems with this
+  CSV", or "is this table reliable", "validate this data", "how good is this
+  data". Not for finding insights (explore-dataset) or building a visual
   (build-dashboard).
-triggers:
-  - is this data clean
-  - can I trust this data
-  - check the data quality
-  - audit this dataset
-  - any problems with this CSV
-  - data quality check
-  - is this table reliable
-  - validate this data
-  - how good is this data
 metadata:
   openclaw:
     emoji: "🧪"
-requires:
-  bins: []
-  env: []
-  config: []
 ---
-
 # Analyze Data Quality — is this dataset trustworthy?
 
 Judge whether a dataset is fit to analyze *before* anyone draws conclusions from

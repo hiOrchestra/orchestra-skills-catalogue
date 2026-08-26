@@ -6,22 +6,12 @@ description: >-
   questions about the current price, 24h change, or market cap of any coin or
   token (Bitcoin, Ethereum, etc.). Authenticates with the CoinGecko Demo API
   key stored in config as USR_COINGECKO_API_KEY.
-triggers:
-  - crypto
-  - cryptocurrency
-  - bitcoin
-  - ethereum
-  - coin
-  - token
-  - price of
-  - market cap
-requires:
-  bins: []
-  env:
-    - USR_COINGECKO_API_KEY
-  config: []
+metadata:
+  openclaw:
+    requires:
+      env:
+        - USR_COINGECKO_API_KEY
 ---
-
 # CoinGecko — live crypto prices
 
 Answer crypto price / market questions by calling CoinGecko's REST API directly

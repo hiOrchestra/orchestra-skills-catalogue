@@ -4,29 +4,14 @@ version: 0.1.0
 description: >-
   Turn a dataset into a visual dashboard — the handful of KPIs and charts that
   answer the stakeholder's question — on the portal Canvas or as a report. Use
-  when the user says "build a dashboard", "visualize this data", "dashboard for
-  our KPIs", "make charts from this", "sales/marketing dashboard", or "show me
-  the metrics that matter". Not for the underlying analysis or the trust check —
-  do those first.
-triggers:
-  - build a dashboard
-  - make a dashboard
-  - visualize this data
-  - dashboard for our KPIs
-  - make charts from this
-  - sales dashboard
-  - marketing dashboard
-  - show me the metrics that matter
-  - turn this into charts
+  when the user says "build a dashboard", "visualize this data", "dashboard
+  for our KPIs", "make charts from this", "sales/marketing dashboard", or
+  "show me the metrics that matter". Not for the underlying analysis or the
+  trust check — do those first.
 metadata:
   openclaw:
     emoji: "📊"
-requires:
-  bins: []
-  env: []
-  config: []
 ---
-
 # Build Dashboard — dataset → the metrics that matter, shown
 
 Turn a dataset into a focused visual dashboard: the 4–8 metrics and charts that

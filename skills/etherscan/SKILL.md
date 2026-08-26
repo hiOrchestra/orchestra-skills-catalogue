@@ -5,30 +5,15 @@ description: >-
   On-chain data for Ethereum and 60+ EVM chains via the Etherscan API (V2):
   address balances, transactions, ERC-20 transfers/holdings, contract ABI &
   source, gas oracle, ETH price, and PRO analytics (historical balances, token
-  info, daily stats). Authenticates with USR_ETHERSCAN_API_KEY.
-triggers:
-  - etherscan
-  - ethereum
-  - on-chain
-  - onchain
-  - wallet
-  - address balance
-  - transactions
-  - erc20
-  - token holdings
-  - contract abi
-  - gas price
-  - gwei
+  info, daily stats). Authenticates with USR_ETHERSCAN_API_KEY. Use when the
+  user says "onchain", "wallet", "erc20", "gwei".
 metadata:
   openclaw:
     emoji: "⛓️"
-requires:
-  bins: []
-  env:
-    - USR_ETHERSCAN_API_KEY
-  config: []
+    requires:
+      env:
+        - USR_ETHERSCAN_API_KEY
 ---
-
 # Etherscan (API V2 + PRO)
 
 Query on-chain data with `exec curl` against the Etherscan **V2** API. One API

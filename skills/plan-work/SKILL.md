@@ -6,27 +6,13 @@ description: >-
   order, dependencies, owners, effort, and a realistic timeline someone can
   actually execute. Use when the user says "plan", "break this down", "project
   plan", "roadmap", "how do we get this done", "sequence the work", "who does
-  what by when", or hands you a goal and wants steps. Not for choosing between
-  options (that's a decision), and not for researching the domain first.
-triggers:
-  - plan this
-  - break this down
-  - project plan
-  - roadmap
-  - how do we get this done
-  - sequence the work
-  - who does what by when
-  - build a timeline
-  - lay out the steps
+  what by when", or hands you a goal and wants steps, "build a timeline". Not
+  for choosing between options (that's a decision), and not for researching
+  the domain first.
 metadata:
   openclaw:
     emoji: "🗂️"
-requires:
-  bins: []
-  env: []
-  config: []
 ---
-
 # Plan Work — goal → a sequenced, executable plan
 
 Turn a goal into a plan someone can act on today: the tasks, their order and

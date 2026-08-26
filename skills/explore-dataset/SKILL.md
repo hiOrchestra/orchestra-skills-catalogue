@@ -6,28 +6,13 @@ description: >-
   distributions, segments, trends, outliers and relationships — before
   committing to a report or dashboard. Use when the user says "explore this
   data", "analyze this CSV/table", "what's in this dataset", "find patterns/
-  insights", "what stands out", or hands you data and asks "what does this tell
-  us?". Not for judging whether the data is trustworthy, and not for the final
-  chart or document.
-triggers:
-  - explore this dataset
-  - analyze this CSV
-  - analyze this data
-  - what's in this data
-  - find patterns in
-  - what insights are in
-  - what stands out in this data
-  - dig into this data
-  - exploratory analysis
+  insights", "what stands out", or hands you data and asks "what does this
+  tell us?", "dig into this data", "exploratory analysis". Not for judging
+  whether the data is trustworthy, and not for the final chart or document.
 metadata:
   openclaw:
     emoji: "🔬"
-requires:
-  bins: []
-  env: []
-  config: []
 ---
-
 # Explore Dataset — data → its shape and the findings that matter
 
 Do exploratory analysis: understand what the dataset is, then surface the

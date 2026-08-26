@@ -6,27 +6,13 @@ description: >-
   into a faithful, tight summary at a target length and for a target reader,
   bottom line first. Use when the user says "summarize", "distill", "TL;DR",
   "condense this", "give me the gist", "boil it down", "key takeaways", or
-  "shorten" and points you at existing material. Not for researching new
-  information, and not for producing a formatted document.
-triggers:
-  - summarize this
-  - distill
-  - TL;DR
-  - condense this
-  - give me the gist
-  - boil it down
-  - key takeaways
-  - shorten this
-  - what are the main points
+  "shorten" and points you at existing material, "what are the main points".
+  Not for researching new information, and not for producing a formatted
+  document.
 metadata:
   openclaw:
     emoji: "🗜️"
-requires:
-  bins: []
-  env: []
-  config: []
 ---
-
 # Distill — long source material → faithful, tight summary
 
 Take source material the user already has and compress it into a summary that a

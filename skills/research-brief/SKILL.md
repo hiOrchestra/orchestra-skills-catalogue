@@ -4,28 +4,14 @@ version: 0.1.0
 description: >-
   Turn a research question into a structured, sourced brief — corroborated
   findings with a clear bottom line, not a link dump. Use when the user says
-  "research", "look into", "find out about", "brief me on", "background on", or
-  "what do we know about" a topic, company, market, competitor, or person and
-  wants a synthesized answer with sources. Not for a single quick fact.
-triggers:
-  - research
-  - look into
-  - find out about
-  - brief me on
-  - background on
-  - what do we know about
-  - deep dive
-  - competitive analysis
-  - market research
+  "research", "look into", "find out about", "brief me on", "background on",
+  or "what do we know about" a topic, company, market, competitor, or person
+  and wants a synthesized answer with sources, "deep dive", "competitive
+  analysis". Not for a single quick fact.
 metadata:
   openclaw:
     emoji: "🔎"
-requires:
-  bins: []
-  env: []
-  config: []
 ---
-
 # Research Brief — question → sourced, synthesized brief
 
 Produce a decision-useful brief on a topic, not a pile of links. Scope to the

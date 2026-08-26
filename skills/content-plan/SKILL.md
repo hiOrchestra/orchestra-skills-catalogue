@@ -3,30 +3,16 @@ name: content-plan
 version: 0.1.0
 description: >-
   Plan a content calendar or strategy for a channel, campaign, or period —
-  audience, content pillars, formats, cadence, and a concrete dated schedule of
-  pieces. Use when the user says "content plan", "content calendar", "editorial
-  calendar", "what should I post", "plan my content", "social media strategy",
-  or "content for next month/quarter". Not for writing an individual piece
-  (write-article) or researching a topic from scratch (research-brief).
-triggers:
-  - content plan
-  - content calendar
-  - editorial calendar
-  - plan my content
-  - what should I post
-  - social media strategy
-  - content strategy
-  - content for next month
-  - posting schedule
+  audience, content pillars, formats, cadence, and a concrete dated schedule
+  of pieces. Use when the user says "content plan", "content calendar",
+  "editorial calendar", "what should I post", "plan my content", "social media
+  strategy", or "content for next month/quarter", "posting schedule". Not for
+  writing an individual piece (write-article) or researching a topic from
+  scratch (research-brief).
 metadata:
   openclaw:
     emoji: "🗓️"
-requires:
-  bins: []
-  env: []
-  config: []
 ---
-
 # Content Plan — audience, pillars, cadence → a dated schedule
 
 Turn a vague "we need to post more" into a plan someone can execute: who it's

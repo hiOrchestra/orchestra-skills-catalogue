@@ -2,30 +2,16 @@
 name: write-article
 version: 0.1.0
 description: >-
-  Draft long-form written content — a blog post, article, or newsletter — from a
-  brief, outline, or topic, in the requested voice and length. Use when the user
-  says "write a blog post", "draft an article", "write the newsletter", "turn
-  this outline into a post", "write me a piece on", or "draft ~800 words on".
-  Not for planning a whole content program (content-plan) or polishing an
-  existing draft (proofread-edit).
-triggers:
-  - write a blog post
-  - draft an article
-  - write the newsletter
-  - turn this outline into a post
-  - write a piece on
-  - draft ~800 words on
-  - write me a post about
-  - ghostwrite
+  Draft long-form written content — a blog post, article, or newsletter — from
+  a brief, outline, or topic, in the requested voice and length. Use when the
+  user says "write a blog post", "draft an article", "write the newsletter",
+  "turn this outline into a post", "write me a piece on", or "draft ~800 words
+  on", "write me a post about", "ghostwrite". Not for planning a whole content
+  program (content-plan) or polishing an existing draft (proofread-edit).
 metadata:
   openclaw:
     emoji: "✍️"
-requires:
-  bins: []
-  env: []
-  config: []
 ---
-
 # Write Article — brief/outline → finished long-form draft
 
 Turn a topic, brief, or outline into a publishable piece — a blog post, article,
