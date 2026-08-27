@@ -326,6 +326,33 @@
         "references/worker.js",
         "scripts/deploy.py"
       ]
+    },
+    {
+      "slug": "design-taste-frontend",
+      "name": "Design Taste (Frontend)",
+      "description": "Design and build frontends that do not look AI-generated — landing pages, marketing sites, portfolios, blogs and redesigns. Reads the brief, commits to a direction, picks a real design system when one fits, and checks its own work against the tells that give machine-made pages away.",
+      "category": "design",
+      "tags": [
+        "design",
+        "frontend",
+        "css",
+        "landing-page",
+        "redesign"
+      ],
+      "path": "skills/design-taste-frontend/SKILL.md",
+      "version": "0.1.0",
+      "files": [
+        "references/ai-tells.md",
+        "references/architecture.md",
+        "references/block-library.md",
+        "references/design-systems.md",
+        "references/directives.md",
+        "references/liquid-glass.md",
+        "references/preflight.md",
+        "references/proactivity.md",
+        "references/redesign.md",
+        "references/vocabulary.md"
+      ]
     }
   ]
 }

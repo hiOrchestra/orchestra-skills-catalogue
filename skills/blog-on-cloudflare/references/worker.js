@@ -128,6 +128,14 @@ const UI = {
   bad_email:       'Invalid email.',
   post_not_found:  'Article not found.',
   comments_closed: 'Comments are closed.',
+  follow_link:     'Get new posts automatically',
+  follow_title:    'Get new posts automatically',
+  follow_lede:     'No account, no newsletter, no algorithm deciding what you see. You add this blog to a reader app once, and every new article turns up there by itself — the same way a podcast app collects new episodes.',
+  follow_step1:    'Install a reader. Most people use one of these, and all have a free version:',
+  follow_step2:    'Paste this address into it:',
+  follow_copy:     'Copy',
+  follow_copied:   'Copied',
+  follow_outro:    'That is all. Nothing is sent to us, and nobody gets your email address.',
 };
 /** A visitor-facing string: `ui_<key>` from settings, else the English default. */
 const t = (cfg, key, vars) => {
@@ -247,11 +255,17 @@ form.comment-form textarea{min-height:7rem;resize:vertical}
 form.comment-form button{font:inherit;justify-self:start;padding:.6rem 1.3rem;border:0;border-radius:3px;
   background:var(--accent);color:#fff;cursor:pointer}
 .note{font-size:.86rem;color:var(--ink-3)}
+.feedbox{display:flex;gap:.5rem;margin:.6rem 0 1.5rem;max-width:34rem}
+.feedbox input{flex:1;font:inherit;font-size:.9rem;padding:.6rem .7rem;border:1px solid var(--edge);
+  background:#fff;border-radius:3px;color:var(--ink-2)}
+.feedbox button{font:inherit;padding:.6rem 1.1rem;border:0;border-radius:3px;background:var(--accent);
+  color:#fff;cursor:pointer;white-space:nowrap}
 .banner{background:#fff6e5;border:1px solid #e8d5a8;padding:.7rem 1rem;border-radius:3px;font-size:.88rem;margin-bottom:2rem}
 footer.site{border-top:1px solid var(--edge);margin-top:4rem;padding:2rem 0 3rem;color:var(--ink-3);font-size:.85rem}
 @media(prefers-color-scheme:dark){
   :root{--ink:#e8e6e1;--ink-2:#b4b1a9;--ink-3:#8a877f;--paper:#161614;--edge:#2e2d29}
-  form.comment-form input,form.comment-form textarea,.reactions button{background:#1f1e1b;color:var(--ink)}
+  form.comment-form input,form.comment-form textarea,.reactions button,
+  .feedbox input{background:#1f1e1b;color:var(--ink)}
   .banner{background:#2a2415;border-color:#4a3f22}
 }
 </style>
@@ -262,7 +276,7 @@ footer.site{border-top:1px solid var(--edge);margin-top:4rem;padding:2rem 0 3rem
   ${s.tagline ? `<p>${esc(s.tagline)}</p>` : ''}
 </div></header>
 <main class="wrap">${body}</main>
-<footer class="site"><div class="wrap">${esc(s.footer || s.title)} · <a href="/rss.xml">RSS</a></div></footer>
+<footer class="site"><div class="wrap">${esc(s.footer || s.title)} · <a href="/follow">${esc(t(s, 'follow_link'))}</a></div></footer>
 </body></html>`;
 
 // ── public pages ────────────────────────────────────────────────────────────
@@ -427,6 +441,64 @@ async function media(env, key, request) {
   headers.set('etag', etag);
   headers.set('cache-control', 'public, max-age=31536000, immutable');
   return new Response(object.body, { headers });
+}
+
+/**
+ * "Get new posts automatically" — RSS, explained to someone who has never
+ * heard of it.
+ *
+ * The footer used to carry a bare link labelled RSS. That is jargon, and
+ * clicking it shows a wall of XML, which reads like a broken page. The feed
+ * itself is genuinely the right channel for a slow blog — no account, no
+ * newsletter list, no algorithm — so the fix is to explain it rather than to
+ * remove it. Auto-discovery in <head> stays either way, so readers that look
+ * for a feed still find one.
+ */
+async function followPage(env, url) {
+  const s = await settings(env);
+  const feed = `${url.origin}/rss.xml`;
+  const readers = [
+    ['Feedly', 'https://feedly.com'],
+    ['Inoreader', 'https://www.inoreader.com'],
+    ['NetNewsWire', 'https://netnewswire.com'],
+  ];
+  const body = `
+<article>
+  <h1>${esc(t(s, 'follow_title'))}</h1>
+  <p>${esc(t(s, 'follow_lede'))}</p>
+
+  <h2>1. ${esc(t(s, 'follow_step1'))}</h2>
+  <ul>${readers.map(([n, u]) => `<li><a href="${attr(u)}" rel="noopener">${esc(n)}</a></li>`).join('')}</ul>
+
+  <h2>2. ${esc(t(s, 'follow_step2'))}</h2>
+  <div class="feedbox">
+    <input id="feed" value="${attr(feed)}" readonly onclick="this.select()">
+    <button type="button" id="copy">${esc(t(s, 'follow_copy'))}</button>
+  </div>
+
+  <p class="note">${esc(t(s, 'follow_outro'))}</p>
+</article>
+<script>
+document.getElementById('copy').addEventListener('click', async (e) => {
+  const f = document.getElementById('feed');
+  try {
+    await navigator.clipboard.writeText(f.value);
+  } catch {
+    // Older browsers, or a page not served over https during local testing.
+    f.select(); document.execCommand('copy');
+  }
+  const b = e.currentTarget, was = b.textContent;
+  b.textContent = ${JSON.stringify(t(s, 'follow_copied'))};
+  setTimeout(() => { b.textContent = was; }, 1400);
+});
+</script>`;
+
+  return html(layout(s, {
+    title: `${t(s, 'follow_title')} · ${s.title}`,
+    description: t(s, 'follow_lede'),
+    canonical: `${url.origin}/follow`,
+    body,
+  }));
 }
 
 async function rss(env, url) {
@@ -633,6 +705,7 @@ export default {
 
       if (p === '/' ) return await homepage(env, url);
       if (p === '/rss.xml') return await rss(env, url);
+      if (p === '/follow') return await followPage(env, url);
       if (p === '/sitemap.xml') return await sitemap(env, url);
       if (p === '/robots.txt') return new Response(`User-agent: *\nAllow: /\nSitemap: ${url.origin}/sitemap.xml\n`, { headers: { 'content-type': 'text/plain' } });
 
