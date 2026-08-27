@@ -267,6 +267,65 @@
       "requires": {
         "env": []
       }
+    },
+    {
+      "slug": "cloudflare",
+      "name": "Cloudflare",
+      "description": "Build, deploy and operate real software on Cloudflare — Workers, D1, R2, KV, DNS and domains, Pages, Turnstile and Queues, through the REST API. The capability every Cloudflare-built site or app depends on.",
+      "category": "infrastructure",
+      "tags": [
+        "cloudflare",
+        "workers",
+        "hosting",
+        "database",
+        "dns"
+      ],
+      "path": "skills/cloudflare/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [
+          "USR_CLOUDFLARE_API_TOKEN",
+          "USR_CLOUDFLARE_ACCOUNT_ID"
+        ]
+      },
+      "files": [
+        "references/d1.md",
+        "references/dns.md",
+        "references/kv.md",
+        "references/pages.md",
+        "references/queues.md",
+        "references/r2.md",
+        "references/turnstile.md",
+        "references/workers.md"
+      ]
+    },
+    {
+      "slug": "blog-on-cloudflare",
+      "name": "Blog on Cloudflare",
+      "description": "Run a public blog on Cloudflare Workers + D1 — write, preview, schedule and publish posts, manage comments and reactions, report readership. Built on the cloudflare skill.",
+      "category": "content",
+      "tags": [
+        "blog",
+        "publishing",
+        "cloudflare",
+        "comments"
+      ],
+      "path": "skills/blog-on-cloudflare/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [
+          "USR_CLOUDFLARE_API_TOKEN",
+          "USR_CLOUDFLARE_ACCOUNT_ID"
+        ],
+        "skills": [
+          "cloudflare"
+        ]
+      },
+      "files": [
+        "references/schema.sql",
+        "references/worker.js",
+        "scripts/deploy.py"
+      ]
     }
   ]
 }
