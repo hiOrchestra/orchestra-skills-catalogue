@@ -57,6 +57,20 @@ def fetch(url, method="GET", headers=None):
 
 
 # ── rendering, via the Chromium already on the box ──────────────────────────
+def default_out_dir():
+    """Screenshots go in the Orchestra namespace, never beside the script.
+
+    The obvious place to run this from is the directory it lives in, and "./verify"
+    then writes into the SKILL — which the catalogue updater prunes, because a
+    file it did not install has no business being there. On the first real run
+    that turned into an update that could not complete: the updater tried to
+    remove the screenshots, could not, and aborted. Output belongs somewhere the
+    skill's own lifecycle does not reach.
+    """
+    base = os.environ.get("OPENCLAW_DIR") or os.path.join(os.path.expanduser("~"), ".openclaw")
+    return os.path.join(base, "orchestra", "site-verify")
+
+
 def cdp_render(url, out_dir):
     """Screenshot at each width and pull back geometry, by shelling out to the
     Node renderer beside this file — Node has `ws`, the instance Python does
@@ -87,7 +101,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("url")
     ap.add_argument("--admin-path", default="/api/admin", help="a path that must require a token")
-    ap.add_argument("--out", default="./verify", help="where screenshots go")
+    ap.add_argument("--out", default=default_out_dir(),
+                    help="where screenshots go (default: the Orchestra namespace, never the skill)")
     a = ap.parse_args()
     base = a.url.rstrip("/")
     os.makedirs(a.out, exist_ok=True)

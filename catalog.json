@@ -403,7 +403,7 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -424,6 +424,11 @@
         "scripts/verify-site.py"
       ],
       "changelog": [
+        {
+          "version": "0.2.2",
+          "date": "2026-08-28",
+          "summary": "Screenshots no longer land inside the skill. The obvious place to run the verifier from is the folder it lives in, which wrote its output into managed files and left the next update unable to complete. They now go to the Orchestra workspace instead."
+        },
         {
           "version": "0.2.1",
           "date": "2026-08-28",
