@@ -403,7 +403,7 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -424,6 +424,11 @@
         "scripts/verify-site.py"
       ],
       "changelog": [
+        {
+          "version": "0.2.4",
+          "date": "2026-08-28",
+          "summary": "The link check now asks what a link actually serves. A site shipped with a \"See all\" link pointing at its own JSON endpoint: it answered 200, so checking the status alone passed it, and a visitor clicking it got raw JSON in the browser. A link in a page is a promise of a page."
+        },
         {
           "version": "0.2.3",
           "date": "2026-08-28",

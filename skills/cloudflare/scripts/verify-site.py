@@ -187,14 +187,30 @@ def main():
                 else:
                     record(PASS, "text lines up on a column", f"{column}px")
 
-            # every internal link must resolve
-            broken = []
+            # Every internal link must resolve AND land on a page.
+            #
+            # Resolving is not enough, and a real site proved it: a "See all"
+            # link in the footer pointed at /api/pieces, which answers 200 with
+            # {"pieces":[]}. Status-only checking passed it, and a visitor
+            # clicking it got raw JSON in their browser. A link in a page is a
+            # promise of a page — an endpoint, a feed or a file behind one is a
+            # bug whatever it returns.
+            broken, not_pages = [], []
             for href in sorted(set(d["links"]))[:25]:
-                st, _, _ = fetch(base + href)
+                st, _, hdrs = fetch(base + href)
                 if st >= 400:
                     broken.append(f"{href} → {st}")
+                    continue
+                ctype = (hdrs.get("Content-Type") or hdrs.get("content-type") or "").split(";")[0].strip()
+                if ctype and not ctype.startswith("text/html"):
+                    not_pages.append(f"{href} → {ctype}")
             record(FAIL if broken else PASS, "internal links resolve",
                    "; ".join(broken) if broken else f"{len(set(d['links']))} checked")
+            if not_pages:
+                record(FAIL, "every link leads to a page",
+                       "these serve a file, not a page: " + "; ".join(not_pages[:4]))
+            else:
+                record(PASS, "every link leads to a page")
 
         print("\nscreenshots:")
         for label, g in geo.items():
