@@ -403,7 +403,7 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.2.7",
+      "version": "0.3.0",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -424,6 +424,11 @@
         "scripts/verify-site.py"
       ],
       "changelog": [
+        {
+          "version": "0.3.0",
+          "date": "2026-08-28",
+          "summary": "Four checks for sites that work but are wrong. Nothing may overlap anything else. The typeface has to reach the reader — a stack led by a macOS-only face with no webfont is a different design on every other machine. The interface has to speak the site’s own language, not show English labels and US dates on a Catalan blog. And a title must not say the same thing twice. All four were found on a live site that passed every existing check."
+        },
         {
           "version": "0.2.7",
           "date": "2026-08-28",

@@ -59,6 +59,29 @@ const MEASURE = `(() => {
   const palette = Object.entries(tally).sort((a, b) => b[1] - a[1]).slice(0, 8)
     .map(([color, area]) => ({ color, area: Math.round(area) }));
 
+  // Siblings whose boxes actually intersect. A logo sitting on top of the
+  // wordmark is not a matter of taste, and no structural check sees it: the
+  // page is 200, both elements exist, nothing scrolls sideways.
+  const overlaps = [];
+  const name = (el) => el.tagName.toLowerCase() + (el.className && typeof el.className === 'string' ? '.' + el.className.split(' ')[0] : '');
+  for (const parent of document.querySelectorAll('body, header, footer, main, nav, .wrap')) {
+    const kids = [...parent.children].filter((el) => {
+      const cs = getComputedStyle(el);
+      if (cs.position === 'absolute' || cs.position === 'fixed' || cs.display === 'none') return false;
+      const b = el.getBoundingClientRect();
+      return b.width > 8 && b.height > 8;
+    });
+    for (let i = 0; i < kids.length; i++) {
+      for (let j = i + 1; j < kids.length; j++) {
+        const a = kids[i].getBoundingClientRect();
+        const b = kids[j].getBoundingClientRect();
+        const ox = Math.min(a.right, b.right) - Math.max(a.left, b.left);
+        const oy = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+        if (ox > 4 && oy > 4) overlaps.push({ a: name(kids[i]), b: name(kids[j]), x: Math.round(ox), y: Math.round(oy) });
+      }
+    }
+  }
+
   const icon = document.querySelector('link[rel~="icon"],link[rel="shortcut icon"]');
   return {
     scrollWidth: document.documentElement.scrollWidth,
@@ -66,6 +89,13 @@ const MEASURE = `(() => {
     favicon: icon ? icon.getAttribute('href') : null,
     ground,
     palette,
+    overlaps,
+    lang: document.documentElement.lang || '',
+    // Faces the page actually SHIPS. Zero means every family in the stack has
+    // to already exist on the reader's machine, which is a different design on
+    // every platform.
+    fontFaces: (document.fonts && document.fonts.size) || 0,
+    bodyFont: getComputedStyle(document.body).fontFamily,
     title: document.title,
     textLen: (document.body.innerText || '').trim().length,
     // Markup that leaked out of an attribute and became words on the page.

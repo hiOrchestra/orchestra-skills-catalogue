@@ -125,6 +125,51 @@ def default_palette_tells(ground, palette):
     return tells
 
 
+
+# ── things that are wrong without being broken ──────────────────────────────
+# Faces that ship with one operating system and nowhere else. A stack that
+# leads with one of these, and ships no @font-face, is a different design on
+# every platform: the author sees their choice, everyone else sees the
+# fallback. Found on a live site whose whole identity was Iowan Old Style —
+# a macOS-only face — silently rendering as Georgia for most of its readers.
+PLATFORM_ONLY_FACES = {
+    "iowan old style", "baskerville", "hoefler text", "palatino", "avenir",
+    "avenir next", "optima", "gill sans", "futura", "didot", "athelas",
+    "charter", "seravek", "skia", "chalkboard", "american typewriter",
+    "sf pro", "sf pro text", "sf pro display", "-apple-system",
+    "segoe ui", "calibri", "cambria", "constantia", "corbel", "candara",
+}
+
+# UI words a site in another language should not be showing its readers.
+ENGLISH_UI = [
+    "min read", "read more", "read time", "posted on", "published on",
+    "continue reading", "search", "home", "next page", "previous page",
+    "comments", "leave a comment", "submit", "loading", "subscribe",
+]
+
+
+def first_family(stack):
+    return (stack or "").split(",")[0].strip().strip("\"'").lower()
+
+
+def us_dates(text):
+    """M/D/YYYY, which is ambiguous everywhere it is not the local habit."""
+    return re.findall(r"\b(?:0?[1-9]|1[0-2])/(?:0?[1-9]|[12]\d|3[01])/(?:19|20)\d\d\b", text)
+
+
+def duplicated_title(title):
+    """`Civis et Homo · Civis et Homo` — a template joining two fields that
+    hold the same value."""
+    parts = [p.strip() for p in re.split(r"[·|—–\-]", title or "") if p.strip()]
+    seen, dupes = set(), []
+    for p in parts:
+        k = p.lower()
+        if k in seen and len(k) > 3:
+            dupes.append(p)
+        seen.add(k)
+    return dupes
+
+
 # ── rendering, via the Chromium already on the box ──────────────────────────
 def default_out_dir():
     """Screenshots go in the Orchestra namespace, never beside the script.
@@ -265,6 +310,51 @@ def main():
                            "; ".join(f"{e}px {n}" for e, n in strays[:4]))
                 else:
                     record(PASS, "text lines up on a column", f"{column}px")
+
+            # ── nothing may sit on top of anything else ─────────────────
+            ov = d.get("overlaps") or []
+            if ov:
+                record(FAIL, "nothing overlaps",
+                       "; ".join(f"{o['a']} over {o['b']} by {o['x']}x{o['y']}px" for o in ov[:3]))
+            else:
+                record(PASS, "nothing overlaps")
+
+            # ── the type has to exist on the reader's machine ───────────
+            stack, faces = d.get("bodyFont", ""), d.get("fontFaces", 0)
+            lead = first_family(stack)
+            if faces == 0 and lead in PLATFORM_ONLY_FACES:
+                record(FAIL, "the typeface reaches the reader",
+                       f"'{lead}' ships with one operating system and the page loads no webfont — "
+                       f"everyone else falls back through {stack}")
+            elif faces == 0:
+                record(WARN, "the typeface reaches the reader",
+                       f"no webfont is loaded; the design depends on {stack} already being installed")
+            else:
+                record(PASS, "the typeface reaches the reader", f"{faces} face(s) shipped")
+
+            # ── the interface speaks the site's language ────────────────
+            lang = (d.get("lang") or "").lower()
+            if lang and not lang.startswith("en"):
+                text = re.sub(r"<[^>]+>", " ", body)
+                found = [w for w in ENGLISH_UI if re.search(r"\b" + re.escape(w) + r"\b", text, re.I)]
+                dates = us_dates(text)
+                bad = []
+                if found:
+                    bad.append("English interface text: " + ", ".join(repr(w) for w in found[:4]))
+                if dates:
+                    bad.append(f"{len(dates)} US-format date(s) like {dates[0]}")
+                if bad:
+                    record(FAIL, f"the interface speaks {lang}", "; ".join(bad))
+                else:
+                    record(PASS, f"the interface speaks {lang}")
+
+            # ── a title that says it twice ──────────────────────────────
+            dup = duplicated_title(d.get("title") or "")
+            if dup:
+                record(FAIL, "the title says each thing once",
+                       f"repeats {dup[0]!r} — {d.get('title')!r}")
+            else:
+                record(PASS, "the title says each thing once")
 
             # ── markup that became words ────────────────────────────────
             # The escaping check above tests one payload against the SOURCE.
