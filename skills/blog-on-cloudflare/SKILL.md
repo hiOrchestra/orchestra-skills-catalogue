@@ -1,156 +1,118 @@
 ---
 name: blog-on-cloudflare
-description: Run a public blog on Cloudflare Workers + D1 — write, preview, schedule and publish posts, manage comments and reactions, report readership. Use when the user asks to publish or edit an article, see how a post is doing, moderate or reply to comments, change how the blog looks or behaves, or set up a new blog on their own domain. Needs the `cloudflare` skill for anything that touches the platform itself. Not for editing a WordPress or Wix site the user already has elsewhere.
+description: Everything worth knowing before building someone a blog or publication on Cloudflare — the content model, publishing states, comments and moderation, reactions, images, feeds, and the traps that only show up in production. Use when the user wants a blog, magazine, newsletter archive or any site where they publish over time. Needs the `cloudflare` skill for the platform itself and `design-taste-frontend` for how it looks. Contains no template: you design and write the site.
 metadata:
   openclaw:
     emoji: "📝"
-    requires:
-      env:
-        - USR_CLOUDFLARE_API_TOKEN
-        - USR_CLOUDFLARE_ACCOUNT_ID
 ---
 
-# Running a blog on Cloudflare
+# Building someone a blog
 
-You operate a blog — any blog — that lives on one Cloudflare Worker backed by
-one D1 database. You are its editor, its community manager and its webmaster.
-The owner writes; everything else is yours.
+**There is no starter worker in this skill, on purpose.** An earlier version
+shipped one and every blog built from it came out looking identical — same
+type, same column, same page, whoever it was for. A working file beats good
+advice every time, so the file is gone.
 
-Nothing here is specific to one site or one language. The worker ships in
-English and is retuned per blog through `settings`; you can run several blogs
-from one instance, each with its own worker, database and `blog-deploy.json`.
+What is here is the part that is genuinely hard: the decisions that are easy to
+get wrong and expensive to discover later. The site itself is yours to design.
 
-The blog's own admin API is the only way to change content. It is a bearer
-token in `blog-deploy.json` (mode 0600) next to your deploy state. Never print
-that token, and never put it in a post.
+Read `design-taste-frontend` **before** you write markup, and `cloudflare` for
+the platform. Then build whatever the brief actually calls for. A furniture
+maker's site and a political columnist's site should not resemble each other.
 
-## Before anything else, on first contact
+## Decide these before you write anything
 
-Read `settings` and tell the owner, in plain words, **what you can change for
-them**. They cannot ask for something they do not know exists. Say it once,
-briefly, and then get on with the work:
+**What is a post, for this person?** Not "title, body, date" by default. A
+woodworker's piece has wood, dimensions, whether it was commissioned. A
+restaurant's has a season. A researcher's has citations. Ask, or infer from the
+brief, and model *that*. You own the schema.
 
-> "I can also turn comments off or hold them for your approval, switch the
-> like/dislike buttons off, change the colour and the language the site speaks,
-> and sweep for spam daily instead of weekly. Just say the word."
+**How is the front page organised?** Reverse-chronological is a default, not an
+answer. Work is often better as a gallery. A columnist may want sections.
+Someone with forty pieces needs a way in that is not scrolling.
 
-If the owner does not write in English, set the `ui_*` strings to their
-language as part of setting the blog up. Do not leave a Spanish-language blog
-with an English "Send" button.
+**What does the reader do here?** Read and leave? Subscribe? Comment? Browse
+by material, place, year? That decides the routes, and therefore the shape.
 
-## What you can tune, without ever redeploying
+## Publishing states
 
-Every row in the `settings` table is a dial. Change one with
-`PUT /api/admin/settings`, and it takes effect on the next page load.
+Three states carry almost every publication:
 
-| Setting | Values | Default | What it changes |
-|---|---|---|---|
-| `comments_mode` | `open`, `review`, `closed` | `open` | `open` publishes a comment the moment it is written. `review` holds it for the owner. `closed` hides the form entirely. |
-| `reactions_enabled` | `true`, `false` | `true` | Shows or hides the like / dislike buttons. |
-| `spam_sweep` | `weekly`, `daily`, `off` | `weekly` | How often you review comments for spam. |
-| `title`, `tagline`, `footer` | free text | — | What the site calls itself. |
-| `accent` | any CSS colour | `#1f3b2c` | The one accent colour the design uses. |
-| `locale` | e.g. `en`, `ca`, `de` | `en` | The `lang` attribute and date formatting. |
-| `ui_<key>` | free text | English | Any visitor-facing word on the site — `ui_comments`, `ui_like`, `ui_submit`, … The full list is `UI` at the top of `worker.js`. This is how a blog speaks a language other than English. |
-| `posts_per_page` | number | `60` | How many articles the homepage lists. |
+- **draft** — invisible everywhere, including by direct URL
+- **review** — invisible publicly, visible on a secret preview URL so the owner
+  sees the real page before saying yes
+- **live** — public
 
-Anything beyond these dials — a new section, a different layout, a landing
-page — is a change to `{baseDir}/references/worker.js` followed by a redeploy. You can do
-that too. Read the `design-taste-frontend` skill first if the request is about
-how it *looks*; that skill exists so the result does not look templated.
+**Scheduling is not a fourth state and needs no cron.** A scheduled post is a
+live row with a future publish timestamp, and every public query filters on
+`timestamp <= now`. One mechanism, nothing to run at 3am, nothing to break.
 
-## The publishing loop
+Never move something to public without being asked. Publishing is the owner's
+decision.
 
-A post has three states, and scheduling is not a fourth.
+## Comments
 
-- **`draft`** — invisible everywhere.
-- **`review`** — invisible publicly, readable at `/preview/<slug>?token=…`.
-  This is how the owner sees the real page before saying yes.
-- **`live`** — public **once `published_at` has passed**. A future
-  `published_at` IS a scheduled post. There is no cron and nothing to check.
+Default to publishing them immediately. On a small site a moderation queue
+means nobody ever sees their comment appear and the conversation dies. Sweep
+for spam on a schedule instead, and offer to switch to hold-for-approval — but
+let the owner choose it rather than imposing it.
 
-So: write it as `draft` → send the preview link → on approval set `live` with
-`published_at` now, or a future date if they want it to wait.
+Strong opinions and disagreement are not spam. Removing a real person is a
+different act from deleting spam; keep them distinguishable, because the owner
+may have to explain the decision.
 
-Never move a post to `live` without being asked. Publishing is the owner's
-decision, not yours.
+Never reply in the owner's name unless asked. Draft, and show them.
 
-```bash
-# create or update (upsert on slug — safe to re-run)
-curl -sX POST "$BLOG/api/admin/posts" -H "Authorization: Bearer $ADMIN" \
-  -H 'content-type: application/json' \
-  -d '{"slug":"...","title":"...","content":"# markdown","status":"review"}'
+## Reactions
 
-# publish now, or schedule
-curl -sX PATCH "$BLOG/api/admin/posts/12" -H "Authorization: Bearer $ADMIN" \
-  -H 'content-type: application/json' \
-  -d '{"status":"live","published_at":"2026-09-01 08:00:00"}'
-```
+If you offer like/dislike, **one per visitor must be a database constraint**, a
+`UNIQUE(post, visitor)`. A cookie identifies a returning visitor; it enforces
+nothing, because it lives on their machine.
 
-## Being the community manager
+## Images
 
-Comments appear immediately by default. That is deliberate: on a blog this
-size, a moderation queue means nobody ever sees their comment appear and the
-conversation dies. You are what keeps it clean, not a gate.
+Someone publishing weekly will have a picture every week. Put them in R2 and
+serve them through the worker: one hostname, no CORS, and it keeps working if
+the bucket is later made private.
 
-**On every sweep** (`spam_sweep`, weekly unless changed):
+Name keys by content (`2026/08/slug-a1b2c3.jpg`). That is what makes
+`immutable` caching safe — a changed image becomes a new key rather than a new
+version of an old one, so no reader ever sees a stale picture.
 
-1. `GET /api/admin/comments?status=approved` — read what is live.
-2. Judge each one. Spam is: links to unrelated commerce, repeated identical
-   text across posts, keyword stuffing, or a body that ignores the article.
-   Strong opinions, disagreement and criticism are **not** spam. When a comment
-   is merely rude rather than abusive, leave it and tell the owner.
-3. `POST /api/admin/comments/<id>/spam` with `{"score":0.0-1.0,"reason":"…"}`.
-   Use `hide` instead of `spam` when it is a real person you are removing for
-   another reason — the owner may have to explain the decision later.
-4. Report to the owner: how many comments arrived, what you removed and why,
-   and anything that deserves a reply from them personally.
+## Being found
 
-Never reply in the owner's name unless they have asked you to. Draft replies
-and show them.
+A feed, a sitemap, and `robots.txt` cost almost nothing and are the difference
+between a site that can be followed and one that can only be visited.
 
-## Readership
+If you offer a feed, do not label it "RSS" and leave a link to raw XML. Most
+people have never heard of it. Explain it in a sentence — it works like
+subscribing to a podcast — and give them the address to copy.
 
-`GET /api/admin/stats` returns per-post views, likes, dislikes and comment
-counts, plus a daily series. Sync it into `orch-database` on a schedule so the
-Canvas can chart it and so history survives — D1 keeps the counts, but the
-trend is only interesting if it is stored somewhere you can query.
+And give the site a **favicon**. A tab with a blank page icon reads as
+unfinished, and it is the one piece of the design people see every day.
 
-## Setting up a new blog
+## Traps that only appear in production
 
-The platform mechanics — the multipart PUT, custom domains, zones, rollback —
-live in the **`cloudflare` skill**. Read that for anything about Cloudflare
-itself; this skill is only about the blog that runs on it.
+- **Escape everything a visitor typed, at render.** One escape function, used
+  everywhere. If you write a second one you will eventually use the wrong one.
+- **Escaping before parsing markdown breaks it.** `>` becomes `&gt;` and every
+  blockquote renders as a literal. Detect structure on the raw line, escape
+  when emitting.
+- **A `margin` shorthand overwrites `margin: auto`.** `margin: 4rem 0` on a
+  centred block silently pins it to the left edge. This has already shipped
+  once.
+- **Admin writes go behind a bearer token**, compared in full. The worker's
+  source is readable back through the API, so never inline a secret.
+- **Rate-limit the public write endpoints.** Comments and reactions are the two
+  things a stranger can call as often as they like.
 
-The deployer wraps the parts you need:
+## Before you say it is done
 
-```bash
-python3 {baseDir}/scripts/deploy.py --name <site> \
-  --worker {baseDir}/references/worker.js \
-  --schema {baseDir}/references/schema.sql
-```
+Run the checks in the `cloudflare` skill — `{baseDir}/../cloudflare/references/verifying.md`
+— against the URL you just deployed. **Look at the screenshots it takes.** You
+cannot see the page otherwise, and every visual defect this skill has caused so
+far was invisible from the source: type running off the edge, a missing
+favicon, a nav pointing at routes that do not exist.
 
-It creates the D1 database, applies the schema, deploys the Worker with the
-binding, and writes `blog-deploy.json` with the admin and preview tokens.
-
-**It will refuse to overwrite a Worker it did not create.** Do not reach for
-`--force` to get past that. A live blog was destroyed exactly that way: a later
-project reused the Worker name and replaced the running site. Pick a different
-name instead. If it has already happened, deployment history can rescue it —
-see the rollback section of the `cloudflare` skill.
-
-Never point two blogs at one D1 database, for the same reason.
-
-Putting the blog on the owner's own domain is `cloudflare` → `references/dns.md`
-plus the custom-domain endpoint. Check what else lives on that domain first;
-moving a domain to Cloudflare moves its email too.
-
-## Files
-
-- `{baseDir}/references/worker.js` — the whole site. Edit and redeploy to change
-  anything the dials do not cover.
-- `{baseDir}/references/schema.sql` — the tables, with the reasoning.
-- `{baseDir}/scripts/deploy.py` — the deployer.
-
-For the platform underneath — Workers, D1, R2 for images, DNS, rollback — read
-the `cloudflare` skill.
+A blog with no posts in it is not finished either. If you are migrating, seed
+the content. If you are starting fresh, ask what should go up first.

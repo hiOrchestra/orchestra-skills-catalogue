@@ -281,7 +281,7 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -296,7 +296,10 @@
         "references/queues.md",
         "references/r2.md",
         "references/turnstile.md",
-        "references/workers.md"
+        "references/verifying.md",
+        "references/workers.md",
+        "scripts/render-and-measure.js",
+        "scripts/verify-site.py"
       ]
     },
     {
@@ -311,7 +314,7 @@
         "comments"
       ],
       "path": "skills/blog-on-cloudflare/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -320,12 +323,7 @@
         "skills": [
           "cloudflare"
         ]
-      },
-      "files": [
-        "references/schema.sql",
-        "references/worker.js",
-        "scripts/deploy.py"
-      ]
+      }
     },
     {
       "slug": "design-taste-frontend",
