@@ -43,8 +43,18 @@ pass every one of them and still look wrong, and that is the failure you are
 there to catch.
 
 Do not report a site as finished before this has run and you have looked at what
-it produced. `{baseDir}/references/verifying.md` explains what each check means
-and what to do when one fails.
+it produced.
+
+**A failing check is not advice.** The first agent to use this ran the checks,
+read a FAIL about a headline sitting outside the column, fixed the two easier
+findings, left that one, and reported the site as ready to show. Running the
+checks and then shipping past them is worse than not running them, because now
+there is a record saying the site was verified. Fix what fails. If you genuinely
+cannot, say which check is still failing and why, in the same breath as telling
+the user where things stand — never a green light with a red check behind it.
+
+`{baseDir}/references/verifying.md` explains what each check means and what to
+do when one fails.
 
 ## Which reference to open
 

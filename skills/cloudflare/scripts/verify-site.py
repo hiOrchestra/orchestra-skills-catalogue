@@ -143,6 +143,16 @@ def main():
     # ── render and look ─────────────────────────────────────────────────────
     geo = cdp_render(base + "/", a.out)
     if geo:
+        # One viewport can come back without measurements — the render timed out,
+        # the page never settled, the tab died. That used to be a KeyError on the
+        # first geometry read, which killed the whole run and threw away every
+        # check that had already passed. A failed measurement is a thing to
+        # report, not a reason to stop verifying.
+        for label in [k for k, g in geo.items() if "scrollWidth" not in g]:
+            record(WARN, f"could not measure the page ({label})",
+                   geo[label].get("error") or "the render returned no geometry — rerun, or check the browser on :18800")
+        geo = {k: g for k, g in geo.items() if "scrollWidth" in g}
+    if geo:
         for label, g in geo.items():
             if g["scrollWidth"] > g["innerWidth"] + 1:
                 record(FAIL, f"no sideways scroll ({label})",

@@ -403,7 +403,7 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.2.4",
+      "version": "0.2.5",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -424,6 +424,11 @@
         "scripts/verify-site.py"
       ],
       "changelog": [
+        {
+          "version": "0.2.5",
+          "date": "2026-08-28",
+          "summary": "Two fixes from watching an agent use it. The verifier crashed outright when one viewport came back without measurements, throwing away every check that had already passed; a failed measurement is now a warning and the rest of the run continues. And the skill now says a failing check is not advice — the agent ran the checks, read the failure, fixed the two easy ones and reported the site as ready anyway."
+        },
         {
           "version": "0.2.4",
           "date": "2026-08-28",
