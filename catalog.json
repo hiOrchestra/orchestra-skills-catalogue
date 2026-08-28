@@ -403,7 +403,7 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -424,6 +424,11 @@
         "scripts/verify-site.py"
       ],
       "changelog": [
+        {
+          "version": "0.3.1",
+          "date": "2026-08-28",
+          "summary": "Stops warning about a deliberately portable font stack. Shipping no webfont is only a problem when the stack names a face that is not on every platform; the best-looking page to come out of this stack so far is set in Arial and takes its character from scale, weight and colour instead."
+        },
         {
           "version": "0.3.0",
           "date": "2026-08-28",

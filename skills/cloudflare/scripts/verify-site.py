@@ -326,11 +326,17 @@ def main():
                 record(FAIL, "the typeface reaches the reader",
                        f"'{lead}' ships with one operating system and the page loads no webfont — "
                        f"everyone else falls back through {stack}")
-            elif faces == 0:
+            elif faces == 0 and any(first_family(f) in PLATFORM_ONLY_FACES for f in stack.split(",")):
                 record(WARN, "the typeface reaches the reader",
-                       f"no webfont is loaded; the design depends on {stack} already being installed")
+                       f"no webfont is loaded and {stack} names a face that is not on every platform")
             else:
-                record(PASS, "the typeface reaches the reader", f"{faces} face(s) shipped")
+                # A fully portable stack with no webfont is a legitimate choice,
+                # not an omission. The best-looking page to come out of this
+                # stack so far is set in Arial and gets its character from
+                # scale, weight and colour instead — warning about that would
+                # be nagging a decision.
+                record(PASS, "the typeface reaches the reader",
+                       f"{faces} face(s) shipped" if faces else "portable stack, no webfont needed")
 
             # ── the interface speaks the site's language ────────────────
             lang = (d.get("lang") or "").lower()
