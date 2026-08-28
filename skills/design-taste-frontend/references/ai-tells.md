@@ -8,7 +8,13 @@ Avoid these signatures unless the brief explicitly asks for them.
 ### 9.A Visual & CSS
 * **NO neon / outer glows** by default. Use inner borders or subtle tinted shadows.
 * **NO pure black (`#000000`).** Off-black, zinc-950, or charcoal.
-* **NO oversaturated accents.** Desaturate to blend with neutrals.
+* **NO oversaturated accents** — but read the next line before applying it.
+* **"Desaturate to blend with neutrals" is how you arrive at the current
+  default.** Taken literally it produces a muted terracotta on warm paper, which
+  is the single most recognisable generated look there is. The rule means *do
+  not let an accent scream*; it does not mean every accent becomes a dusty
+  mid-tone. An accent can be fully saturated if the subject earns it and it is
+  used sparingly and functionally.
 * **NO excessive gradient text** for large headers.
 * **NO custom mouse cursors.** Outdated, accessibility-hostile, perf-hostile.
 
@@ -16,6 +22,13 @@ Avoid these signatures unless the brief explicitly asks for them.
 * **AVOID Inter as default.** See Section 4.1. Override path exists.
 * **NO oversized H1s** that just scream. Control hierarchy with weight + color, not raw scale.
 * **Serif constraints:** Serif for editorial / luxury / publication. Not for dashboards.
+* **A serif is not automatically a direction.** "Editorial subject, therefore
+  high-contrast display serif on cream" is the reflex this file exists to
+  interrupt. Choose the face from the subject; see `{baseDir}/references/aesthetics.md`.
+* **Never design against a face you have not loaded.** A stack led by
+  `Iowan Old Style`, `Baskerville`, `Palatino`, `Avenir` or `Segoe UI` with no
+  `@font-face` renders your design for one platform's users and something else
+  for everyone else.
 
 ### 9.C Layout & Spacing
 * **Mathematically perfect** padding and margins. No floating elements with awkward gaps.

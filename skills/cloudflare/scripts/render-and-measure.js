@@ -82,6 +82,31 @@ const MEASURE = `(() => {
     }
   }
 
+  // An image sitting on top of words. The sibling scan above misses the common
+  // case entirely, because the offender is usually a CHILD of the block whose
+  // text it covers — a seal absolutely positioned inside the wordmark it is
+  // meant to sit beside. So compare image boxes against the boxes of actual
+  // TEXT RUNS, which is what a reader would complain about.
+  for (const img of document.querySelectorAll('img, svg')) {
+    const a = img.getBoundingClientRect();
+    if (a.width < 12 || a.height < 12) continue;
+    const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    let n;
+    while ((n = walk.nextNode())) {
+      if (!n.nodeValue || !n.nodeValue.trim() || img.contains(n)) continue;
+      const rng = document.createRange();
+      rng.selectNodeContents(n);
+      const b = rng.getBoundingClientRect();
+      if (b.width < 8 || b.height < 8) continue;
+      const ox = Math.min(a.right, b.right) - Math.max(a.left, b.left);
+      const oy = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+      if (ox > 6 && oy > 6) {
+        overlaps.push({ a: name(img), b: JSON.stringify(n.nodeValue.trim().slice(0, 24)), x: Math.round(ox), y: Math.round(oy) });
+        break;
+      }
+    }
+  }
+
   const icon = document.querySelector('link[rel~="icon"],link[rel="shortcut icon"]');
   return {
     scrollWidth: document.documentElement.scrollWidth,

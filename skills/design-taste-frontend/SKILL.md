@@ -27,6 +27,8 @@ what the brief calls for.
 
 | The task | Read |
 |---|---|
+| **Choosing a direction — what this page should BE** | `{baseDir}/references/aesthetics.md` |
+| **The craft under any direction — measure, scale, rhythm, grid, colour, locale** | `{baseDir}/references/craft.md` |
 | Choosing between Tailwind, shadcn, Material, GOV.UK, Carbon…; install commands | `{baseDir}/references/design-systems.md` |
 | Actually writing the page — type, colour, space, motion, layout decisions | `{baseDir}/references/directives.md` |
 | "It looks AI-generated" — the specific tells, and what to do instead | `{baseDir}/references/ai-tells.md` |
@@ -38,9 +40,10 @@ what the brief calls for.
 | Frosted-glass / translucent-material effects, done honestly | `{baseDir}/references/liquid-glass.md` |
 | Before you say it is finished | `{baseDir}/references/preflight.md` |
 
-`directives.md` and `ai-tells.md` are the two that change the output most. If
-you only open one, open the one that matches whether you are *making* the page
-or *fixing* one that came out bland.
+Open `aesthetics.md` before you write anything and `craft.md` while you write.
+Between them they answer the two different questions — what this should be, and
+whether it is any good. `directives.md` and `ai-tells.md` go deeper on fixing a
+page that came out bland.
 
 ## 0. BRIEF INFERENCE (Read the Room Before Anything Else)
 
@@ -68,7 +71,29 @@ Ask exactly **one** clarifying question - never a multi-question dump - and only
 If you can confidently infer from context, **do not ask**. Just declare the design read and proceed.
 
 ### 0.D Anti-Default Discipline
-Do not default to: AI-purple gradients, centered hero over dark mesh, three equal feature cards, generic glassmorphism on everything, infinite-loop micro-animations everywhere, Inter + slate-900. These are the LLM defaults. Reach past them deliberately based on the design read.
+Two generations of default, and the older list is the more dangerous one to
+trust, because following it lands you squarely on the newer.
+
+**Still true:** no AI-purple gradients, no centred hero over a dark mesh, no
+three equal feature cards, no glassmorphism as a default surface, no
+infinite-loop micro-animation, no Inter + slate-900.
+
+**And now, the look those corrections produce:** warm cream ground near
+#F4F1EA, high-contrast display serif, a single desaturated terracotta or coral
+accent, mono uppercase eyebrow labels above every section. This is a NAMED
+family — "Warm Editorial" in awesome-claude-design, "Warm Humanist" in SDesign
+— and it is where models in this family land by default. It arrived unprompted
+for a carpentry studio and a municipal swimming pool on the same day, in the
+same hexes. The sibling default is near-black with one acid-green or vermilion
+accent.
+
+Both are legitimate when the subject genuinely calls for them, and a tell when
+it does not. If your palette is cream + terracotta and you did not derive it
+from the subject, you have not made a decision — and the `cloudflare` skill's
+verifier now says so out loud.
+
+Reach past all of it deliberately, from the design read. `{baseDir}/references/aesthetics.md`
+is the vocabulary for doing that.
 
 ---
 
