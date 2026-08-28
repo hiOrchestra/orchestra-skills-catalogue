@@ -266,6 +266,23 @@ def main():
                 else:
                     record(PASS, "text lines up on a column", f"{column}px")
 
+            # ── markup that became words ────────────────────────────────
+            # The escaping check above tests one payload against the SOURCE.
+            # This asks the browser what a reader actually sees, which is a
+            # different question and the one that caught a real bug: a favicon
+            # data: URI carrying raw <svg …> inside its href closed the <link>
+            # early, and a stray glyph plus `">` rendered on every page of the
+            # site. Status was 200, the title existed, a <link rel=icon> existed
+            # — every structural check passed.
+            stray = d.get("strayMarkup") or []
+            if stray:
+                record(FAIL, "no markup showing as text",
+                       "these appear in the visible text of the page: "
+                       + ", ".join(repr(x) for x in stray[:5])
+                       + " — something is escaping its attribute or being double-encoded")
+            else:
+                record(PASS, "no markup showing as text")
+
             # ── is this the palette every generated site lands on? ──────
             tells = default_palette_tells(d.get("ground"), d.get("palette"))
             if len(tells) >= 2:

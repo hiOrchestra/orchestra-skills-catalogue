@@ -403,7 +403,7 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.2.6",
+      "version": "0.2.7",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -424,6 +424,11 @@
         "scripts/verify-site.py"
       ],
       "changelog": [
+        {
+          "version": "0.2.7",
+          "date": "2026-08-28",
+          "summary": "Catches markup that has become words on the page. A favicon data URI carrying a raw <svg> inside its href closed its own <link> tag early, and a stray glyph and quote-bracket rendered on every route of a live site — while the page answered 200, had a title, and had a favicon link, so every structural check passed. The verifier now reads what the browser actually shows."
+        },
         {
           "version": "0.2.6",
           "date": "2026-08-28",

@@ -68,6 +68,16 @@ const MEASURE = `(() => {
     palette,
     title: document.title,
     textLen: (document.body.innerText || '').trim().length,
+    // Markup that leaked out of an attribute and became words on the page.
+    // A data: URI holding raw <svg …> inside an href closes its own tag early;
+    // everything after it lands in the body as text. The page still answers
+    // 200, still has a <title>, still passes every structural check — and shows
+    // a stray glyph and a stray quote-bracket on every route.
+    strayMarkup: (() => {
+      const t = (document.body.innerText || '');
+      const tells = ['">', "'>", '</', '<svg', '<path', '<text ', '&lt;', '&gt;', '&quot;', '&#39;', '&amp;'];
+      return tells.filter((x) => t.includes(x));
+    })(),
     links: [...document.querySelectorAll('a[href^="/"]')].map(a => a.getAttribute('href')),
     blocks,
   };
