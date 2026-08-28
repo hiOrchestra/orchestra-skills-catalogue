@@ -17,7 +17,19 @@
         "env": [
           "USR_COINGECKO_API_KEY"
         ]
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.2.0",
+          "date": "2026-08-27",
+          "summary": "Uses the authenticated API, so rate limits no longer bite during a busy conversation."
+        },
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "etherscan",
@@ -35,7 +47,14 @@
         "env": [
           "USR_ETHERSCAN_API_KEY"
         ]
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "wordpress",
@@ -56,7 +75,19 @@
           "USR_WORDPRESS_USER",
           "USR_WORDPRESS_PWD"
         ]
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.2.0",
+          "date": "2026-08-27",
+          "summary": "Handles application passwords, so it works on hosts that block basic auth."
+        },
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "research-brief",
@@ -73,7 +104,14 @@
       "version": "0.1.0",
       "requires": {
         "env": []
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "fact-check",
@@ -89,7 +127,14 @@
       "version": "0.1.0",
       "requires": {
         "env": []
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "content-plan",
@@ -105,7 +150,14 @@
       "version": "0.1.0",
       "requires": {
         "env": []
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "write-article",
@@ -121,7 +173,14 @@
       "version": "0.1.0",
       "requires": {
         "env": []
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "build-report",
@@ -137,7 +196,14 @@
       "version": "0.1.0",
       "requires": {
         "env": []
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "distill",
@@ -153,7 +219,14 @@
       "version": "0.1.0",
       "requires": {
         "env": []
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "proofread-edit",
@@ -169,7 +242,14 @@
       "version": "0.1.0",
       "requires": {
         "env": []
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "analyze-data-quality",
@@ -185,7 +265,14 @@
       "version": "0.1.0",
       "requires": {
         "env": []
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "explore-dataset",
@@ -201,7 +288,14 @@
       "version": "0.1.0",
       "requires": {
         "env": []
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "build-dashboard",
@@ -217,7 +311,14 @@
       "version": "0.1.0",
       "requires": {
         "env": []
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "build-data-view",
@@ -234,7 +335,14 @@
       "version": "0.1.0",
       "requires": {
         "env": []
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "plan-work",
@@ -250,7 +358,14 @@
       "version": "0.1.0",
       "requires": {
         "env": []
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "decision-brief",
@@ -266,7 +381,14 @@
       "version": "0.1.0",
       "requires": {
         "env": []
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "cloudflare",
@@ -300,6 +422,18 @@
         "references/workers.md",
         "scripts/render-and-measure.js",
         "scripts/verify-site.py"
+      ],
+      "changelog": [
+        {
+          "version": "0.2.0",
+          "date": "2026-08-28",
+          "summary": "The agent can now look at what it deployed. Adds a verifier it runs after every deploy — it renders the site in a real browser and checks the layout holds, the favicon loads, no API token is being served, and no internal link is broken."
+        },
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release. Workers, D1, R2, KV, DNS and domains, Pages, Turnstile and Queues through the REST API."
+        }
       ]
     },
     {
@@ -323,7 +457,19 @@
         "skills": [
           "cloudflare"
         ]
-      }
+      },
+      "changelog": [
+        {
+          "version": "0.2.0",
+          "date": "2026-08-28",
+          "summary": "Removes the starter template. Every blog built from it came out looking the same, so the skill now teaches the judgement — content model, publishing states, comment moderation, feeds and the traps that only appear in production — and leaves the design to the agent."
+        },
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release. Write, preview, schedule and publish posts, moderate comments and reactions, and report readership."
+        }
+      ]
     },
     {
       "slug": "design-taste-frontend",
@@ -350,6 +496,13 @@
         "references/proactivity.md",
         "references/redesign.md",
         "references/vocabulary.md"
+      ],
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release. How to build a frontend that does not look AI-generated: picking a real design direction, then holding to it through type, colour, layout and motion."
+        }
       ]
     }
   ]
