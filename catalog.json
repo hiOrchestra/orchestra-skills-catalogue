@@ -403,7 +403,7 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.2.5",
+      "version": "0.2.6",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -424,6 +424,11 @@
         "scripts/verify-site.py"
       ],
       "changelog": [
+        {
+          "version": "0.2.6",
+          "date": "2026-08-28",
+          "summary": "Adds a check for the palette every generated site lands on. The verifier now reads the colours the page is actually painted in and warns when they are the default cream-and-terracotta (or near-black-and-acid-green) that arrives regardless of subject — the same palette came out of this stack for a carpentry studio and a municipal swimming pool."
+        },
         {
           "version": "0.2.5",
           "date": "2026-08-28",
@@ -473,7 +478,7 @@
         "comments"
       ],
       "path": "skills/blog-on-cloudflare/SKILL.md",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -484,6 +489,11 @@
         ]
       },
       "changelog": [
+        {
+          "version": "0.3.0",
+          "date": "2026-08-28",
+          "summary": "Fixes a broken cross-skill path: the verifier was addressed relative to this skill, which only resolves when both skills are installed into the same root. Also requires checking an article page rather than only the homepage, and states that a failing check is not advice."
+        },
         {
           "version": "0.2.0",
           "date": "2026-08-28",

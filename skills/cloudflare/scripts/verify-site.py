@@ -56,6 +56,75 @@ def fetch(url, method="GET", headers=None):
         return 0, str(e), {}
 
 
+
+# ── the palette a page is actually painted in ───────────────────────────────
+def _rgb(css):
+    m = re.match(r"rgba?\(([^)]+)\)", (css or "").strip())
+    if not m:
+        return None
+    parts = [q.strip() for q in m.group(1).replace("/", ",").split(",")]
+    try:
+        r, g, b = (int(float(q)) for q in parts[:3])
+    except ValueError:
+        return None
+    if len(parts) > 3:
+        try:
+            if float(parts[3]) < 0.5:
+                return None      # too transparent to count as paint
+        except ValueError:
+            pass
+    return r, g, b
+
+
+def _hsl(rgb):
+    import colorsys
+    r, g, b = (c / 255 for c in rgb)
+    h, lum, sat = colorsys.rgb_to_hls(r, g, b)
+    return h * 360, sat, lum
+
+
+def default_palette_tells(ground, palette):
+    """Is this the palette every generated site arrives at?
+
+    Not a style opinion — a repetition detector. The same cream ground and the
+    same terracotta accent came out of this stack for a carpentry studio and a
+    municipal swimming pool on one night, declared as #f5f1e8 / #ff6b4a both
+    times. A palette that does not change when the subject changes was not
+    chosen for the subject.
+
+    Deliberately narrow: it names the two clusters we have actually watched
+    appear, and stays quiet about everything else rather than refereeing taste.
+    """
+    tells = []
+    g = _rgb(ground)
+    if g:
+        r, gr, b = g
+        # warm off-white: bright, and measurably warmer than it is blue
+        if r > 238 and gr > 232 and b > 215 and 6 <= r - b <= 30:
+            tells.append(f"a warm cream ground ({ground})")
+        # The other cluster's ground: near-black, near-neutral. Paired with one
+        # loud accent it is the second look this stack reaches for unprompted.
+        elif max(r, gr, b) < 34 and max(r, gr, b) - min(r, gr, b) < 14:
+            tells.append(f"a near-black ground ({ground})")
+    for entry in palette or []:
+        c = _rgb(entry.get("color"))
+        if not c:
+            continue
+        h, sat, lum = _hsl(c)
+        if 4 <= h <= 26 and sat >= 0.5 and 0.42 <= lum <= 0.70:
+            tells.append(f"a terracotta/coral accent ({entry['color']})")
+            break
+    for entry in palette or []:
+        c = _rgb(entry.get("color"))
+        if not c:
+            continue
+        h, sat, lum = _hsl(c)
+        if 80 <= h <= 165 and sat >= 0.45 and 0.40 <= lum <= 0.62:
+            tells.append(f"an acid-green accent ({entry['color']})")
+            break
+    return tells
+
+
 # ── rendering, via the Chromium already on the box ──────────────────────────
 def default_out_dir():
     """Screenshots go in the Orchestra namespace, never beside the script.
@@ -196,6 +265,16 @@ def main():
                            "; ".join(f"{e}px {n}" for e, n in strays[:4]))
                 else:
                     record(PASS, "text lines up on a column", f"{column}px")
+
+            # ── is this the palette every generated site lands on? ──────
+            tells = default_palette_tells(d.get("ground"), d.get("palette"))
+            if len(tells) >= 2:
+                record(WARN, "the palette was chosen for this subject",
+                       "this is the look that arrives by default — " + " and ".join(tells)
+                       + ". It has come out of this stack for unrelated businesses. "
+                         "If it was not derived from what this site is about, change it.")
+            else:
+                record(PASS, "the palette was chosen for this subject")
 
             # Every internal link must resolve AND land on a page.
             #

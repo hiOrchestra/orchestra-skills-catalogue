@@ -40,11 +40,32 @@ const MEASURE = `(() => {
                left: Math.round(r.left), right: Math.round(r.right), w: Math.round(r.width),
                textLeft: textLeft(el) }; })
     .filter(b => b.w > 40);
+  // What the page is actually PAINTED in, so a palette can be judged from the
+  // rendered result rather than from a stylesheet that may declare colours it
+  // never uses. Ground = the body's own background; ink and accents = the
+  // colours doing the most work across visible elements.
+  const ground = getComputedStyle(document.body).backgroundColor;
+  const tally = {};
+  for (const el of document.querySelectorAll('body *')) {
+    const r = el.getBoundingClientRect();
+    if (r.width < 4 || r.height < 4) continue;
+    const cs = getComputedStyle(el);
+    const area = Math.min(r.width * r.height, 400000);
+    for (const c of [cs.backgroundColor, cs.color]) {
+      if (!c || c === 'rgba(0, 0, 0, 0)' || c === 'transparent') continue;
+      tally[c] = (tally[c] || 0) + area;
+    }
+  }
+  const palette = Object.entries(tally).sort((a, b) => b[1] - a[1]).slice(0, 8)
+    .map(([color, area]) => ({ color, area: Math.round(area) }));
+
   const icon = document.querySelector('link[rel~="icon"],link[rel="shortcut icon"]');
   return {
     scrollWidth: document.documentElement.scrollWidth,
     innerWidth: window.innerWidth,
     favicon: icon ? icon.getAttribute('href') : null,
+    ground,
+    palette,
     title: document.title,
     textLen: (document.body.innerText || '').trim().length,
     links: [...document.querySelectorAll('a[href^="/"]')].map(a => a.getAttribute('href')),

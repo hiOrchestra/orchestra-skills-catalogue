@@ -108,11 +108,26 @@ unfinished, and it is the one piece of the design people see every day.
 
 ## Before you say it is done
 
-Run the checks in the `cloudflare` skill — `{baseDir}/../cloudflare/references/verifying.md`
-— against the URL you just deployed. **Look at the screenshots it takes.** You
-cannot see the page otherwise, and every visual defect this skill has caused so
-far was invisible from the source: type running off the edge, a missing
-favicon, a nav pointing at routes that do not exist.
+Run the `cloudflare` skill's `scripts/verify-site.py` against the URL you just
+deployed. Do not guess at its path from here — the two skills can be installed
+into different roots, so a relative path between them resolves on one instance
+and not on another. Find it in that skill's own directory.
+
+**Look at the screenshots it takes.** You cannot see the page otherwise, and
+every visual defect this skill has caused so far was invisible from the source:
+type running off the edge, a missing favicon, a nav pointing at routes that do
+not exist.
+
+**Check an article page too, not only the homepage.** The homepage is the one
+page you have looked at a hundred times while building; the article template is
+where a reader actually spends their time, and it is where the routing bugs
+live — one blog shipped with a homepage linking to `/piece/<slug>` while the
+worker only served `/peça/<slug>`, so every post 404'd and the homepage looked
+perfect throughout.
+
+**A failing check is not advice.** Fix what fails. If you genuinely cannot, say
+which check is still failing and why, in the same breath as telling the owner
+where things stand — never a green light with a red check behind it.
 
 A blog with no posts in it is not finished either. If you are migrating, seed
 the content. If you are starting fresh, ask what should go up first.
