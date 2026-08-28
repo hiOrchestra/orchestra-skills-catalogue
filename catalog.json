@@ -403,7 +403,7 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.2.2",
+      "version": "0.2.3",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -424,6 +424,11 @@
         "scripts/verify-site.py"
       ],
       "changelog": [
+        {
+          "version": "0.2.3",
+          "date": "2026-08-28",
+          "summary": "The verifier is now part of what \"done\" means. It shipped in 0.2.0 but was only mentioned in a reference file, so an agent asked to check a site reached for its own browser instead, looked at the page, and missed a missing favicon and a headline sitting outside the column. The skill now says a deploy is not finished until the checks have run and the screenshots have been opened."
+        },
         {
           "version": "0.2.2",
           "date": "2026-08-28",

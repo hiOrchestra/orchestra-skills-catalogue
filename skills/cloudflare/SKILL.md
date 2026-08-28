@@ -20,6 +20,32 @@ Everything is the REST API at `https://api.cloudflare.com/client/v4`, authorised
 with `Authorization: Bearer $USR_CLOUDFLARE_API_TOKEN`. There is no CLI to
 install and `wrangler` is not required — do not ask the user to install it.
 
+## A deploy is not done until you have looked
+
+You cannot see what you shipped, and reading your own HTML back is not looking.
+Every site built with this skill that went out broken had passed its author's
+reading first: a headline sitting outside the column while everything else held
+it, no favicon, a homepage linking to routes the worker does not serve.
+
+After every deploy, before you tell anyone it is ready:
+
+```bash
+python3 {baseDir}/scripts/verify-site.py <url> [--admin-path /api/admin/...]
+```
+
+It renders the page in the browser already running on this instance, saves a
+desktop and a phone screenshot, and checks the floor — the page loads, the admin
+refuses an unauthenticated caller, no key is being served, the text lines up on
+one column, there is a favicon, internal links resolve.
+
+Then **open the screenshots**. The checks are a floor, not a verdict: a site can
+pass every one of them and still look wrong, and that is the failure you are
+there to catch.
+
+Do not report a site as finished before this has run and you have looked at what
+it produced. `{baseDir}/references/verifying.md` explains what each check means
+and what to do when one fails.
+
 ## Which reference to open
 
 Load only the one the task needs. Each is generated from Cloudflare's own
@@ -35,6 +61,7 @@ schema, so an endpoint listed there exists and one that is absent does not.
 | A purely static site with no server code | `{baseDir}/references/pages.md` |
 | Stop spam on a public form, free | `{baseDir}/references/turnstile.md` |
 | Background jobs, retries, fan-out | `{baseDir}/references/queues.md` |
+| Check a site you just deployed is actually good | `{baseDir}/references/verifying.md` |
 
 Your training data about Cloudflare limits, pricing and payload shapes is
 probably out of date. The references are the endpoint list; for request bodies
