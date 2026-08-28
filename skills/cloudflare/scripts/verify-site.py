@@ -341,7 +341,14 @@ def main():
             # ── the interface speaks the site's language ────────────────
             lang = (d.get("lang") or "").lower()
             if lang and not lang.startswith("en"):
-                text = re.sub(r"<[^>]+>", " ", body)
+                # Strip the CONTENTS of script and style first, not just the
+                # tags. A crude tag-strip leaves the JavaScript behind, and a
+                # blog whose worker mentions `comments` or `home` in its own
+                # code was reported as showing English to its Catalan readers.
+                # The check is about what a reader sees, so it has to look at
+                # what a reader sees.
+                text = re.sub(r"<(script|style)\b[^>]*>.*?</\1>", " ", body, flags=re.S | re.I)
+                text = re.sub(r"<[^>]+>", " ", text)
                 found = [w for w in ENGLISH_UI if re.search(r"\b" + re.escape(w) + r"\b", text, re.I)]
                 dates = us_dates(text)
                 bad = []

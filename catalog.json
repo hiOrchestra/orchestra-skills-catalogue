@@ -403,7 +403,7 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -424,6 +424,11 @@
         "scripts/verify-site.py"
       ],
       "changelog": [
+        {
+          "version": "0.3.2",
+          "date": "2026-08-28",
+          "summary": "Fixes a false alarm in the language check. It stripped HTML tags but not the contents of script and style, so a site whose own JavaScript mentioned \"comments\" or \"home\" was reported as showing English to readers of another language. The check is about what a reader sees, so it now looks only at that."
+        },
         {
           "version": "0.3.1",
           "date": "2026-08-28",
