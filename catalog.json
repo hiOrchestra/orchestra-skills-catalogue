@@ -403,7 +403,7 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -424,6 +424,11 @@
         "scripts/verify-site.py"
       ],
       "changelog": [
+        {
+          "version": "0.2.1",
+          "date": "2026-08-28",
+          "summary": "Fixes a false alarm in the layout check. It compared the boxes of top-level sections, so any page with a full-bleed header or footer was reported as misaligned — and the correctly-built sections were the ones it named. It now compares where the text starts, which is the question a reader actually asks."
+        },
         {
           "version": "0.2.0",
           "date": "2026-08-28",

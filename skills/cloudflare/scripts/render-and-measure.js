@@ -16,10 +16,29 @@ const CDP = process.env.CDP_URL || 'http://127.0.0.1:18800';
 const WIDTHS = [[1440, 900, 'desktop'], [390, 844, 'phone']];
 
 const MEASURE = `(() => {
+  // Where the INK starts, not where the box starts. A full-bleed header or
+  // footer legitimately spans from 0 while its text sits on the page's column,
+  // so measuring boxes reports every such site as misaligned and names the
+  // correctly-built sections as the offenders. Walking to the first text node
+  // asks the question a reader actually asks: does the writing line up?
+  const textLeft = (el) => {
+    let min = Infinity;
+    const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    let n;
+    while ((n = walk.nextNode())) {
+      if (!n.nodeValue || !n.nodeValue.trim()) continue;
+      const rng = document.createRange();
+      rng.selectNodeContents(n);
+      const r = rng.getBoundingClientRect();
+      if (r.width > 0 && r.height > 0) min = Math.min(min, r.left);
+    }
+    return Number.isFinite(min) ? Math.round(min) : null;
+  };
   const blocks = [...document.querySelectorAll('body > *, main > *, body > * > section')]
     .map(el => { const r = el.getBoundingClientRect();
       return { tag: el.tagName.toLowerCase(), cls: String(el.className || '').split(' ')[0],
-               left: Math.round(r.left), right: Math.round(r.right), w: Math.round(r.width) }; })
+               left: Math.round(r.left), right: Math.round(r.right), w: Math.round(r.width),
+               textLeft: textLeft(el) }; })
     .filter(b => b.w > 40);
   const icon = document.querySelector('link[rel~="icon"],link[rel="shortcut icon"]');
   return {

@@ -145,23 +145,32 @@ def main():
             else:
                 record(PASS, "the page has content", f"{d['textLen']} characters")
 
-            # left edges: the bug that shipped. Blocks either share the
-            # container's edge or run full-bleed from 0. Anything else is a
-            # margin shorthand having eaten `auto`.
-            lefts = {}
-            for b in d["blocks"]:
-                lefts.setdefault(b["left"], []).append(f"{b['tag']}.{b['cls']}")
-            if len(lefts) > 1:
-                main_edge = max(lefts, key=lambda k: len(lefts[k]))
-                strays = {k: v for k, v in lefts.items() if k != main_edge and k != 0 or (k == 0 and main_edge != 0 and any(bb["right"] < d["innerWidth"] - 4 for bb in d["blocks"] if bb["left"] == 0))}
-                if strays:
-                    record(FAIL, "blocks share a left edge",
-                           f"most sit at {main_edge}px; these do not: " +
-                           "; ".join(f"{k}px {','.join(v[:3])}" for k, v in strays.items()))
-                else:
-                    record(PASS, "blocks share a left edge", f"{main_edge}px, plus full-bleed")
+            # The bug that shipped: one section lost its centring and its
+            # headline ran to the viewport edge while everything else stayed on
+            # the column. Judged on where the TEXT starts, because a full-bleed
+            # header or footer spans from 0 by design and comparing boxes marks
+            # every such page as broken — it did exactly that on its first run,
+            # naming the correctly-built sections as the strays.
+            edges = [(b["textLeft"], f"{b['tag']}.{b['cls']}")
+                     for b in d["blocks"] if b.get("textLeft") is not None]
+            if len(edges) < 3:
+                record(PASS, "text lines up on a column", "too few blocks to judge")
             else:
-                record(PASS, "blocks share a left edge")
+                tally = {}
+                for e, _ in edges:
+                    tally.setdefault(e, []).append(_)
+                column = max(tally, key=lambda k: len(tally[k]))
+                # A deliberate offset is small — an indented pull-quote, a hanging
+                # bullet. A container that lost `margin: auto` is off by the whole
+                # gutter, so the tolerance sits well below a gutter and well above
+                # a nudge.
+                strays = sorted({(e, n) for e, n in edges if abs(e - column) > 24})
+                if strays:
+                    record(FAIL, "text lines up on a column",
+                           f"most text starts at {column}px; these do not: " +
+                           "; ".join(f"{e}px {n}" for e, n in strays[:4]))
+                else:
+                    record(PASS, "text lines up on a column", f"{column}px")
 
             # every internal link must resolve
             broken = []
