@@ -8,9 +8,11 @@ three months, after the conversation that set it has scrolled out of reach.
 
 ## Where it lives
 
-- **In the Skill Workshop**, as a skill of this instance, named for the thing:
-  `publishing-<site>`, `operating-<tool>`, `running-<name>`. Versioned, so a
-  change of mind is a new version and the old one is still there.
+- **In the Skill Workshop**, as a skill of this instance, named for the thing
+  as a slug — lowercase ASCII, hyphens: `publishing-<site>`,
+  `operating-<tool>`, `running-<name>`. Versioned, so a change of mind is a
+  new version and the old one is still there. Scoped to you, the agent that
+  runs the procedure, unless the person widens it.
 - **In the person's language.** It is theirs to read and edit; tell them it
   exists and that editing it is how they change how you work.
 - **Never in `SOUL.md` or `AGENTS.md`** — those are overwritten by the

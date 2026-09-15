@@ -104,9 +104,14 @@ start with the old one.
 ## Then write it down — the operating skill
 
 A confirmed brief is worth keeping in a place you read on every turn, not in a
-message that scrolls away. Write it as a skill in the Skill Workshop, named
-for the thing (`publishing-<site>`, `operating-<tool>`), in the person's
-language, and tell them it exists and that they can edit it.
+message that scrolls away. Write it as a skill in the Skill Workshop, in the
+person's language, and tell them it exists and that they can edit it.
+
+**Name it as a slug**: lowercase ASCII letters, digits and hyphens only —
+`publicacio-terra-crua`, `operating-bookings`. No spaces, no accents, no
+capitals: the name is an identifier the platform installs by, and the first
+one written with an accent and spaces failed its format check. The title
+inside the file (`# Publicació Terra Crua`) is where the language lives.
 
 On most instances a skill you write is a **proposal** until the person
 approves it in Skills — so say that: "I have written our procedure down; it

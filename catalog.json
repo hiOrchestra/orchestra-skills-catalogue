@@ -590,7 +590,7 @@
         "frontend"
       ],
       "path": "skills/brief-before-build/SKILL.md",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "requires": {
         "env": []
       },
@@ -599,6 +599,11 @@
         "references/operating-skill.md"
       ],
       "changelog": [
+        {
+          "version": "0.1.2",
+          "date": "2026-09-15",
+          "summary": "The operating skill's name is an ASCII slug; the title inside carries the language. Scoped to the agent that runs it."
+        },
         {
           "version": "0.1.1",
           "date": "2026-09-15",
