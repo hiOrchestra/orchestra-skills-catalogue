@@ -508,7 +508,7 @@
         "comments"
       ],
       "path": "skills/blog-on-cloudflare/SKILL.md",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -519,6 +519,11 @@
         ]
       },
       "changelog": [
+        {
+          "version": "0.3.1",
+          "date": "2026-09-16",
+          "summary": "Declares what it needs where the gateway reads it: the two Cloudflare variables under metadata.openclaw.requires.env (it loaded without them before), and the cloudflare skill under metadata.orchestra.requires.skills."
+        },
         {
           "version": "0.3.0",
           "date": "2026-08-28",

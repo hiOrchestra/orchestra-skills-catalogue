@@ -61,3 +61,24 @@ and the skill triggers on matching prompts.
 Skills never contain secrets. API keys live per-tenant in the instance
 `config.env` (e.g. `USR_COINGECKO_API_KEY`), surfaced via each skill's
 `requires.env` so the portal can prompt for them.
+
+## What a skill requires
+
+A requirement is true in exactly one place, the SKILL.md frontmatter, and
+`catalog.json` copies it so the index can be read alone — `check-schema.py`
+fails when the two disagree.
+
+```yaml
+metadata:
+  openclaw:
+    requires:
+      env: [USR_SERVICE_API_KEY]      # the gateway gates on these
+  orchestra:
+    requires:
+      skills: [cloudflare]            # another catalogue skill this one builds on
+      integrations: [gmail]           # Composio toolkit slugs — a bundle cannot be
+                                      # hired until the tenant has connected them
+```
+
+Bundled agents (orchestra-agents-catalogue) never repeat any of this: what a
+bundle needs from the person is derived from its skills at read time.

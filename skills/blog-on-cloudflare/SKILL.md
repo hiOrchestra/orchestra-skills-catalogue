@@ -4,6 +4,14 @@ description: Everything worth knowing before building someone a blog or publicat
 metadata:
   openclaw:
     emoji: "📝"
+    requires:
+      env:
+        - USR_CLOUDFLARE_API_TOKEN
+        - USR_CLOUDFLARE_ACCOUNT_ID
+  orchestra:
+    requires:
+      skills:
+        - cloudflare
 ---
 
 # Building someone a blog

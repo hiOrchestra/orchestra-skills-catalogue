@@ -34,6 +34,7 @@ Run: python3 test/skill-schema.test.py    (or via scripts/run-tests.sh)
 """
 
 import pathlib
+import json
 import re
 import sys
 
@@ -129,6 +130,51 @@ def described(block):
     return " ".join(out).strip()
 
 
+def mini_yaml(block):
+    """Nested maps and lists of scalars, by indentation — enough for `metadata`.
+    Folded scalars and quoted strings are returned raw; nothing else is needed."""
+    root = {}
+    stack = [(-1, root)]
+    for raw in block.splitlines():
+        if not raw.strip() or raw.lstrip().startswith("#"):
+            continue
+        indent = len(raw) - len(raw.lstrip())
+        line = raw.strip()
+        while stack and indent <= stack[-1][0]:
+            stack.pop()
+        parent = stack[-1][1] if stack else root
+        if line.startswith("- "):
+            if isinstance(parent, dict) and parent.get("__list__") is not None:
+                parent["__list__"].append(line[2:].strip().strip('"').strip("'"))
+            continue
+        km = re.match(r"^([A-Za-z][A-Za-z0-9_-]*):\s*(.*)$", line)
+        if not km or not isinstance(parent, dict):
+            continue
+        key, val = km.group(1), km.group(2)
+        if val == "":
+            child = {"__list__": []}
+            parent[key] = child
+            stack.append((indent, child))
+        else:
+            parent[key] = val.strip()
+    return root
+
+
+def declared(node, *path):
+    """The list at metadata.<path...>, or []."""
+    cur = node
+    for k in path:
+        if not isinstance(cur, dict) or k not in cur:
+            return []
+        cur = cur[k]
+    if isinstance(cur, dict):
+        return [x for x in cur.get("__list__", [])]
+    return []
+
+
+CATALOG = json.loads((ROOT / "catalog.json").read_text())
+CATALOG_BY_SLUG = {e.get("slug"): e for e in CATALOG.get("skills", [])}
+
 failures = []
 checked = 0
 
@@ -156,6 +202,32 @@ for skill_dir in sorted(SKILLS.glob("*/")):
     for key, why in INERT.items():
         if key in keys:
             failures.append(f"{label}: remove `{key}:` — {why}")
+
+    # ── the index agrees with the skill ──────────────────────────────────
+    # catalog.json is an index; a requirement is TRUE only in SKILL.md
+    # (`metadata.openclaw.requires.env`, which the gateway honours, and
+    # `metadata.orchestra.requires.integrations` — Composio toolkit slugs,
+    # which Orchestra honours: a bundle cannot be hired until they are
+    # connected). The index copies them so a list can be read without every
+    # SKILL.md; this is what keeps the copy honest.
+    meta = mini_yaml(block).get("metadata", {})
+    env_true = declared(meta, "openclaw", "requires", "env")
+    int_true = declared(meta, "orchestra", "requires", "integrations")
+    entry = CATALOG_BY_SLUG.get(label)
+    if entry is None:
+        failures.append(f"{label}: not in catalog.json")
+    else:
+        req = entry.get("requires") or {}
+        if sorted(req.get("env") or []) != sorted(env_true):
+            failures.append(f"{label}: catalog.json requires.env {req.get('env')} != SKILL.md {env_true}")
+        skills_true = declared(meta, "orchestra", "requires", "skills")
+        if sorted(req.get("skills") or []) != sorted(skills_true):
+            failures.append(f"{label}: catalog.json requires.skills {req.get('skills')} != SKILL.md {skills_true}")
+        if sorted(req.get("integrations") or []) != sorted(int_true):
+            failures.append(f"{label}: catalog.json requires.integrations {req.get('integrations')} != SKILL.md {int_true}")
+        for slug in int_true:
+            if not re.match(r"^[a-z0-9_]+$", slug):
+                failures.append(f"{label}: integration `{slug}` is not a Composio toolkit slug")
 
     # ── dependency declared where nothing reads it ───────────────────────
     for key, why in IGNORED_NESTED.items():
@@ -234,4 +306,5 @@ print("  ✓ no inert keys (triggers / tool / top-level requires)")
 print("  ✓ name matches directory")
 print("  ✓ descriptions carry enough to decide on")
 print("  ✓ support files addressed as {baseDir}/… and present on disk")
+print("  ✓ catalog.json requires (env, skills, integrations) match each SKILL.md")
 print("\nAll skill-schema checks passed.")
