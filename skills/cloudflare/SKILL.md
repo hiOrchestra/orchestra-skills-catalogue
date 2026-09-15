@@ -102,6 +102,30 @@ curl -sX PUT \
 - New scripts have no public URL until you enable it:
   `POST /workers/scripts/{name}/subdomain {"enabled":true}`.
 
+## Where the project lives
+
+One folder per site or app, under the workspace:
+
+```
+orchestra/sites/<name>/
+  worker.js        the code you deploy
+  schema.sql       the database, as created — kept current with every migration
+  DESIGN.md        the design commitment (design-taste-frontend writes it)
+  deploy.json      worker name, D1 id, R2 bucket, account id, custom domain,
+                   and the site's admin / preview tokens
+  README.md        one paragraph: what this is, whose it is, where it is live
+```
+
+`<name>` is the worker name. The next change to this site — yours or another
+agent's, weeks later — starts by reading this folder, so it must be complete
+enough to rebuild from. A site whose files sit loose in the workspace root
+next to unrelated work has already been lost once.
+
+**`deploy.json` is a secret.** It holds tokens next to ids. It stays in this
+folder; it is never uploaded to Files, quoted in chat, or pasted into a
+report. When you need to tell the person where something is, tell them the
+URL, not the record.
+
 ## Rules that exist because something broke
 
 **Never deploy over a name you did not create.** A PUT to an existing script

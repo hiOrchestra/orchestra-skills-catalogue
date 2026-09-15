@@ -403,7 +403,7 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.3.2",
+      "version": "0.4.0",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -424,6 +424,11 @@
         "scripts/verify-site.py"
       ],
       "changelog": [
+        {
+          "version": "0.4.0",
+          "date": "2026-09-15",
+          "summary": "Where the project lives: one folder per site under orchestra/sites/<name>/ with worker, schema, DESIGN.md, README and a deploy.json that is treated as a secret."
+        },
         {
           "version": "0.3.2",
           "date": "2026-08-28",
@@ -564,6 +569,61 @@
           "version": "0.1.0",
           "date": "2026-08-27",
           "summary": "First release. How to build a frontend that does not look AI-generated: picking a real design direction, then holding to it through type, colour, layout and motion."
+        }
+      ]
+    },
+    {
+      "slug": "brief-before-build",
+      "name": "Brief Before Build",
+      "description": "Ask before you build. Turns \"make me a website / blog / landing / app\" into a short brief the person confirms — audience, what a thing is for them, organisation, feel, where it lives, how you work together, what done looks like — then writes it down as an operating skill the agent keeps. Nothing that belongs to the person is decided by the agent.",
+      "category": "methodology",
+      "tags": [
+        "brief",
+        "requirements",
+        "elicitation",
+        "behavioral",
+        "frontend"
+      ],
+      "path": "skills/brief-before-build/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "files": [
+        "references/questions.md",
+        "references/operating-skill.md"
+      ],
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-15",
+          "summary": "First release — the question bank by kind of build, the seven-part brief, and the operating skill written from it."
+        }
+      ]
+    },
+    {
+      "slug": "site-operations",
+      "name": "Site Operations",
+      "description": "Run a live site or web app like an operator: back up before every change, preview before public, verify from the outside after every deploy, and report in three states (uploaded, active, public) so \"fixed\" is never said early. Every rule was paid for by a real incident.",
+      "category": "methodology",
+      "tags": [
+        "operations",
+        "deploy",
+        "verification",
+        "incident",
+        "behavioral",
+        "frontend"
+      ],
+      "path": "skills/site-operations/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-15",
+          "summary": "First release — three states, backup-before-change, verify from the outside, defensive rendering, validated/done/pending reporting."
         }
       ]
     }
