@@ -90,7 +90,7 @@ curl -sX PUT \
   -F 'metadata={"main_module":"worker.js","compatibility_date":"2026-08-01",
         "bindings":[{"type":"d1","name":"DB","id":"'"$DB_ID"'"},
                     {"type":"secret_text","name":"API_KEY","text":"'"$SECRET"'"}]};type=application/json' \
-  -F 'worker.js=@worker.js;type=application/javascript+module'
+  -F "worker.js=@orchestra/sites/$NAME/worker.js;type=application/javascript+module"
 ```
 
 - `main_module` + `application/javascript+module` means an ES-module Worker
@@ -120,6 +120,14 @@ orchestra/sites/<name>/
 agent's, weeks later — starts by reading this folder, so it must be complete
 enough to rebuild from. A site whose files sit loose in the workspace root
 next to unrelated work has already been lost once.
+
+**Write the folder first, then deploy from it.** Code that lives in `/tmp` or
+only in your turn is not a project; it is gone when the turn ends. The first
+site built after this rule was written was deployed from `/tmp` and only
+moved into its folder when the person asked where it was. The deploy command
+below reads `orchestra/sites/$NAME/worker.js` for that reason — if the file
+is not there yet, put it there before you run it. And the record is
+`deploy.json`, that name exactly, so the next reader finds it.
 
 **`deploy.json` is a secret.** It holds tokens next to ids. It stays in this
 folder; it is never uploaded to Files, quoted in chat, or pasted into a

@@ -403,7 +403,7 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "requires": {
         "env": [
           "USR_CLOUDFLARE_API_TOKEN",
@@ -424,6 +424,11 @@
         "scripts/verify-site.py"
       ],
       "changelog": [
+        {
+          "version": "0.4.1",
+          "date": "2026-09-15",
+          "summary": "Deploy from the project folder, not from /tmp — the deploy command reads orchestra/sites/$NAME/worker.js; the record is deploy.json exactly."
+        },
         {
           "version": "0.4.0",
           "date": "2026-09-15",
