@@ -585,7 +585,7 @@
         "frontend"
       ],
       "path": "skills/brief-before-build/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "requires": {
         "env": []
       },
@@ -594,6 +594,11 @@
         "references/operating-skill.md"
       ],
       "changelog": [
+        {
+          "version": "0.1.1",
+          "date": "2026-09-15",
+          "summary": "Say that the operating skill is a proposal awaiting approval when it is — seen on the first live run."
+        },
         {
           "version": "0.1.0",
           "date": "2026-09-15",
