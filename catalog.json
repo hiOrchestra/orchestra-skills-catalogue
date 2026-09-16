@@ -1060,6 +1060,156 @@
           "summary": "First release."
         }
       ]
+    },
+    {
+      "slug": "meeting-notes",
+      "name": "Meeting Notes",
+      "description": "Turn a meeting (transcript, notes, thread) into the record that matters: decisions taken, actions with owner and date, open questions, and a short summary for those not there, in the words used. Use for notes from the meeting / minutes / what did we decide / action items / write up the call.",
+      "category": "methodology",
+      "tags": [
+        "meetings",
+        "minutes",
+        "decisions",
+        "actions",
+        "behavioral"
+      ],
+      "path": "skills/meeting-notes/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "action-tracker",
+      "name": "Action Tracker",
+      "description": "Keep who owes what to whom by when in one table, follow it up on a cadence, give a weekly view (due, late, blocked, done) and a per-person view before a meeting. Use for track this / follow up on / what's outstanding / who owes me what / before my meeting with X.",
+      "category": "methodology",
+      "tags": [
+        "commitments",
+        "follow-up",
+        "weekly",
+        "routine",
+        "behavioral"
+      ],
+      "path": "skills/action-tracker/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "proposal-brief",
+      "name": "Proposal Brief",
+      "description": "Read a call, tender, RFP or grant like an evaluator (eligibility, deadlines, scoring grid, every requirement quoted) and produce a go/no-go, a compliance matrix and the response outline in scoring order, before a word is written. Use for RFP / tender / call for proposals / grant / should we apply.",
+      "category": "methodology",
+      "tags": [
+        "rfp",
+        "tender",
+        "grant",
+        "bid",
+        "compliance",
+        "behavioral"
+      ],
+      "path": "skills/proposal-brief/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "job-description",
+      "name": "Job Description",
+      "description": "Write a job description from a conversation with the hiring manager: the real work, the outcomes at twelve months, must-haves apart from nice-to-haves, pay range and process, plainly and only job-related. Use for job description / job post / we're hiring a / open a role.",
+      "category": "methodology",
+      "tags": [
+        "hiring",
+        "recruiting",
+        "job-post",
+        "behavioral"
+      ],
+      "path": "skills/job-description/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "candidate-screening",
+      "name": "Candidate Screening",
+      "description": "Screen applications against the role's must-haves with the same criteria for everyone, evidence quoted from each application, a consistent score and a shortlist with the reason for each yes and no; never on anything not about doing the job. Use for screen these CVs / shortlist / who should we interview.",
+      "category": "methodology",
+      "tags": [
+        "hiring",
+        "recruiting",
+        "shortlist",
+        "screening",
+        "behavioral"
+      ],
+      "path": "skills/candidate-screening/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "onboarding-plan",
+      "name": "Onboarding Plan",
+      "description": "Plan a new hire's first weeks: access and tools before day one with owners, whom they meet and why, what on track means at one week, one month and three months, and the check-ins; two versions, manager's and new hire's. Use for onboarding / they start on Monday / first week plan / 30-60-90.",
+      "category": "methodology",
+      "tags": [
+        "hiring",
+        "onboarding",
+        "first-week",
+        "30-60-90",
+        "behavioral"
+      ],
+      "path": "skills/onboarding-plan/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
     }
   ]
 }
