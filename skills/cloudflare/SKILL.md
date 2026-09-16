@@ -6,8 +6,29 @@ metadata:
     emoji: "☁️"
     requires:
       env:
-        - USR_CLOUDFLARE_API_TOKEN
-        - USR_CLOUDFLARE_ACCOUNT_ID
+        - CLOUDFLARE_API_TOKEN
+        - CLOUDFLARE_ACCOUNT_ID
+  orchestra:
+    secrets:
+      CLOUDFLARE_API_TOKEN:
+        kind: secret
+        hosts:
+          - api.cloudflare.com
+        label:
+          en: "Cloudflare API token"
+          es: "Token de API de Cloudflare"
+        where:
+          en: "Cloudflare dashboard → My Profile → API Tokens → Create Token (Edit zone DNS + Workers/D1/R2 as needed)."
+          es: "Panel de Cloudflare → My Profile → API Tokens → Create Token (Edit zone DNS + Workers/D1/R2 según haga falta)."
+      CLOUDFLARE_ACCOUNT_ID:
+        kind: env
+        label:
+          en: "Cloudflare account id"
+          es: "ID de cuenta de Cloudflare"
+        where:
+          en: "Cloudflare dashboard → any zone → Overview → API section, right column."
+          es: "Panel de Cloudflare → cualquier zona → Overview → sección API, columna derecha."
+        why: "An identifier, not a credential; it goes into URL paths and is safe to see."
 ---
 
 # Cloudflare
@@ -17,7 +38,7 @@ anyone else's help. That is what this skill is for. Workers run the code, D1
 stores the data, R2 stores the files, DNS points the domain at it.
 
 Everything is the REST API at `https://api.cloudflare.com/client/v4`, authorised
-with `Authorization: Bearer $USR_CLOUDFLARE_API_TOKEN`. There is no CLI to
+with `Authorization: Bearer $CLOUDFLARE_API_TOKEN`. There is no CLI to
 install and `wrangler` is not required — do not ask the user to install it.
 
 ## A deploy is not done until you have looked
@@ -85,8 +106,8 @@ attempt, so it is written out once here:
 
 ```bash
 curl -sX PUT \
-  "https://api.cloudflare.com/client/v4/accounts/$USR_CLOUDFLARE_ACCOUNT_ID/workers/scripts/$NAME" \
-  -H "Authorization: Bearer $USR_CLOUDFLARE_API_TOKEN" \
+  "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/scripts/$NAME" \
+  -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
   -F 'metadata={"main_module":"worker.js","compatibility_date":"2026-08-01",
         "bindings":[{"type":"d1","name":"DB","id":"'"$DB_ID"'"},
                     {"type":"secret_text","name":"API_KEY","text":"'"$SECRET"'"}]};type=application/json' \

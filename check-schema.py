@@ -172,6 +172,39 @@ def declared(node, *path):
     return []
 
 
+LOCALES = {"en", "es"}
+CREDENTIAL_NAME = re.compile(r"_?(API_KEY|TOKEN|PASSWORD|PRIVATE_KEY|SECRET|PWD)$", re.I)
+
+
+def unquote(v):
+    return v.strip().strip('"').strip("'") if isinstance(v, str) else v
+
+
+def secrets_contract(meta):
+    """metadata.orchestra.secrets as plain dicts (kind, hosts[], label{}, where{}, why)."""
+    node = meta.get("orchestra", {}).get("secrets") if isinstance(meta.get("orchestra"), dict) else None
+    if not isinstance(node, dict):
+        return {}
+    out = {}
+    for name, c in node.items():
+        if name == "__list__" or not isinstance(c, dict):
+            continue
+        entry = {}
+        if "kind" in c:
+            entry["kind"] = unquote(c["kind"])
+        hosts = c.get("hosts")
+        if isinstance(hosts, dict):
+            entry["hosts"] = [unquote(h) for h in hosts.get("__list__", [])]
+        for k in ("label", "where"):
+            loc = c.get(k)
+            if isinstance(loc, dict):
+                entry[k] = {lk: unquote(lv) for lk, lv in loc.items() if lk != "__list__"}
+        if "why" in c:
+            entry["why"] = unquote(c["why"])
+        out[name] = entry
+    return out
+
+
 CATALOG = json.loads((ROOT / "catalog.json").read_text())
 CATALOG_BY_SLUG = {e.get("slug"): e for e in CATALOG.get("skills", [])}
 
@@ -228,6 +261,40 @@ for skill_dir in sorted(SKILLS.glob("*/")):
         for slug in int_true:
             if not re.match(r"^[a-z0-9_]+$", slug):
                 failures.append(f"{label}: integration `{slug}` is not a Composio toolkit slug")
+
+        # ── every key has its secrets contract, and the index copies it ──
+        # A key lives in the tenant's secret store; the platform needs, per
+        # key, the kind (secret → sentinel + egress proxy; env → plain), the
+        # hosts a secret may reach, and the person's words. `USR_` marked the
+        # retired config.env path (2026-09-16) and is refused.
+        contract = secrets_contract(meta)
+        for name in env_true:
+            if name.startswith("USR_"):
+                failures.append(f"{label}: `{name}` carries the retired USR_ prefix — keys are bare names in the secret store")
+            c = contract.get(name)
+            if c is None:
+                failures.append(f"{label}: `{name}` has no metadata.orchestra.secrets entry (kind, hosts, label, where)")
+                continue
+            kind = c.get("kind")
+            if kind not in ("secret", "env"):
+                failures.append(f"{label}: secrets.{name}.kind must be secret or env (got {kind!r})")
+            if kind == "secret" and not c.get("hosts"):
+                failures.append(f"{label}: secrets.{name} is a secret with no hosts — the proxy would never release it anywhere")
+            if kind == "env" and CREDENTIAL_NAME.search(name) and not c.get("why"):
+                failures.append(f"{label}: secrets.{name} looks like a credential but is kind env with no `why:`")
+            for h in c.get("hosts") or []:
+                if not re.match(r"^[a-z0-9.-]+$", h) or h.startswith("*"):
+                    failures.append(f"{label}: secrets.{name} host `{h}` is not an exact hostname")
+            for k in ("label", "where"):
+                loc = c.get(k) or {}
+                if set(loc.keys()) != LOCALES:
+                    failures.append(f"{label}: secrets.{name}.{k} must have exactly {sorted(LOCALES)}")
+        for name in contract:
+            if name not in env_true:
+                failures.append(f"{label}: secrets.{name} is declared but `{name}` is not in requires.env")
+        mirror = entry.get("secrets") or {}
+        if mirror != contract:
+            failures.append(f"{label}: catalog.json secrets != SKILL.md metadata.orchestra.secrets")
 
     # ── dependency declared where nothing reads it ───────────────────────
     for key, why in IGNORED_NESTED.items():
@@ -307,4 +374,5 @@ print("  ✓ name matches directory")
 print("  ✓ descriptions carry enough to decide on")
 print("  ✓ support files addressed as {baseDir}/… and present on disk")
 print("  ✓ catalog.json requires (env, skills, integrations) match each SKILL.md")
+    print("  ✓ every key has its secrets contract (kind, hosts, words) and the index copies it")
 print("\nAll skill-schema checks passed.")

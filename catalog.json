@@ -12,13 +12,18 @@
         "market-data"
       ],
       "path": "skills/coingecko/SKILL.md",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "requires": {
         "env": [
-          "USR_COINGECKO_API_KEY"
+          "COINGECKO_API_KEY"
         ]
       },
       "changelog": [
+        {
+          "version": "0.2.1",
+          "date": "2026-09-16",
+          "notes": "Credentials move to the gateway secret store: bare names (no USR_ prefix) and a per-key contract (kind, hosts, words) under metadata.orchestra.secrets."
+        },
         {
           "version": "0.2.0",
           "date": "2026-08-27",
@@ -29,7 +34,24 @@
           "date": "2026-08-27",
           "summary": "First release."
         }
-      ]
+      ],
+      "secrets": {
+        "COINGECKO_API_KEY": {
+          "kind": "secret",
+          "hosts": [
+            "api.coingecko.com",
+            "pro-api.coingecko.com"
+          ],
+          "label": {
+            "en": "CoinGecko API key",
+            "es": "Clave de API de CoinGecko"
+          },
+          "where": {
+            "en": "coingecko.com → Developer Dashboard → API keys (Demo or Pro).",
+            "es": "coingecko.com → Developer Dashboard → API keys (Demo o Pro)."
+          }
+        }
+      }
     },
     {
       "slug": "etherscan",
@@ -42,19 +64,40 @@
         "onchain"
       ],
       "path": "skills/etherscan/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "requires": {
         "env": [
-          "USR_ETHERSCAN_API_KEY"
+          "ETHERSCAN_API_KEY"
         ]
       },
       "changelog": [
+        {
+          "version": "0.1.1",
+          "date": "2026-09-16",
+          "notes": "Credentials move to the gateway secret store: bare names (no USR_ prefix) and a per-key contract (kind, hosts, words) under metadata.orchestra.secrets."
+        },
         {
           "version": "0.1.0",
           "date": "2026-08-27",
           "summary": "First release."
         }
-      ]
+      ],
+      "secrets": {
+        "ETHERSCAN_API_KEY": {
+          "kind": "secret",
+          "hosts": [
+            "api.etherscan.io"
+          ],
+          "label": {
+            "en": "Etherscan API key",
+            "es": "Clave de API de Etherscan"
+          },
+          "where": {
+            "en": "etherscan.io → My Account → API Keys.",
+            "es": "etherscan.io → My Account → API Keys."
+          }
+        }
+      }
     },
     {
       "slug": "wordpress",
@@ -68,15 +111,20 @@
         "publishing"
       ],
       "path": "skills/wordpress/SKILL.md",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "requires": {
         "env": [
-          "USR_WORDPRESS_URL",
-          "USR_WORDPRESS_USER",
-          "USR_WORDPRESS_PWD"
+          "WORDPRESS_URL",
+          "WORDPRESS_USER",
+          "WORDPRESS_PWD"
         ]
       },
       "changelog": [
+        {
+          "version": "0.2.1",
+          "date": "2026-09-16",
+          "notes": "Credentials move to the gateway secret store: bare names (no USR_ prefix) and a per-key contract (kind, hosts, words) under metadata.orchestra.secrets."
+        },
         {
           "version": "0.2.0",
           "date": "2026-08-27",
@@ -87,7 +135,43 @@
           "date": "2026-08-27",
           "summary": "First release."
         }
-      ]
+      ],
+      "secrets": {
+        "WORDPRESS_URL": {
+          "kind": "env",
+          "label": {
+            "en": "WordPress site URL",
+            "es": "URL del sitio WordPress"
+          },
+          "where": {
+            "en": "The site root, e.g. https://myblog.com (no trailing slash).",
+            "es": "La raíz del sitio, p. ej. https://miblog.com (sin barra final)."
+          }
+        },
+        "WORDPRESS_USER": {
+          "kind": "env",
+          "label": {
+            "en": "WordPress username",
+            "es": "Usuario de WordPress"
+          },
+          "where": {
+            "en": "The WordPress user the Application Password belongs to.",
+            "es": "El usuario de WordPress al que pertenece la Application Password."
+          }
+        },
+        "WORDPRESS_PWD": {
+          "kind": "env",
+          "label": {
+            "en": "WordPress application password",
+            "es": "Application Password de WordPress"
+          },
+          "where": {
+            "en": "WordPress → Users → Profile → Application Passwords → Add New.",
+            "es": "WordPress → Usuarios → Perfil → Application Passwords → Add New."
+          },
+          "why": "Sent as HTTP Basic auth, which base64-encodes user:password inside curl — the egress proxy cannot substitute a sentinel inside base64, so this key stays a plain variable."
+        }
+      }
     },
     {
       "slug": "research-brief",
@@ -403,11 +487,11 @@
         "dns"
       ],
       "path": "skills/cloudflare/SKILL.md",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "requires": {
         "env": [
-          "USR_CLOUDFLARE_API_TOKEN",
-          "USR_CLOUDFLARE_ACCOUNT_ID"
+          "CLOUDFLARE_API_TOKEN",
+          "CLOUDFLARE_ACCOUNT_ID"
         ]
       },
       "files": [
@@ -424,6 +508,11 @@
         "scripts/verify-site.py"
       ],
       "changelog": [
+        {
+          "version": "0.4.2",
+          "date": "2026-09-16",
+          "notes": "Credentials move to the gateway secret store: bare names (no USR_ prefix) and a per-key contract (kind, hosts, words) under metadata.orchestra.secrets."
+        },
         {
           "version": "0.4.1",
           "date": "2026-09-15",
@@ -494,7 +583,35 @@
           "date": "2026-08-27",
           "summary": "First release. Workers, D1, R2, KV, DNS and domains, Pages, Turnstile and Queues through the REST API."
         }
-      ]
+      ],
+      "secrets": {
+        "CLOUDFLARE_API_TOKEN": {
+          "kind": "secret",
+          "hosts": [
+            "api.cloudflare.com"
+          ],
+          "label": {
+            "en": "Cloudflare API token",
+            "es": "Token de API de Cloudflare"
+          },
+          "where": {
+            "en": "Cloudflare dashboard → My Profile → API Tokens → Create Token (Edit zone DNS + Workers/D1/R2 as needed).",
+            "es": "Panel de Cloudflare → My Profile → API Tokens → Create Token (Edit zone DNS + Workers/D1/R2 según haga falta)."
+          }
+        },
+        "CLOUDFLARE_ACCOUNT_ID": {
+          "kind": "env",
+          "label": {
+            "en": "Cloudflare account id",
+            "es": "ID de cuenta de Cloudflare"
+          },
+          "where": {
+            "en": "Cloudflare dashboard → any zone → Overview → API section, right column.",
+            "es": "Panel de Cloudflare → cualquier zona → Overview → sección API, columna derecha."
+          },
+          "why": "An identifier, not a credential; it goes into URL paths and is safe to see."
+        }
+      }
     },
     {
       "slug": "blog-on-cloudflare",
@@ -508,17 +625,22 @@
         "comments"
       ],
       "path": "skills/blog-on-cloudflare/SKILL.md",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "requires": {
         "env": [
-          "USR_CLOUDFLARE_API_TOKEN",
-          "USR_CLOUDFLARE_ACCOUNT_ID"
+          "CLOUDFLARE_API_TOKEN",
+          "CLOUDFLARE_ACCOUNT_ID"
         ],
         "skills": [
           "cloudflare"
         ]
       },
       "changelog": [
+        {
+          "version": "0.3.2",
+          "date": "2026-09-16",
+          "notes": "Credentials move to the gateway secret store: bare names (no USR_ prefix) and a per-key contract (kind, hosts, words) under metadata.orchestra.secrets."
+        },
         {
           "version": "0.3.1",
           "date": "2026-09-16",
@@ -539,7 +661,35 @@
           "date": "2026-08-27",
           "summary": "First release. Write, preview, schedule and publish posts, moderate comments and reactions, and report readership."
         }
-      ]
+      ],
+      "secrets": {
+        "CLOUDFLARE_API_TOKEN": {
+          "kind": "secret",
+          "hosts": [
+            "api.cloudflare.com"
+          ],
+          "label": {
+            "en": "Cloudflare API token",
+            "es": "Token de API de Cloudflare"
+          },
+          "where": {
+            "en": "Cloudflare dashboard → My Profile → API Tokens → Create Token (Edit zone DNS + Workers/D1/R2 as needed).",
+            "es": "Panel de Cloudflare → My Profile → API Tokens → Create Token (Edit zone DNS + Workers/D1/R2 según haga falta)."
+          }
+        },
+        "CLOUDFLARE_ACCOUNT_ID": {
+          "kind": "env",
+          "label": {
+            "en": "Cloudflare account id",
+            "es": "ID de cuenta de Cloudflare"
+          },
+          "where": {
+            "en": "Cloudflare dashboard → any zone → Overview → API section, right column.",
+            "es": "Panel de Cloudflare → cualquier zona → Overview → sección API, columna derecha."
+          },
+          "why": "An identifier, not a credential; it goes into URL paths and is safe to see."
+        }
+      }
     },
     {
       "slug": "design-taste-frontend",

@@ -1,22 +1,49 @@
 ---
 name: wordpress
-version: 0.2.0
+version: 0.2.1
 description: >-
   Create and manage content on a WordPress site via the WordPress REST API
   (v2): draft/publish/update posts and pages, upload images to the media
   library and set featured images, manage categories & tags, and moderate
   comments. Authenticates with an Application Password using Basic auth — site
-  URL in USR_WORDPRESS_URL, username in USR_WORDPRESS_USER, app password in
-  USR_WORDPRESS_PWD. Use when the user says "wp", "blog post", "cms",
+  URL in WORDPRESS_URL, username in WORDPRESS_USER, app password in
+  WORDPRESS_PWD. Use when the user says "wp", "blog post", "cms",
   "article".
 metadata:
   openclaw:
     emoji: "📝"
     requires:
       env:
-        - USR_WORDPRESS_URL
-        - USR_WORDPRESS_USER
-        - USR_WORDPRESS_PWD
+        - WORDPRESS_URL
+        - WORDPRESS_USER
+        - WORDPRESS_PWD
+  orchestra:
+    secrets:
+      WORDPRESS_URL:
+        kind: env
+        label:
+          en: "WordPress site URL"
+          es: "URL del sitio WordPress"
+        where:
+          en: "The site root, e.g. https://myblog.com (no trailing slash)."
+          es: "La raíz del sitio, p. ej. https://miblog.com (sin barra final)."
+      WORDPRESS_USER:
+        kind: env
+        label:
+          en: "WordPress username"
+          es: "Usuario de WordPress"
+        where:
+          en: "The WordPress user the Application Password belongs to."
+          es: "El usuario de WordPress al que pertenece la Application Password."
+      WORDPRESS_PWD:
+        kind: env
+        label:
+          en: "WordPress application password"
+          es: "Application Password de WordPress"
+        where:
+          en: "WordPress → Users → Profile → Application Passwords → Add New."
+          es: "WordPress → Usuarios → Perfil → Application Passwords → Add New."
+        why: "Sent as HTTP Basic auth, which base64-encodes user:password inside curl — the egress proxy cannot substitute a sentinel inside base64, so this key stays a plain variable."
 ---
 # WordPress — create & manage content
 
@@ -28,22 +55,22 @@ and moderate comments.
 
 Three values are stored in config and available as env vars in `exec`:
 
-- `USR_WORDPRESS_URL` — the site root, e.g. `https://myblog.com` (no trailing slash)
-- `USR_WORDPRESS_USER` — the WordPress username
-- `USR_WORDPRESS_PWD` — an **Application Password** (WordPress 5.6+, generated under
+- `WORDPRESS_URL` — the site root, e.g. `https://myblog.com` (no trailing slash)
+- `WORDPRESS_USER` — the WordPress username
+- `WORDPRESS_PWD` — an **Application Password** (WordPress 5.6+, generated under
   Users → Profile → Application Passwords). It looks like `abcd EFGH ijkl 1234`
   (six 4-char groups); the spaces are fine.
 
 > **⚠️ This MUST be an Application Password, NOT the user's normal login
 > password.** The REST API rejects the regular wp-admin login password and
 > returns `401 rest_not_logged_in` — this is the #1 cause of auth failures. If
-> the value in `USR_WORDPRESS_PWD` doesn't look like six space-separated 4-char
+> the value in `WORDPRESS_PWD` doesn't look like six space-separated 4-char
 > groups, it's almost certainly the wrong password; tell the user to generate an
 > Application Password and store *that*.
 
 Authenticate with curl's `-u` flag on **every** request — this sends an
 `Authorization: Basic` header and keeps the password out of the URL. **Never
-print or echo `USR_WORDPRESS_PWD`** in your reply or in command output.
+print or echo `WORDPRESS_PWD`** in your reply or in command output.
 
 ### Resolve the API base first (once)
 
@@ -53,8 +80,8 @@ back to the query-string form, which always works regardless of permalink config
 
 | Form | Endpoint example | Extra params |
 |------|------------------|--------------|
-| Pretty (preferred) | `$USR_WORDPRESS_URL/wp-json/wp/v2/posts/123` | `?per_page=5&status=any` |
-| Query (`?rest_route=`, universal) | `$USR_WORDPRESS_URL/?rest_route=/wp/v2/posts/123` | `&per_page=5&status=any` |
+| Pretty (preferred) | `$WORDPRESS_URL/wp-json/wp/v2/posts/123` | `?per_page=5&status=any` |
+| Query (`?rest_route=`, universal) | `$WORDPRESS_URL/?rest_route=/wp/v2/posts/123` | `&per_page=5&status=any` |
 
 **Important for the query form:** the route lives in the `rest_route` value, so
 every *additional* parameter is joined with `&` (not `?`), e.g.
@@ -63,18 +90,18 @@ every *additional* parameter is joined with `&` (not `?`), e.g.
 Probe auth + base in one shot (try pretty, then query form on a 404):
 
 ```bash
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
-  "$USR_WORDPRESS_URL/wp-json/wp/v2/users/me?context=edit"
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" \
+  "$WORDPRESS_URL/wp-json/wp/v2/users/me?context=edit"
 # If that returns an HTML 404 page, use the query form instead:
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
-  "$USR_WORDPRESS_URL/?rest_route=/wp/v2/users/me&context=edit"
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" \
+  "$WORDPRESS_URL/?rest_route=/wp/v2/users/me&context=edit"
 ```
 
 A `200` with the user JSON (note `roles` — needs an author/editor/admin to write)
 means you're good; keep using whichever form worked for every call below. The
 examples below use the pretty path — translate to the query form if that's the
 one that worked. `401 rest_not_logged_in` / `403 incorrect_password` means the
-credentials are wrong — almost always because `USR_WORDPRESS_PWD` is a login
+credentials are wrong — almost always because `WORDPRESS_PWD` is a login
 password instead of an Application Password (see the warning above).
 
 ## Posts
@@ -85,30 +112,30 @@ block markup is optional — plain HTML paragraphs render fine.
 
 ```bash
 # Create a draft post
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" \
   -H "Content-Type: application/json" \
   -d '{"title":"My title","content":"<p>Body in HTML.</p>","status":"draft","excerpt":"Short summary"}' \
-  "$USR_WORDPRESS_URL/wp-json/wp/v2/posts"
+  "$WORDPRESS_URL/wp-json/wp/v2/posts"
 
 # Publish immediately: set "status":"publish" instead.
 
 # Update an existing post (id from the create response)
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" \
   -H "Content-Type: application/json" \
   -d '{"content":"<p>Edited body.</p>","status":"publish"}' \
-  "$USR_WORDPRESS_URL/wp-json/wp/v2/posts/123"
+  "$WORDPRESS_URL/wp-json/wp/v2/posts/123"
 
 # List recent posts (any status needs context=edit + auth)
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
-  "$USR_WORDPRESS_URL/wp-json/wp/v2/posts?per_page=10&status=any&context=edit&orderby=date&order=desc"
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" \
+  "$WORDPRESS_URL/wp-json/wp/v2/posts?per_page=10&status=any&context=edit&orderby=date&order=desc"
 
 # Search posts by keyword
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
-  "$USR_WORDPRESS_URL/wp-json/wp/v2/posts?search=keyword&context=edit"
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" \
+  "$WORDPRESS_URL/wp-json/wp/v2/posts?search=keyword&context=edit"
 
 # Delete a post (move to trash; add &force=true to permanently delete)
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" -X DELETE \
-  "$USR_WORDPRESS_URL/wp-json/wp/v2/posts/123"
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" -X DELETE \
+  "$WORDPRESS_URL/wp-json/wp/v2/posts/123"
 ```
 
 Useful post fields: `title`, `content`, `excerpt`, `status`, `slug`, `date`
@@ -124,10 +151,10 @@ Pages use the same shape as posts at `/wp/v2/pages`. Extra fields: `parent`
 (parent page id) and `menu_order`.
 
 ```bash
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" \
   -H "Content-Type: application/json" \
   -d '{"title":"About","content":"<p>About us.</p>","status":"publish"}' \
-  "$USR_WORDPRESS_URL/wp-json/wp/v2/pages"
+  "$WORDPRESS_URL/wp-json/wp/v2/pages"
 ```
 
 ## Media (images)
@@ -138,11 +165,11 @@ giving the filename. The response `id` is the attachment id; the response
 
 ```bash
 # Upload an image to the media library
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" \
   -H "Content-Disposition: attachment; filename=hero.jpg" \
   -H "Content-Type: image/jpeg" \
   --data-binary @/path/to/hero.jpg \
-  "$USR_WORDPRESS_URL/wp-json/wp/v2/media"
+  "$WORDPRESS_URL/wp-json/wp/v2/media"
 ```
 
 Use the returned media `id` as a post's `featured_media` to set the featured
@@ -158,14 +185,14 @@ name to an id first; create it if it doesn't exist.
 
 ```bash
 # Find a category by name (search), or list all
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
-  "$USR_WORDPRESS_URL/wp-json/wp/v2/categories?search=News"
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" \
+  "$WORDPRESS_URL/wp-json/wp/v2/categories?search=News"
 
 # Create a category (returns its id)
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" \
   -H "Content-Type: application/json" \
   -d '{"name":"News"}' \
-  "$USR_WORDPRESS_URL/wp-json/wp/v2/categories"
+  "$WORDPRESS_URL/wp-json/wp/v2/categories"
 ```
 
 Tags work identically at `/wp/v2/tags`. Then attach to a post with
@@ -175,27 +202,27 @@ Tags work identically at `/wp/v2/tags`. Then attach to a post with
 
 ```bash
 # List comments awaiting moderation
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
-  "$USR_WORDPRESS_URL/wp-json/wp/v2/comments?status=hold&context=edit"
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" \
+  "$WORDPRESS_URL/wp-json/wp/v2/comments?status=hold&context=edit"
 
 # Approve / hold / spam / trash a comment by setting status
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" \
   -H "Content-Type: application/json" \
   -d '{"status":"approved"}' \
-  "$USR_WORDPRESS_URL/wp-json/wp/v2/comments/55"
+  "$WORDPRESS_URL/wp-json/wp/v2/comments/55"
 
 # Reply to a comment: POST with post + parent ids
-exec curl -s -u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD" \
+exec curl -s -u "$WORDPRESS_USER:$WORDPRESS_PWD" \
   -H "Content-Type: application/json" \
   -d '{"post":123,"parent":55,"content":"Thanks for your comment!"}' \
-  "$USR_WORDPRESS_URL/wp-json/wp/v2/comments"
+  "$WORDPRESS_URL/wp-json/wp/v2/comments"
 ```
 
 Comment `status` values: `approved`, `hold`, `spam`, `trash`.
 
 ## Rules
 
-- **Always authenticate with `-u "$USR_WORDPRESS_USER:$USR_WORDPRESS_PWD"`.**
+- **Always authenticate with `-u "$WORDPRESS_USER:$WORDPRESS_PWD"`.**
   Never print or echo the password, and never put it in the URL.
 - **Default new posts/pages to `status:"draft"`** unless the user clearly asks to
   publish. Confirm before publishing or deleting content.
@@ -206,7 +233,7 @@ Comment `status` values: `approved`, `hold`, `spam`, `trash`.
 - Parse the JSON response and report the resulting post/page `link` (or media
   `source_url`) to the user. On error, read the `code` and `message` fields and
   report them succinctly — don't invent success.
-- Treat the site root from `USR_WORDPRESS_URL` as having **no trailing slash** and
-  build paths as `$USR_WORDPRESS_URL/wp-json/wp/v2/...`.
+- Treat the site root from `WORDPRESS_URL` as having **no trailing slash** and
+  build paths as `$WORDPRESS_URL/wp-json/wp/v2/...`.
 - If you get `404 rest_no_route`, the REST API path is wrong or pretty permalinks
-  are off — try `"$USR_WORDPRESS_URL/?rest_route=/wp/v2/posts"` form as a fallback.
+  are off — try `"$WORDPRESS_URL/?rest_route=/wp/v2/posts"` form as a fallback.

@@ -5,7 +5,7 @@ Regenerate: `python3 tools/gen-cloudflare-refs.py --fetch`
 
 Paths are relative to `https://api.cloudflare.com/client/v4`, with
 `/accounts/{account_id}` or `/zones/{zone_id}` omitted for brevity —
-prefix them back on. Auth is `Authorization: Bearer $USR_CLOUDFLARE_API_TOKEN`.
+prefix them back on. Auth is `Authorization: Bearer $CLOUDFLARE_API_TOKEN`.
 
 45 endpoints.
 

@@ -6,9 +6,29 @@ metadata:
     emoji: "📝"
     requires:
       env:
-        - USR_CLOUDFLARE_API_TOKEN
-        - USR_CLOUDFLARE_ACCOUNT_ID
+        - CLOUDFLARE_API_TOKEN
+        - CLOUDFLARE_ACCOUNT_ID
   orchestra:
+    secrets:
+      CLOUDFLARE_API_TOKEN:
+        kind: secret
+        hosts:
+          - api.cloudflare.com
+        label:
+          en: "Cloudflare API token"
+          es: "Token de API de Cloudflare"
+        where:
+          en: "Cloudflare dashboard → My Profile → API Tokens → Create Token (Edit zone DNS + Workers/D1/R2 as needed)."
+          es: "Panel de Cloudflare → My Profile → API Tokens → Create Token (Edit zone DNS + Workers/D1/R2 según haga falta)."
+      CLOUDFLARE_ACCOUNT_ID:
+        kind: env
+        label:
+          en: "Cloudflare account id"
+          es: "ID de cuenta de Cloudflare"
+        where:
+          en: "Cloudflare dashboard → any zone → Overview → API section, right column."
+          es: "Panel de Cloudflare → cualquier zona → Overview → sección API, columna derecha."
+        why: "An identifier, not a credential; it goes into URL paths and is safe to see."
     requires:
       skills:
         - cloudflare
