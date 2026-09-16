@@ -646,6 +646,270 @@
           "summary": "First release — three states, backup-before-change, verify from the outside, defensive rendering, validated/done/pending reporting."
         }
       ]
+    },
+    {
+      "slug": "voice-guide",
+      "name": "Voice Guide",
+      "description": "Capture how a person or brand actually sounds, from things they already wrote, into a one-page voice guide, and write against it so every piece reads as theirs. Use for write in my voice / sound like me / match our tone / this doesn't sound like us.",
+      "category": "content",
+      "tags": [
+        "voice",
+        "tone",
+        "style",
+        "writing",
+        "behavioral"
+      ],
+      "path": "skills/voice-guide/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "seo-writing",
+      "name": "SEO Writing",
+      "description": "Write a piece so the people searching for it find it and stay: the intent behind the query, a headline that answers it, a structure both search engines and readers follow, meta description and internal links, without stuffing. Use for SEO / rank for / keyword / optimize this post.",
+      "category": "content",
+      "tags": [
+        "seo",
+        "search",
+        "headline",
+        "meta",
+        "writing",
+        "behavioral"
+      ],
+      "path": "skills/seo-writing/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "repurpose-content",
+      "name": "Repurpose Content",
+      "description": "Turn one finished piece into its derivatives (newsletter blurb, LinkedIn post, thread, pull quote, site blurb), each written for its channel in the same voice. Use for repurpose / turn this into a post / social version / what can we make from this.",
+      "category": "content",
+      "tags": [
+        "repurpose",
+        "social",
+        "newsletter",
+        "linkedin",
+        "writing",
+        "behavioral"
+      ],
+      "path": "skills/repurpose-content/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "evaluate-source",
+      "name": "Evaluate Source",
+      "description": "Judge how far a source can be trusted before a claim from it is used: primary or secondhand, who is behind it and what they gain, how it knows, how old, how it has held up, graded A to D. Use for is this source reliable / can we trust this / who is behind this site.",
+      "category": "methodology",
+      "tags": [
+        "research",
+        "sources",
+        "credibility",
+        "behavioral"
+      ],
+      "path": "skills/evaluate-source/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "topic-watch",
+      "name": "Topic Watch",
+      "description": "Keep a standing watch on a topic, company, competitor, regulation or person: a baseline, a scheduled routine, and a report that says only what changed with sources, or nothing. Use for keep an eye on / monitor / alert me when / competitor watch / weekly update on.",
+      "category": "methodology",
+      "tags": [
+        "monitoring",
+        "competitor",
+        "routine",
+        "research",
+        "behavioral"
+      ],
+      "path": "skills/topic-watch/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "interview-guide",
+      "name": "Interview Guide",
+      "description": "Prepare a person to interview someone (an expert, a customer, a candidate): who they are, the questions that get what is needed, the order, what to listen for. Use for what should I ask / prepare questions for / interview guide / discovery call prep.",
+      "category": "methodology",
+      "tags": [
+        "interview",
+        "questions",
+        "research",
+        "discovery",
+        "behavioral"
+      ],
+      "path": "skills/interview-guide/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "defillama",
+      "name": "DefiLlama",
+      "description": "Protocol and chain fundamentals from DefiLlama's free public API: TVL by protocol and chain with history, fees and revenue, stablecoin supply, yield pools, prices. No API key. Use for TVL / how big is protocol X / fees and revenue of / stablecoin supply / yields on.",
+      "category": "crypto",
+      "tags": [
+        "defi",
+        "tvl",
+        "fees",
+        "stablecoins",
+        "yields",
+        "onchain"
+      ],
+      "path": "skills/defillama/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "token-due-diligence",
+      "name": "Token Due Diligence",
+      "description": "Check a token or contract before anyone acts on it: verified source, owner powers (mint, pause, blacklist, fees), holder concentration, liquidity and lock, age, listings and fundamentals, with a red-flag list and a Red/Amber/Green verdict. Describes risk, never recommends. Use for is this token legit / check this contract / rug pull / due diligence on.",
+      "category": "crypto",
+      "tags": [
+        "token",
+        "contract",
+        "rug",
+        "honeypot",
+        "risk",
+        "behavioral"
+      ],
+      "path": "skills/token-due-diligence/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "skills": [
+          "etherscan",
+          "coingecko"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "wallet-watch",
+      "name": "Wallet Watch",
+      "description": "Keep a standing watch on addresses: a baseline of balances and holdings, a scheduled routine, a report of movements above a threshold with transaction hashes, or nothing. Read-only. Use for watch this wallet / alert me if this address moves / track the treasury / whale watch.",
+      "category": "crypto",
+      "tags": [
+        "wallet",
+        "monitoring",
+        "treasury",
+        "whale",
+        "routine",
+        "behavioral"
+      ],
+      "path": "skills/wallet-watch/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "skills": [
+          "etherscan"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "portfolio-pnl",
+      "name": "Portfolio P&L",
+      "description": "Turn an exported history of trades and transfers into holdings, cost basis, realized and unrealized P&L at a stated price snapshot, with every assumption written down (lot method, fees, own-wallet transfers). Analytical, not tax advice. Use for what's my P&L / how much am I up / cost basis / value my portfolio.",
+      "category": "crypto",
+      "tags": [
+        "portfolio",
+        "pnl",
+        "cost-basis",
+        "holdings",
+        "behavioral"
+      ],
+      "path": "skills/portfolio-pnl/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "skills": [
+          "coingecko"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
     }
   ]
 }
