@@ -2,189 +2,18 @@
   "version": 1,
   "skills": [
     {
-      "slug": "coingecko",
-      "name": "CoinGecko",
-      "description": "Live cryptocurrency prices and market data from CoinGecko. Ask for the current price, 24h change, or market cap of any coin or token.",
-      "category": "crypto",
-      "tags": [
-        "crypto",
-        "defi",
-        "market-data"
-      ],
-      "path": "skills/coingecko/SKILL.md",
-      "version": "0.2.1",
-      "requires": {
-        "env": [
-          "COINGECKO_API_KEY"
-        ]
-      },
-      "changelog": [
-        {
-          "version": "0.2.1",
-          "date": "2026-09-16",
-          "notes": "Credentials move to the gateway secret store: bare names (no USR_ prefix) and a per-key contract (kind, hosts, words) under metadata.orchestra.secrets."
-        },
-        {
-          "version": "0.2.0",
-          "date": "2026-08-27",
-          "summary": "Uses the authenticated API, so rate limits no longer bite during a busy conversation."
-        },
-        {
-          "version": "0.1.0",
-          "date": "2026-08-27",
-          "summary": "First release."
-        }
-      ],
-      "secrets": {
-        "COINGECKO_API_KEY": {
-          "kind": "secret",
-          "hosts": [
-            "api.coingecko.com",
-            "pro-api.coingecko.com"
-          ],
-          "label": {
-            "en": "CoinGecko API key",
-            "es": "Clave de API de CoinGecko"
-          },
-          "where": {
-            "en": "coingecko.com → Developer Dashboard → API keys (Demo or Pro).",
-            "es": "coingecko.com → Developer Dashboard → API keys (Demo o Pro)."
-          }
-        }
-      }
-    },
-    {
-      "slug": "etherscan",
-      "name": "Etherscan (Pro)",
-      "description": "On-chain data for Ethereum + 60 EVM chains via Etherscan API V2: balances, transactions, ERC-20 transfers & holdings, contract ABI/source, gas, ETH price, plus PRO analytics (historical balances, token info, daily stats).",
-      "category": "crypto",
-      "tags": [
-        "crypto",
-        "defi",
-        "onchain"
-      ],
-      "path": "skills/etherscan/SKILL.md",
-      "version": "0.1.1",
-      "requires": {
-        "env": [
-          "ETHERSCAN_API_KEY"
-        ]
-      },
-      "changelog": [
-        {
-          "version": "0.1.1",
-          "date": "2026-09-16",
-          "notes": "Credentials move to the gateway secret store: bare names (no USR_ prefix) and a per-key contract (kind, hosts, words) under metadata.orchestra.secrets."
-        },
-        {
-          "version": "0.1.0",
-          "date": "2026-08-27",
-          "summary": "First release."
-        }
-      ],
-      "secrets": {
-        "ETHERSCAN_API_KEY": {
-          "kind": "secret",
-          "hosts": [
-            "api.etherscan.io"
-          ],
-          "label": {
-            "en": "Etherscan API key",
-            "es": "Clave de API de Etherscan"
-          },
-          "where": {
-            "en": "etherscan.io → My Account → API Keys.",
-            "es": "etherscan.io → My Account → API Keys."
-          }
-        }
-      }
-    },
-    {
-      "slug": "wordpress",
-      "name": "WordPress",
-      "description": "Create and manage content on a WordPress site via the REST API: draft/publish/update posts and pages, upload images and set featured images, manage categories & tags, and moderate comments. Authenticates with an Application Password.",
-      "category": "content",
-      "tags": [
-        "cms",
-        "content",
-        "blog",
-        "publishing"
-      ],
-      "path": "skills/wordpress/SKILL.md",
-      "version": "0.2.1",
-      "requires": {
-        "env": [
-          "WORDPRESS_URL",
-          "WORDPRESS_USER",
-          "WORDPRESS_PWD"
-        ]
-      },
-      "changelog": [
-        {
-          "version": "0.2.1",
-          "date": "2026-09-16",
-          "notes": "Credentials move to the gateway secret store: bare names (no USR_ prefix) and a per-key contract (kind, hosts, words) under metadata.orchestra.secrets."
-        },
-        {
-          "version": "0.2.0",
-          "date": "2026-08-27",
-          "summary": "Handles application passwords, so it works on hosts that block basic auth."
-        },
-        {
-          "version": "0.1.0",
-          "date": "2026-08-27",
-          "summary": "First release."
-        }
-      ],
-      "secrets": {
-        "WORDPRESS_URL": {
-          "kind": "env",
-          "label": {
-            "en": "WordPress site URL",
-            "es": "URL del sitio WordPress"
-          },
-          "where": {
-            "en": "The site root, e.g. https://myblog.com (no trailing slash).",
-            "es": "La raíz del sitio, p. ej. https://miblog.com (sin barra final)."
-          }
-        },
-        "WORDPRESS_USER": {
-          "kind": "env",
-          "label": {
-            "en": "WordPress username",
-            "es": "Usuario de WordPress"
-          },
-          "where": {
-            "en": "The WordPress user the Application Password belongs to.",
-            "es": "El usuario de WordPress al que pertenece la Application Password."
-          }
-        },
-        "WORDPRESS_PWD": {
-          "kind": "env",
-          "label": {
-            "en": "WordPress application password",
-            "es": "Application Password de WordPress"
-          },
-          "where": {
-            "en": "WordPress → Users → Profile → Application Passwords → Add New.",
-            "es": "WordPress → Usuarios → Perfil → Application Passwords → Add New."
-          },
-          "why": "Sent as HTTP Basic auth, which base64-encodes user:password inside curl — the egress proxy cannot substitute a sentinel inside base64, so this key stays a plain variable."
-        }
-      }
-    },
-    {
-      "slug": "research-brief",
-      "name": "Research Brief",
-      "description": "Turn a research question into a structured, sourced brief — corroborated findings with a clear bottom line, not a link dump. Use for research / look into / brief me on / background on a topic, company, market, competitor, or person.",
+      "slug": "action-tracker",
+      "name": "Action Tracker",
+      "description": "Keep who owes what to whom by when in one table, follow it up on a cadence, give a weekly view (due, late, blocked, done) and a per-person view before a meeting. Use for track this / follow up on / what's outstanding / who owes me what / before my meeting with X.",
       "category": "methodology",
       "tags": [
-        "research",
-        "analysis",
-        "synthesis",
+        "commitments",
+        "follow-up",
+        "weekly",
+        "routine",
         "behavioral"
       ],
-      "path": "skills/research-brief/SKILL.md",
+      "path": "skills/action-tracker/SKILL.md",
       "version": "0.1.0",
       "requires": {
         "env": []
@@ -192,145 +21,7 @@
       "changelog": [
         {
           "version": "0.1.0",
-          "date": "2026-08-27",
-          "summary": "First release."
-        }
-      ]
-    },
-    {
-      "slug": "fact-check",
-      "name": "Fact Check",
-      "description": "Verify a specific factual claim — or a list of claims — against primary sources, ruling each True / False / Misleading / Unverifiable with the evidence and a confidence level.",
-      "category": "methodology",
-      "tags": [
-        "research",
-        "verification",
-        "behavioral"
-      ],
-      "path": "skills/fact-check/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": []
-      },
-      "changelog": [
-        {
-          "version": "0.1.0",
-          "date": "2026-08-27",
-          "summary": "First release."
-        }
-      ]
-    },
-    {
-      "slug": "content-plan",
-      "name": "Content Plan",
-      "description": "Plan a content calendar or strategy for a channel, campaign, or period — audience, content pillars, formats, cadence, and a concrete dated schedule of pieces.",
-      "category": "content",
-      "tags": [
-        "content",
-        "planning",
-        "marketing"
-      ],
-      "path": "skills/content-plan/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": []
-      },
-      "changelog": [
-        {
-          "version": "0.1.0",
-          "date": "2026-08-27",
-          "summary": "First release."
-        }
-      ]
-    },
-    {
-      "slug": "write-article",
-      "name": "Write Article",
-      "description": "Draft long-form written content — a blog post, article, or newsletter — from a brief, outline, or topic, in the voice and length you ask for.",
-      "category": "content",
-      "tags": [
-        "content",
-        "writing",
-        "copywriting"
-      ],
-      "path": "skills/write-article/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": []
-      },
-      "changelog": [
-        {
-          "version": "0.1.0",
-          "date": "2026-08-27",
-          "summary": "First release."
-        }
-      ]
-    },
-    {
-      "slug": "build-report",
-      "name": "Build Report",
-      "description": "Turn findings, analysis, or data you already have into a polished deliverable document — a report, DOCX, PDF, or slide deck.",
-      "category": "content",
-      "tags": [
-        "documents",
-        "reporting",
-        "deliverable"
-      ],
-      "path": "skills/build-report/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": []
-      },
-      "changelog": [
-        {
-          "version": "0.1.0",
-          "date": "2026-08-27",
-          "summary": "First release."
-        }
-      ]
-    },
-    {
-      "slug": "distill",
-      "name": "Distill",
-      "description": "Compress long source material — a document, transcript, thread, or paper — into a faithful, tight summary at the length you need, bottom line first.",
-      "category": "content",
-      "tags": [
-        "summarization",
-        "synthesis",
-        "behavioral"
-      ],
-      "path": "skills/distill/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": []
-      },
-      "changelog": [
-        {
-          "version": "0.1.0",
-          "date": "2026-08-27",
-          "summary": "First release."
-        }
-      ]
-    },
-    {
-      "slug": "proofread-edit",
-      "name": "Proofread & Edit",
-      "description": "Copy-edit and tighten an existing draft — grammar, clarity, concision, tone, consistency — returning a cleaner version plus a short list of the changes made.",
-      "category": "content",
-      "tags": [
-        "editing",
-        "proofreading",
-        "writing"
-      ],
-      "path": "skills/proofread-edit/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": []
-      },
-      "changelog": [
-        {
-          "version": "0.1.0",
-          "date": "2026-08-27",
+          "date": "2026-09-16",
           "summary": "First release."
         }
       ]
@@ -359,25 +50,119 @@
       ]
     },
     {
-      "slug": "explore-dataset",
-      "name": "Explore Dataset",
-      "description": "Explore a dataset to understand its shape and surface what matters — distributions, segments, trends, outliers and relationships — before committing to a report or dashboard.",
-      "category": "analytics",
+      "slug": "blog-on-cloudflare",
+      "name": "Blog on Cloudflare",
+      "description": "Run a public blog on Cloudflare Workers + D1 — write, preview, schedule and publish posts, manage comments and reactions, report readership. Built on the cloudflare skill.",
+      "category": "content",
       "tags": [
-        "data",
-        "analysis",
-        "eda"
+        "blog",
+        "publishing",
+        "cloudflare",
+        "comments"
       ],
-      "path": "skills/explore-dataset/SKILL.md",
-      "version": "0.1.0",
+      "path": "skills/blog-on-cloudflare/SKILL.md",
+      "version": "0.3.2",
       "requires": {
-        "env": []
+        "env": [
+          "CLOUDFLARE_API_TOKEN",
+          "CLOUDFLARE_ACCOUNT_ID"
+        ],
+        "skills": [
+          "cloudflare"
+        ]
       },
       "changelog": [
         {
+          "version": "0.3.2",
+          "date": "2026-09-16",
+          "notes": "Credentials move to the gateway secret store: bare names (no USR_ prefix) and a per-key contract (kind, hosts, words) under metadata.orchestra.secrets."
+        },
+        {
+          "version": "0.3.1",
+          "date": "2026-09-16",
+          "summary": "Declares what it needs where the gateway reads it: the two Cloudflare variables under metadata.openclaw.requires.env (it loaded without them before), and the cloudflare skill under metadata.orchestra.requires.skills."
+        },
+        {
+          "version": "0.3.0",
+          "date": "2026-08-28",
+          "summary": "Fixes a broken cross-skill path: the verifier was addressed relative to this skill, which only resolves when both skills are installed into the same root. Also requires checking an article page rather than only the homepage, and states that a failing check is not advice."
+        },
+        {
+          "version": "0.2.0",
+          "date": "2026-08-28",
+          "summary": "Removes the starter template. Every blog built from it came out looking the same, so the skill now teaches the judgement — content model, publishing states, comment moderation, feeds and the traps that only appear in production — and leaves the design to the agent."
+        },
+        {
           "version": "0.1.0",
           "date": "2026-08-27",
-          "summary": "First release."
+          "summary": "First release. Write, preview, schedule and publish posts, moderate comments and reactions, and report readership."
+        }
+      ],
+      "secrets": {
+        "CLOUDFLARE_API_TOKEN": {
+          "kind": "secret",
+          "hosts": [
+            "api.cloudflare.com"
+          ],
+          "label": {
+            "en": "Cloudflare API token",
+            "es": "Token de API de Cloudflare"
+          },
+          "where": {
+            "en": "Cloudflare dashboard → My Profile → API Tokens → Create Token (Edit zone DNS + Workers/D1/R2 as needed).",
+            "es": "Panel de Cloudflare → My Profile → API Tokens → Create Token (Edit zone DNS + Workers/D1/R2 según haga falta)."
+          }
+        },
+        "CLOUDFLARE_ACCOUNT_ID": {
+          "kind": "env",
+          "label": {
+            "en": "Cloudflare account id",
+            "es": "ID de cuenta de Cloudflare"
+          },
+          "where": {
+            "en": "Cloudflare dashboard → any zone → Overview → API section, right column.",
+            "es": "Panel de Cloudflare → cualquier zona → Overview → sección API, columna derecha."
+          },
+          "why": "An identifier, not a credential; it goes into URL paths and is safe to see."
+        }
+      }
+    },
+    {
+      "slug": "brief-before-build",
+      "name": "Brief Before Build",
+      "description": "Ask before you build. Turns \"make me a website / blog / landing / app\" into a short brief the person confirms — audience, what a thing is for them, organisation, feel, where it lives, how you work together, what done looks like — then writes it down as an operating skill the agent keeps. Nothing that belongs to the person is decided by the agent.",
+      "category": "methodology",
+      "tags": [
+        "brief",
+        "requirements",
+        "elicitation",
+        "behavioral",
+        "frontend"
+      ],
+      "path": "skills/brief-before-build/SKILL.md",
+      "version": "0.1.2",
+      "requires": {
+        "env": []
+      },
+      "files": [
+        "references/questions.md",
+        "references/operating-skill.md"
+      ],
+      "changelog": [
+        {
+          "version": "0.1.2",
+          "date": "2026-09-15",
+          "summary": "The operating skill's name is an ASCII slug; the title inside carries the language. Scoped to the agent that runs it."
+        },
+        {
+          "version": "0.1.1",
+          "date": "2026-09-15",
+          "summary": "Say that the operating skill is a proposal awaiting approval when it is — seen on the first live run."
+        },
+        {
+          "version": "0.1.0",
+          "date": "2026-09-15",
+          "summary": "First release — the question bank by kind of build, the seven-part brief, and the operating skill written from it."
         }
       ]
     },
@@ -429,16 +214,16 @@
       ]
     },
     {
-      "slug": "plan-work",
-      "name": "Plan Work",
-      "description": "Break a goal or project into a concrete, sequenced plan — tasks in the right order, dependencies, owners, effort, and a realistic timeline someone can actually execute.",
-      "category": "methodology",
+      "slug": "build-report",
+      "name": "Build Report",
+      "description": "Turn findings, analysis, or data you already have into a polished deliverable document — a report, DOCX, PDF, or slide deck.",
+      "category": "content",
       "tags": [
-        "planning",
-        "project",
-        "behavioral"
+        "documents",
+        "reporting",
+        "deliverable"
       ],
-      "path": "skills/plan-work/SKILL.md",
+      "path": "skills/build-report/SKILL.md",
       "version": "0.1.0",
       "requires": {
         "env": []
@@ -452,16 +237,18 @@
       ]
     },
     {
-      "slug": "decision-brief",
-      "name": "Decision Brief",
-      "description": "Weigh options against explicit criteria and recommend one, with the tradeoffs, risks and reasoning laid out — a defensible call, not a pros-and-cons dump.",
+      "slug": "candidate-screening",
+      "name": "Candidate Screening",
+      "description": "Screen applications against the role's must-haves with the same criteria for everyone, evidence quoted from each application, a consistent score and a shortlist with the reason for each yes and no; never on anything not about doing the job. Use for screen these CVs / shortlist / who should we interview.",
       "category": "methodology",
       "tags": [
-        "decision",
-        "analysis",
+        "hiring",
+        "recruiting",
+        "shortlist",
+        "screening",
         "behavioral"
       ],
-      "path": "skills/decision-brief/SKILL.md",
+      "path": "skills/candidate-screening/SKILL.md",
       "version": "0.1.0",
       "requires": {
         "env": []
@@ -469,7 +256,7 @@
       "changelog": [
         {
           "version": "0.1.0",
-          "date": "2026-08-27",
+          "date": "2026-09-16",
           "summary": "First release."
         }
       ]
@@ -614,82 +401,128 @@
       }
     },
     {
-      "slug": "blog-on-cloudflare",
-      "name": "Blog on Cloudflare",
-      "description": "Run a public blog on Cloudflare Workers + D1 — write, preview, schedule and publish posts, manage comments and reactions, report readership. Built on the cloudflare skill.",
-      "category": "content",
+      "slug": "coingecko",
+      "name": "CoinGecko",
+      "description": "Live cryptocurrency prices and market data from CoinGecko. Ask for the current price, 24h change, or market cap of any coin or token.",
+      "category": "crypto",
       "tags": [
-        "blog",
-        "publishing",
-        "cloudflare",
-        "comments"
+        "crypto",
+        "defi",
+        "market-data"
       ],
-      "path": "skills/blog-on-cloudflare/SKILL.md",
-      "version": "0.3.2",
+      "path": "skills/coingecko/SKILL.md",
+      "version": "0.2.1",
       "requires": {
         "env": [
-          "CLOUDFLARE_API_TOKEN",
-          "CLOUDFLARE_ACCOUNT_ID"
-        ],
-        "skills": [
-          "cloudflare"
+          "COINGECKO_API_KEY"
         ]
       },
       "changelog": [
         {
-          "version": "0.3.2",
+          "version": "0.2.1",
           "date": "2026-09-16",
           "notes": "Credentials move to the gateway secret store: bare names (no USR_ prefix) and a per-key contract (kind, hosts, words) under metadata.orchestra.secrets."
         },
         {
-          "version": "0.3.1",
-          "date": "2026-09-16",
-          "summary": "Declares what it needs where the gateway reads it: the two Cloudflare variables under metadata.openclaw.requires.env (it loaded without them before), and the cloudflare skill under metadata.orchestra.requires.skills."
-        },
-        {
-          "version": "0.3.0",
-          "date": "2026-08-28",
-          "summary": "Fixes a broken cross-skill path: the verifier was addressed relative to this skill, which only resolves when both skills are installed into the same root. Also requires checking an article page rather than only the homepage, and states that a failing check is not advice."
-        },
-        {
           "version": "0.2.0",
-          "date": "2026-08-28",
-          "summary": "Removes the starter template. Every blog built from it came out looking the same, so the skill now teaches the judgement — content model, publishing states, comment moderation, feeds and the traps that only appear in production — and leaves the design to the agent."
+          "date": "2026-08-27",
+          "summary": "Uses the authenticated API, so rate limits no longer bite during a busy conversation."
         },
         {
           "version": "0.1.0",
           "date": "2026-08-27",
-          "summary": "First release. Write, preview, schedule and publish posts, moderate comments and reactions, and report readership."
+          "summary": "First release."
         }
       ],
       "secrets": {
-        "CLOUDFLARE_API_TOKEN": {
+        "COINGECKO_API_KEY": {
           "kind": "secret",
           "hosts": [
-            "api.cloudflare.com"
+            "api.coingecko.com",
+            "pro-api.coingecko.com"
           ],
           "label": {
-            "en": "Cloudflare API token",
-            "es": "Token de API de Cloudflare"
+            "en": "CoinGecko API key",
+            "es": "Clave de API de CoinGecko"
           },
           "where": {
-            "en": "Cloudflare dashboard → My Profile → API Tokens → Create Token (Edit zone DNS + Workers/D1/R2 as needed).",
-            "es": "Panel de Cloudflare → My Profile → API Tokens → Create Token (Edit zone DNS + Workers/D1/R2 según haga falta)."
+            "en": "coingecko.com → Developer Dashboard → API keys (Demo or Pro).",
+            "es": "coingecko.com → Developer Dashboard → API keys (Demo o Pro)."
           }
-        },
-        "CLOUDFLARE_ACCOUNT_ID": {
-          "kind": "env",
-          "label": {
-            "en": "Cloudflare account id",
-            "es": "ID de cuenta de Cloudflare"
-          },
-          "where": {
-            "en": "Cloudflare dashboard → any zone → Overview → API section, right column.",
-            "es": "Panel de Cloudflare → cualquier zona → Overview → sección API, columna derecha."
-          },
-          "why": "An identifier, not a credential; it goes into URL paths and is safe to see."
         }
       }
+    },
+    {
+      "slug": "content-plan",
+      "name": "Content Plan",
+      "description": "Plan a content calendar or strategy for a channel, campaign, or period — audience, content pillars, formats, cadence, and a concrete dated schedule of pieces.",
+      "category": "content",
+      "tags": [
+        "content",
+        "planning",
+        "marketing"
+      ],
+      "path": "skills/content-plan/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "decision-brief",
+      "name": "Decision Brief",
+      "description": "Weigh options against explicit criteria and recommend one, with the tradeoffs, risks and reasoning laid out — a defensible call, not a pros-and-cons dump.",
+      "category": "methodology",
+      "tags": [
+        "decision",
+        "analysis",
+        "behavioral"
+      ],
+      "path": "skills/decision-brief/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "defillama",
+      "name": "DefiLlama",
+      "description": "Protocol and chain fundamentals from DefiLlama's free public API: TVL by protocol and chain with history, fees and revenue, stablecoin supply, yield pools, prices. No API key. Use for TVL / how big is protocol X / fees and revenue of / stablecoin supply / yields on.",
+      "category": "crypto",
+      "tags": [
+        "defi",
+        "tvl",
+        "fees",
+        "stablecoins",
+        "yields",
+        "onchain"
+      ],
+      "path": "skills/defillama/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
     },
     {
       "slug": "design-taste-frontend",
@@ -733,58 +566,16 @@
       ]
     },
     {
-      "slug": "brief-before-build",
-      "name": "Brief Before Build",
-      "description": "Ask before you build. Turns \"make me a website / blog / landing / app\" into a short brief the person confirms — audience, what a thing is for them, organisation, feel, where it lives, how you work together, what done looks like — then writes it down as an operating skill the agent keeps. Nothing that belongs to the person is decided by the agent.",
-      "category": "methodology",
+      "slug": "distill",
+      "name": "Distill",
+      "description": "Compress long source material — a document, transcript, thread, or paper — into a faithful, tight summary at the length you need, bottom line first.",
+      "category": "content",
       "tags": [
-        "brief",
-        "requirements",
-        "elicitation",
-        "behavioral",
-        "frontend"
+        "summarization",
+        "synthesis",
+        "behavioral"
       ],
-      "path": "skills/brief-before-build/SKILL.md",
-      "version": "0.1.2",
-      "requires": {
-        "env": []
-      },
-      "files": [
-        "references/questions.md",
-        "references/operating-skill.md"
-      ],
-      "changelog": [
-        {
-          "version": "0.1.2",
-          "date": "2026-09-15",
-          "summary": "The operating skill's name is an ASCII slug; the title inside carries the language. Scoped to the agent that runs it."
-        },
-        {
-          "version": "0.1.1",
-          "date": "2026-09-15",
-          "summary": "Say that the operating skill is a proposal awaiting approval when it is — seen on the first live run."
-        },
-        {
-          "version": "0.1.0",
-          "date": "2026-09-15",
-          "summary": "First release — the question bank by kind of build, the seven-part brief, and the operating skill written from it."
-        }
-      ]
-    },
-    {
-      "slug": "site-operations",
-      "name": "Site Operations",
-      "description": "Run a live site or web app like an operator: back up before every change, preview before public, verify from the outside after every deploy, and report in three states (uploaded, active, public) so \"fixed\" is never said early. Every rule was paid for by a real incident.",
-      "category": "methodology",
-      "tags": [
-        "operations",
-        "deploy",
-        "verification",
-        "incident",
-        "behavioral",
-        "frontend"
-      ],
-      "path": "skills/site-operations/SKILL.md",
+      "path": "skills/distill/SKILL.md",
       "version": "0.1.0",
       "requires": {
         "env": []
@@ -792,24 +583,69 @@
       "changelog": [
         {
           "version": "0.1.0",
-          "date": "2026-09-15",
-          "summary": "First release — three states, backup-before-change, verify from the outside, defensive rendering, validated/done/pending reporting."
+          "date": "2026-08-27",
+          "summary": "First release."
         }
       ]
     },
     {
-      "slug": "voice-guide",
-      "name": "Voice Guide",
-      "description": "Capture how a person or brand actually sounds, from things they already wrote, into a one-page voice guide, and write against it so every piece reads as theirs. Use for write in my voice / sound like me / match our tone / this doesn't sound like us.",
-      "category": "content",
+      "slug": "etherscan",
+      "name": "Etherscan (Pro)",
+      "description": "On-chain data for Ethereum + 60 EVM chains via Etherscan API V2: balances, transactions, ERC-20 transfers & holdings, contract ABI/source, gas, ETH price, plus PRO analytics (historical balances, token info, daily stats).",
+      "category": "crypto",
       "tags": [
-        "voice",
-        "tone",
-        "style",
-        "writing",
+        "crypto",
+        "defi",
+        "onchain"
+      ],
+      "path": "skills/etherscan/SKILL.md",
+      "version": "0.1.1",
+      "requires": {
+        "env": [
+          "ETHERSCAN_API_KEY"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.1",
+          "date": "2026-09-16",
+          "notes": "Credentials move to the gateway secret store: bare names (no USR_ prefix) and a per-key contract (kind, hosts, words) under metadata.orchestra.secrets."
+        },
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ],
+      "secrets": {
+        "ETHERSCAN_API_KEY": {
+          "kind": "secret",
+          "hosts": [
+            "api.etherscan.io"
+          ],
+          "label": {
+            "en": "Etherscan API key",
+            "es": "Clave de API de Etherscan"
+          },
+          "where": {
+            "en": "etherscan.io → My Account → API Keys.",
+            "es": "etherscan.io → My Account → API Keys."
+          }
+        }
+      }
+    },
+    {
+      "slug": "evaluate-source",
+      "name": "Evaluate Source",
+      "description": "Judge how far a source can be trusted before a claim from it is used: primary or secondhand, who is behind it and what they gain, how it knows, how old, how it has held up, graded A to D. Use for is this source reliable / can we trust this / who is behind this site.",
+      "category": "methodology",
+      "tags": [
+        "research",
+        "sources",
+        "credibility",
         "behavioral"
       ],
-      "path": "skills/voice-guide/SKILL.md",
+      "path": "skills/evaluate-source/SKILL.md",
       "version": "0.1.0",
       "requires": {
         "env": []
@@ -823,19 +659,280 @@
       ]
     },
     {
-      "slug": "seo-writing",
-      "name": "SEO Writing",
-      "description": "Write a piece so the people searching for it find it and stay: the intent behind the query, a headline that answers it, a structure both search engines and readers follow, meta description and internal links, without stuffing. Use for SEO / rank for / keyword / optimize this post.",
-      "category": "content",
+      "slug": "explore-dataset",
+      "name": "Explore Dataset",
+      "description": "Explore a dataset to understand its shape and surface what matters — distributions, segments, trends, outliers and relationships — before committing to a report or dashboard.",
+      "category": "analytics",
       "tags": [
-        "seo",
-        "search",
-        "headline",
-        "meta",
-        "writing",
+        "data",
+        "analysis",
+        "eda"
+      ],
+      "path": "skills/explore-dataset/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "fact-check",
+      "name": "Fact Check",
+      "description": "Verify a specific factual claim — or a list of claims — against primary sources, ruling each True / False / Misleading / Unverifiable with the evidence and a confidence level.",
+      "category": "methodology",
+      "tags": [
+        "research",
+        "verification",
         "behavioral"
       ],
-      "path": "skills/seo-writing/SKILL.md",
+      "path": "skills/fact-check/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "garmin",
+      "name": "Garmin",
+      "description": "The user's own Garmin Connect data — sleep, HRV, resting heart rate, stress, body battery, readiness, training load, VO2 max and activities. Answers how they slept, whether they are recovered, and how a metric has moved over weeks.",
+      "category": "health",
+      "tags": [
+        "health",
+        "fitness",
+        "wearables"
+      ],
+      "path": "skills/garmin/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [
+          "GARMIN_TOKENS"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-21",
+          "notes": "Moved out of the platform image into the catalogue: it needs a per-person login, and a platform skill must work with no setup. The orch-garmin CLI ships with every instance, so installing this is all that is needed."
+        }
+      ],
+      "secrets": {
+        "GARMIN_TOKENS": {
+          "kind": "env",
+          "hosts": [
+            "connect.garmin.com",
+            "connectapi.garmin.com"
+          ],
+          "label": {
+            "en": "Garmin session tokens",
+            "es": "Tokens de sesión de Garmin"
+          },
+          "where": {
+            "en": "Install orch-garmin locally and run `orch-garmin login` — it prints a token blob to paste here. Garmin has no third-party OAuth, so the password never leaves your machine.",
+            "es": "Instala orch-garmin en tu equipo y ejecuta `orch-garmin login` — imprime un bloque de tokens para pegar aquí. Garmin no tiene OAuth para terceros, así que la contraseña nunca sale de tu equipo."
+          }
+        }
+      }
+    },
+    {
+      "slug": "interview-guide",
+      "name": "Interview Guide",
+      "description": "Prepare a person to interview someone (an expert, a customer, a candidate): who they are, the questions that get what is needed, the order, what to listen for. Use for what should I ask / prepare questions for / interview guide / discovery call prep.",
+      "category": "methodology",
+      "tags": [
+        "interview",
+        "questions",
+        "research",
+        "discovery",
+        "behavioral"
+      ],
+      "path": "skills/interview-guide/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "job-description",
+      "name": "Job Description",
+      "description": "Write a job description from a conversation with the hiring manager: the real work, the outcomes at twelve months, must-haves apart from nice-to-haves, pay range and process, plainly and only job-related. Use for job description / job post / we're hiring a / open a role.",
+      "category": "methodology",
+      "tags": [
+        "hiring",
+        "recruiting",
+        "job-post",
+        "behavioral"
+      ],
+      "path": "skills/job-description/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "meeting-notes",
+      "name": "Meeting Notes",
+      "description": "Turn a meeting (transcript, notes, thread) into the record that matters: decisions taken, actions with owner and date, open questions, and a short summary for those not there, in the words used. Use for notes from the meeting / minutes / what did we decide / action items / write up the call.",
+      "category": "methodology",
+      "tags": [
+        "meetings",
+        "minutes",
+        "decisions",
+        "actions",
+        "behavioral"
+      ],
+      "path": "skills/meeting-notes/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "onboarding-plan",
+      "name": "Onboarding Plan",
+      "description": "Plan a new hire's first weeks: access and tools before day one with owners, whom they meet and why, what on track means at one week, one month and three months, and the check-ins; two versions, manager's and new hire's. Use for onboarding / they start on Monday / first week plan / 30-60-90.",
+      "category": "methodology",
+      "tags": [
+        "hiring",
+        "onboarding",
+        "first-week",
+        "30-60-90",
+        "behavioral"
+      ],
+      "path": "skills/onboarding-plan/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "plan-work",
+      "name": "Plan Work",
+      "description": "Break a goal or project into a concrete, sequenced plan — tasks in the right order, dependencies, owners, effort, and a realistic timeline someone can actually execute.",
+      "category": "methodology",
+      "tags": [
+        "planning",
+        "project",
+        "behavioral"
+      ],
+      "path": "skills/plan-work/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "portfolio-pnl",
+      "name": "Portfolio P&L",
+      "description": "Turn an exported history of trades and transfers into holdings, cost basis, realized and unrealized P&L at a stated price snapshot, with every assumption written down (lot method, fees, own-wallet transfers). Analytical, not tax advice. Use for what's my P&L / how much am I up / cost basis / value my portfolio.",
+      "category": "crypto",
+      "tags": [
+        "portfolio",
+        "pnl",
+        "cost-basis",
+        "holdings",
+        "behavioral"
+      ],
+      "path": "skills/portfolio-pnl/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "skills": [
+          "coingecko"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "proofread-edit",
+      "name": "Proofread & Edit",
+      "description": "Copy-edit and tighten an existing draft — grammar, clarity, concision, tone, consistency — returning a cleaner version plus a short list of the changes made.",
+      "category": "content",
+      "tags": [
+        "editing",
+        "proofreading",
+        "writing"
+      ],
+      "path": "skills/proofread-edit/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "proposal-brief",
+      "name": "Proposal Brief",
+      "description": "Read a call, tender, RFP or grant like an evaluator (eligibility, deadlines, scoring grid, every requirement quoted) and produce a go/no-go, a compliance matrix and the response outline in scoring order, before a word is written. Use for RFP / tender / call for proposals / grant / should we apply.",
+      "category": "methodology",
+      "tags": [
+        "rfp",
+        "tender",
+        "grant",
+        "bid",
+        "compliance",
+        "behavioral"
+      ],
+      "path": "skills/proposal-brief/SKILL.md",
       "version": "0.1.0",
       "requires": {
         "env": []
@@ -875,20 +972,102 @@
       ]
     },
     {
-      "slug": "evaluate-source",
-      "name": "Evaluate Source",
-      "description": "Judge how far a source can be trusted before a claim from it is used: primary or secondhand, who is behind it and what they gain, how it knows, how old, how it has held up, graded A to D. Use for is this source reliable / can we trust this / who is behind this site.",
+      "slug": "research-brief",
+      "name": "Research Brief",
+      "description": "Turn a research question into a structured, sourced brief — corroborated findings with a clear bottom line, not a link dump. Use for research / look into / brief me on / background on a topic, company, market, competitor, or person.",
       "category": "methodology",
       "tags": [
         "research",
-        "sources",
-        "credibility",
+        "analysis",
+        "synthesis",
         "behavioral"
       ],
-      "path": "skills/evaluate-source/SKILL.md",
+      "path": "skills/research-brief/SKILL.md",
       "version": "0.1.0",
       "requires": {
         "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "seo-writing",
+      "name": "SEO Writing",
+      "description": "Write a piece so the people searching for it find it and stay: the intent behind the query, a headline that answers it, a structure both search engines and readers follow, meta description and internal links, without stuffing. Use for SEO / rank for / keyword / optimize this post.",
+      "category": "content",
+      "tags": [
+        "seo",
+        "search",
+        "headline",
+        "meta",
+        "writing",
+        "behavioral"
+      ],
+      "path": "skills/seo-writing/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-16",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "site-operations",
+      "name": "Site Operations",
+      "description": "Run a live site or web app like an operator: back up before every change, preview before public, verify from the outside after every deploy, and report in three states (uploaded, active, public) so \"fixed\" is never said early. Every rule was paid for by a real incident.",
+      "category": "methodology",
+      "tags": [
+        "operations",
+        "deploy",
+        "verification",
+        "incident",
+        "behavioral",
+        "frontend"
+      ],
+      "path": "skills/site-operations/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-15",
+          "summary": "First release — three states, backup-before-change, verify from the outside, defensive rendering, validated/done/pending reporting."
+        }
+      ]
+    },
+    {
+      "slug": "token-due-diligence",
+      "name": "Token Due Diligence",
+      "description": "Check a token or contract before anyone acts on it: verified source, owner powers (mint, pause, blacklist, fees), holder concentration, liquidity and lock, age, listings and fundamentals, with a red-flag list and a Red/Amber/Green verdict. Describes risk, never recommends. Use for is this token legit / check this contract / rug pull / due diligence on.",
+      "category": "crypto",
+      "tags": [
+        "token",
+        "contract",
+        "rug",
+        "honeypot",
+        "risk",
+        "behavioral"
+      ],
+      "path": "skills/token-due-diligence/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "skills": [
+          "etherscan",
+          "coingecko"
+        ]
       },
       "changelog": [
         {
@@ -924,77 +1103,21 @@
       ]
     },
     {
-      "slug": "interview-guide",
-      "name": "Interview Guide",
-      "description": "Prepare a person to interview someone (an expert, a customer, a candidate): who they are, the questions that get what is needed, the order, what to listen for. Use for what should I ask / prepare questions for / interview guide / discovery call prep.",
-      "category": "methodology",
+      "slug": "voice-guide",
+      "name": "Voice Guide",
+      "description": "Capture how a person or brand actually sounds, from things they already wrote, into a one-page voice guide, and write against it so every piece reads as theirs. Use for write in my voice / sound like me / match our tone / this doesn't sound like us.",
+      "category": "content",
       "tags": [
-        "interview",
-        "questions",
-        "research",
-        "discovery",
+        "voice",
+        "tone",
+        "style",
+        "writing",
         "behavioral"
       ],
-      "path": "skills/interview-guide/SKILL.md",
+      "path": "skills/voice-guide/SKILL.md",
       "version": "0.1.0",
       "requires": {
         "env": []
-      },
-      "changelog": [
-        {
-          "version": "0.1.0",
-          "date": "2026-09-16",
-          "summary": "First release."
-        }
-      ]
-    },
-    {
-      "slug": "defillama",
-      "name": "DefiLlama",
-      "description": "Protocol and chain fundamentals from DefiLlama's free public API: TVL by protocol and chain with history, fees and revenue, stablecoin supply, yield pools, prices. No API key. Use for TVL / how big is protocol X / fees and revenue of / stablecoin supply / yields on.",
-      "category": "crypto",
-      "tags": [
-        "defi",
-        "tvl",
-        "fees",
-        "stablecoins",
-        "yields",
-        "onchain"
-      ],
-      "path": "skills/defillama/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": []
-      },
-      "changelog": [
-        {
-          "version": "0.1.0",
-          "date": "2026-09-16",
-          "summary": "First release."
-        }
-      ]
-    },
-    {
-      "slug": "token-due-diligence",
-      "name": "Token Due Diligence",
-      "description": "Check a token or contract before anyone acts on it: verified source, owner powers (mint, pause, blacklist, fees), holder concentration, liquidity and lock, age, listings and fundamentals, with a red-flag list and a Red/Amber/Green verdict. Describes risk, never recommends. Use for is this token legit / check this contract / rug pull / due diligence on.",
-      "category": "crypto",
-      "tags": [
-        "token",
-        "contract",
-        "rug",
-        "honeypot",
-        "risk",
-        "behavioral"
-      ],
-      "path": "skills/token-due-diligence/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": [],
-        "skills": [
-          "etherscan",
-          "coingecko"
-        ]
       },
       "changelog": [
         {
@@ -1034,46 +1157,90 @@
       ]
     },
     {
-      "slug": "portfolio-pnl",
-      "name": "Portfolio P&L",
-      "description": "Turn an exported history of trades and transfers into holdings, cost basis, realized and unrealized P&L at a stated price snapshot, with every assumption written down (lot method, fees, own-wallet transfers). Analytical, not tax advice. Use for what's my P&L / how much am I up / cost basis / value my portfolio.",
-      "category": "crypto",
+      "slug": "wordpress",
+      "name": "WordPress",
+      "description": "Create and manage content on a WordPress site via the REST API: draft/publish/update posts and pages, upload images and set featured images, manage categories & tags, and moderate comments. Authenticates with an Application Password.",
+      "category": "content",
       "tags": [
-        "portfolio",
-        "pnl",
-        "cost-basis",
-        "holdings",
-        "behavioral"
+        "cms",
+        "content",
+        "blog",
+        "publishing"
       ],
-      "path": "skills/portfolio-pnl/SKILL.md",
-      "version": "0.1.0",
+      "path": "skills/wordpress/SKILL.md",
+      "version": "0.2.1",
       "requires": {
-        "env": [],
-        "skills": [
-          "coingecko"
+        "env": [
+          "WORDPRESS_URL",
+          "WORDPRESS_USER",
+          "WORDPRESS_PWD"
         ]
       },
       "changelog": [
         {
-          "version": "0.1.0",
+          "version": "0.2.1",
           "date": "2026-09-16",
+          "notes": "Credentials move to the gateway secret store: bare names (no USR_ prefix) and a per-key contract (kind, hosts, words) under metadata.orchestra.secrets."
+        },
+        {
+          "version": "0.2.0",
+          "date": "2026-08-27",
+          "summary": "Handles application passwords, so it works on hosts that block basic auth."
+        },
+        {
+          "version": "0.1.0",
+          "date": "2026-08-27",
           "summary": "First release."
         }
-      ]
+      ],
+      "secrets": {
+        "WORDPRESS_URL": {
+          "kind": "env",
+          "label": {
+            "en": "WordPress site URL",
+            "es": "URL del sitio WordPress"
+          },
+          "where": {
+            "en": "The site root, e.g. https://myblog.com (no trailing slash).",
+            "es": "La raíz del sitio, p. ej. https://miblog.com (sin barra final)."
+          }
+        },
+        "WORDPRESS_USER": {
+          "kind": "env",
+          "label": {
+            "en": "WordPress username",
+            "es": "Usuario de WordPress"
+          },
+          "where": {
+            "en": "The WordPress user the Application Password belongs to.",
+            "es": "El usuario de WordPress al que pertenece la Application Password."
+          }
+        },
+        "WORDPRESS_PWD": {
+          "kind": "env",
+          "label": {
+            "en": "WordPress application password",
+            "es": "Application Password de WordPress"
+          },
+          "where": {
+            "en": "WordPress → Users → Profile → Application Passwords → Add New.",
+            "es": "WordPress → Usuarios → Perfil → Application Passwords → Add New."
+          },
+          "why": "Sent as HTTP Basic auth, which base64-encodes user:password inside curl — the egress proxy cannot substitute a sentinel inside base64, so this key stays a plain variable."
+        }
+      }
     },
     {
-      "slug": "meeting-notes",
-      "name": "Meeting Notes",
-      "description": "Turn a meeting (transcript, notes, thread) into the record that matters: decisions taken, actions with owner and date, open questions, and a short summary for those not there, in the words used. Use for notes from the meeting / minutes / what did we decide / action items / write up the call.",
-      "category": "methodology",
+      "slug": "write-article",
+      "name": "Write Article",
+      "description": "Draft long-form written content — a blog post, article, or newsletter — from a brief, outline, or topic, in the voice and length you ask for.",
+      "category": "content",
       "tags": [
-        "meetings",
-        "minutes",
-        "decisions",
-        "actions",
-        "behavioral"
+        "content",
+        "writing",
+        "copywriting"
       ],
-      "path": "skills/meeting-notes/SKILL.md",
+      "path": "skills/write-article/SKILL.md",
       "version": "0.1.0",
       "requires": {
         "env": []
@@ -1081,132 +1248,7 @@
       "changelog": [
         {
           "version": "0.1.0",
-          "date": "2026-09-16",
-          "summary": "First release."
-        }
-      ]
-    },
-    {
-      "slug": "action-tracker",
-      "name": "Action Tracker",
-      "description": "Keep who owes what to whom by when in one table, follow it up on a cadence, give a weekly view (due, late, blocked, done) and a per-person view before a meeting. Use for track this / follow up on / what's outstanding / who owes me what / before my meeting with X.",
-      "category": "methodology",
-      "tags": [
-        "commitments",
-        "follow-up",
-        "weekly",
-        "routine",
-        "behavioral"
-      ],
-      "path": "skills/action-tracker/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": []
-      },
-      "changelog": [
-        {
-          "version": "0.1.0",
-          "date": "2026-09-16",
-          "summary": "First release."
-        }
-      ]
-    },
-    {
-      "slug": "proposal-brief",
-      "name": "Proposal Brief",
-      "description": "Read a call, tender, RFP or grant like an evaluator (eligibility, deadlines, scoring grid, every requirement quoted) and produce a go/no-go, a compliance matrix and the response outline in scoring order, before a word is written. Use for RFP / tender / call for proposals / grant / should we apply.",
-      "category": "methodology",
-      "tags": [
-        "rfp",
-        "tender",
-        "grant",
-        "bid",
-        "compliance",
-        "behavioral"
-      ],
-      "path": "skills/proposal-brief/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": []
-      },
-      "changelog": [
-        {
-          "version": "0.1.0",
-          "date": "2026-09-16",
-          "summary": "First release."
-        }
-      ]
-    },
-    {
-      "slug": "job-description",
-      "name": "Job Description",
-      "description": "Write a job description from a conversation with the hiring manager: the real work, the outcomes at twelve months, must-haves apart from nice-to-haves, pay range and process, plainly and only job-related. Use for job description / job post / we're hiring a / open a role.",
-      "category": "methodology",
-      "tags": [
-        "hiring",
-        "recruiting",
-        "job-post",
-        "behavioral"
-      ],
-      "path": "skills/job-description/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": []
-      },
-      "changelog": [
-        {
-          "version": "0.1.0",
-          "date": "2026-09-16",
-          "summary": "First release."
-        }
-      ]
-    },
-    {
-      "slug": "candidate-screening",
-      "name": "Candidate Screening",
-      "description": "Screen applications against the role's must-haves with the same criteria for everyone, evidence quoted from each application, a consistent score and a shortlist with the reason for each yes and no; never on anything not about doing the job. Use for screen these CVs / shortlist / who should we interview.",
-      "category": "methodology",
-      "tags": [
-        "hiring",
-        "recruiting",
-        "shortlist",
-        "screening",
-        "behavioral"
-      ],
-      "path": "skills/candidate-screening/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": []
-      },
-      "changelog": [
-        {
-          "version": "0.1.0",
-          "date": "2026-09-16",
-          "summary": "First release."
-        }
-      ]
-    },
-    {
-      "slug": "onboarding-plan",
-      "name": "Onboarding Plan",
-      "description": "Plan a new hire's first weeks: access and tools before day one with owners, whom they meet and why, what on track means at one week, one month and three months, and the check-ins; two versions, manager's and new hire's. Use for onboarding / they start on Monday / first week plan / 30-60-90.",
-      "category": "methodology",
-      "tags": [
-        "hiring",
-        "onboarding",
-        "first-week",
-        "30-60-90",
-        "behavioral"
-      ],
-      "path": "skills/onboarding-plan/SKILL.md",
-      "version": "0.1.0",
-      "requires": {
-        "env": []
-      },
-      "changelog": [
-        {
-          "version": "0.1.0",
-          "date": "2026-09-16",
+          "date": "2026-08-27",
           "summary": "First release."
         }
       ]
