@@ -1103,6 +1103,100 @@
       ]
     },
     {
+      "slug": "twitter",
+      "name": "X (Twitter)",
+      "description": "Post to X as the user through X's official API: single posts, threads, quote posts and deleting a post, each after the user approves the exact text. Uses the four keys of the user's own X developer app; X bills each post to the user's prepaid credit (US$0.015, or US$0.20 with a link).",
+      "category": "content",
+      "tags": [
+        "social",
+        "publishing",
+        "x",
+        "twitter"
+      ],
+      "path": "skills/twitter/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [
+          "X_API_KEY",
+          "X_API_KEY_SECRET",
+          "X_ACCESS_TOKEN",
+          "X_ACCESS_TOKEN_SECRET"
+        ]
+      },
+      "files": [
+        "scripts/x.py"
+      ],
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-09-26",
+          "summary": "First release: posts, threads, quote posts and deletes through X's API with the user's own keys. Text only."
+        }
+      ],
+      "secrets": {
+        "X_API_KEY": {
+          "kind": "env",
+          "hosts": [
+            "api.x.com"
+          ],
+          "label": {
+            "en": "X API Key",
+            "es": "API Key de X"
+          },
+          "where": {
+            "en": "console.x.com → your app → Keys and tokens → API Key and Secret (the first value). It is shown once; if you lost it, regenerate it.",
+            "es": "console.x.com → tu app → Keys and tokens → API Key and Secret (el primer valor). Se muestra una sola vez; si la perdiste, regénerala."
+          },
+          "why": "X signs every request with OAuth 1.0a, an HMAC keyed by the two secrets over a text that includes the key and the token. The egress proxy can swap a sentinel into a header but cannot re-sign, so all four keys stay plain variables."
+        },
+        "X_API_KEY_SECRET": {
+          "kind": "env",
+          "hosts": [
+            "api.x.com"
+          ],
+          "label": {
+            "en": "X API Key Secret",
+            "es": "API Key Secret de X"
+          },
+          "where": {
+            "en": "console.x.com → your app → Keys and tokens → API Key and Secret (the second value).",
+            "es": "console.x.com → tu app → Keys and tokens → API Key and Secret (el segundo valor)."
+          },
+          "why": "X signs every request with OAuth 1.0a, an HMAC keyed by the two secrets over a text that includes the key and the token. The egress proxy can swap a sentinel into a header but cannot re-sign, so all four keys stay plain variables."
+        },
+        "X_ACCESS_TOKEN": {
+          "kind": "env",
+          "hosts": [
+            "api.x.com"
+          ],
+          "label": {
+            "en": "X Access Token",
+            "es": "Access Token de X"
+          },
+          "where": {
+            "en": "console.x.com → your app → Keys and tokens → Access Token and Secret → Generate (the first value). First set User authentication settings → App permissions to 'Read and write': a token generated before that stays read-only.",
+            "es": "console.x.com → tu app → Keys and tokens → Access Token and Secret → Generate (el primer valor). Antes pon User authentication settings → App permissions en 'Read and write': un token generado antes queda de solo lectura."
+          },
+          "why": "X signs every request with OAuth 1.0a, an HMAC keyed by the two secrets over a text that includes the key and the token. The egress proxy can swap a sentinel into a header but cannot re-sign, so all four keys stay plain variables."
+        },
+        "X_ACCESS_TOKEN_SECRET": {
+          "kind": "env",
+          "hosts": [
+            "api.x.com"
+          ],
+          "label": {
+            "en": "X Access Token Secret",
+            "es": "Access Token Secret de X"
+          },
+          "where": {
+            "en": "console.x.com → your app → Keys and tokens → Access Token and Secret (the second value), generated after setting 'Read and write'.",
+            "es": "console.x.com → tu app → Keys and tokens → Access Token and Secret (el segundo valor), generado después de poner 'Read and write'."
+          },
+          "why": "X signs every request with OAuth 1.0a, an HMAC keyed by the two secrets over a text that includes the key and the token. The egress proxy can swap a sentinel into a header but cannot re-sign, so all four keys stay plain variables."
+        }
+      }
+    },
+    {
       "slug": "voice-guide",
       "name": "Voice Guide",
       "description": "Capture how a person or brand actually sounds, from things they already wrote, into a one-page voice guide, and write against it so every piece reads as theirs. Use for write in my voice / sound like me / match our tone / this doesn't sound like us.",
