@@ -1,6 +1,6 @@
 ---
 name: twitter
-version: 0.1.0
+version: 0.1.1
 description: >-
   Post to X (Twitter) as the user through X's official API: a single post, a
   thread, a quote post, or deleting one of their posts, always after the user
@@ -25,22 +25,22 @@ metadata:
         hosts:
           - api.x.com
         label:
-          en: "X API Key"
-          es: "API Key de X"
+          en: "X Consumer Key"
+          es: "Consumer Key de X"
         where:
-          en: "console.x.com → your app → Keys and tokens → API Key and Secret (the first value). It is shown once; if you lost it, regenerate it."
-          es: "console.x.com → tu app → Keys and tokens → API Key and Secret (el primer valor). Se muestra una sola vez; si la perdiste, regénerala."
+          en: "console.x.com → your app → Keys & Tokens → OAuth 1.0 Keys → Consumer Key (older guides call it API Key). It is shown once; if you lost it, regenerate it."
+          es: "console.x.com → tu app → Keys & Tokens → OAuth 1.0 Keys → Consumer Key (en guías viejas, API Key). Se muestra una sola vez; si la perdiste, regénerala."
         why: "X signs every request with OAuth 1.0a, an HMAC keyed by the two secrets over a text that includes the key and the token. The egress proxy can swap a sentinel into a header but cannot re-sign, so all four keys stay plain variables."
       X_API_KEY_SECRET:
         kind: env
         hosts:
           - api.x.com
         label:
-          en: "X API Key Secret"
-          es: "API Key Secret de X"
+          en: "X Consumer Secret"
+          es: "Consumer Secret de X"
         where:
-          en: "console.x.com → your app → Keys and tokens → API Key and Secret (the second value)."
-          es: "console.x.com → tu app → Keys and tokens → API Key and Secret (el segundo valor)."
+          en: "console.x.com → your app → Keys & Tokens → OAuth 1.0 Keys → Consumer Secret, next to the Consumer Key (older guides call it API Key Secret)."
+          es: "console.x.com → tu app → Keys & Tokens → OAuth 1.0 Keys → Consumer Secret, junto al Consumer Key (en guías viejas, API Key Secret)."
         why: "X signs every request with OAuth 1.0a, an HMAC keyed by the two secrets over a text that includes the key and the token. The egress proxy can swap a sentinel into a header but cannot re-sign, so all four keys stay plain variables."
       X_ACCESS_TOKEN:
         kind: env
@@ -50,8 +50,8 @@ metadata:
           en: "X Access Token"
           es: "Access Token de X"
         where:
-          en: "console.x.com → your app → Keys and tokens → Access Token and Secret → Generate (the first value). First set User authentication settings → App permissions to 'Read and write': a token generated before that stays read-only."
-          es: "console.x.com → tu app → Keys and tokens → Access Token and Secret → Generate (el primer valor). Antes pon User authentication settings → App permissions en 'Read and write': un token generado antes queda de solo lectura."
+          en: "console.x.com → your app → Keys & Tokens → OAuth 1.0 Keys → Access Token → Generate. First set User authentication settings → App permissions to 'Read and write': a token generated before that stays read-only."
+          es: "console.x.com → tu app → Keys & Tokens → OAuth 1.0 Keys → Access Token → Generate. Antes pon User authentication settings → App permissions en 'Read and write': un token generado antes queda de solo lectura."
         why: "X signs every request with OAuth 1.0a, an HMAC keyed by the two secrets over a text that includes the key and the token. The egress proxy can swap a sentinel into a header but cannot re-sign, so all four keys stay plain variables."
       X_ACCESS_TOKEN_SECRET:
         kind: env
@@ -61,8 +61,8 @@ metadata:
           en: "X Access Token Secret"
           es: "Access Token Secret de X"
         where:
-          en: "console.x.com → your app → Keys and tokens → Access Token and Secret (the second value), generated after setting 'Read and write'."
-          es: "console.x.com → tu app → Keys and tokens → Access Token and Secret (el segundo valor), generado después de poner 'Read and write'."
+          en: "console.x.com → your app → Keys & Tokens → OAuth 1.0 Keys → Access Token Secret, next to the Access Token, generated after setting 'Read and write'."
+          es: "console.x.com → tu app → Keys & Tokens → OAuth 1.0 Keys → Access Token Secret, junto al Access Token, generado después de poner 'Read and write'."
         why: "X signs every request with OAuth 1.0a, an HMAC keyed by the two secrets over a text that includes the key and the token. The egress proxy can swap a sentinel into a header but cannot re-sign, so all four keys stay plain variables."
 ---
 # X (Twitter) — post as the user
@@ -151,9 +151,10 @@ retried on its own, and a post that failed was not published.
    Read and write. Type of app: Web App, Automated App or Bot. It asks for a
    callback URL and a website; neither is used here, so any URL of the user's
    works, such as their X profile.
-3. Keys and tokens: copy the API Key and Secret, then generate the Access
-   Token and Secret. The order matters: a token generated before step 2 stays
-   read-only, so regenerate it.
+3. Keys & Tokens → OAuth 1.0 Keys: copy the Consumer Key and Consumer Secret
+   (older guides call them API Key and API Key Secret), then generate the
+   Access Token and copy it with the Access Token Secret. The order matters: a
+   token generated before step 2 stays read-only, so regenerate it.
 4. Buy credit and set a spending limit.
 5. Paste the four values on this skill's page in the portal.
 
