@@ -715,36 +715,22 @@
         "wearables"
       ],
       "path": "skills/garmin/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "requires": {
-        "env": [
-          "GARMIN_TOKENS"
-        ]
+        "env": []
       },
       "changelog": [
+        {
+          "version": "0.2.0",
+          "date": "2026-09-29",
+          "notes": "A person connects Garmin in the portal (Integrations → Garmin: email, password and the code Garmin sends); the platform keeps only the token. The laptop login and the GARMIN_TOKENS secret are no longer the way in, and no longer gate the skill — a portal-connected instance never had that secret, so its agents did not see the skill. The daily files are read from the directory sync reports, not a fixed path."
+        },
         {
           "version": "0.1.0",
           "date": "2026-09-21",
           "notes": "Moved out of the platform image into the catalogue: it needs a per-person login, and a platform skill must work with no setup. The orch-garmin CLI ships with every instance, so installing this is all that is needed."
         }
-      ],
-      "secrets": {
-        "GARMIN_TOKENS": {
-          "kind": "env",
-          "hosts": [
-            "connect.garmin.com",
-            "connectapi.garmin.com"
-          ],
-          "label": {
-            "en": "Garmin session tokens",
-            "es": "Tokens de sesión de Garmin"
-          },
-          "where": {
-            "en": "Install orch-garmin locally and run `orch-garmin login` — it prints a token blob to paste here. Garmin has no third-party OAuth, so the password never leaves your machine.",
-            "es": "Instala orch-garmin en tu equipo y ejecuta `orch-garmin login` — imprime un bloque de tokens para pegar aquí. Garmin no tiene OAuth para terceros, así que la contraseña nunca sale de tu equipo."
-          }
-        }
-      }
+      ]
     },
     {
       "slug": "interview-guide",

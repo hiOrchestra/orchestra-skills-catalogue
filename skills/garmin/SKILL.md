@@ -1,32 +1,16 @@
 ---
 name: garmin
-version: 0.1.0
+version: 0.2.0
 description: >-
   The user's own Garmin Connect data — sleep, HRV, resting heart rate, stress,
   body battery, training readiness, training load, VO2 max, and every recorded
   activity. Use whenever they ask how they slept, whether they are recovered,
   what they trained, how a metric has moved over weeks, or want their health
-  read against how their work and calendar are going. Needs the GARMIN_TOKENS
-  blob from `orch-garmin login`, run once on the user's own machine.
+  read against how their work and calendar are going. Works once a person has
+  connected Garmin in the portal (Integrations → Garmin).
 metadata:
   openclaw:
     emoji: "⌚"
-    requires:
-      env:
-        - GARMIN_TOKENS
-  orchestra:
-    secrets:
-      GARMIN_TOKENS:
-        kind: env
-        hosts:
-          - connect.garmin.com
-          - connectapi.garmin.com
-        label:
-          en: "Garmin session tokens"
-          es: "Tokens de sesión de Garmin"
-        where:
-          en: "Install orch-garmin locally and run `orch-garmin login` — it prints a token blob to paste here. Garmin has no third-party OAuth, so the password never leaves your machine."
-          es: "Instala orch-garmin en tu equipo y ejecuta `orch-garmin login` — imprime un bloque de tokens para pegar aquí. Garmin no tiene OAuth para terceros, así que la contraseña nunca sale de tu equipo."
 ---
 # orch-garmin — the user's Garmin Connect data
 
@@ -66,10 +50,11 @@ been this month" will get the account rate-limited.
 orch-garmin sync --days 7
 ```
 
-Writes one markdown file per day to `~/.openclaw/workspace/health/YYYY-MM-DD.md`.
-Read those files directly for anything older than a few days — they are already
-on disk, and re-fetching history from Garmin is slow and rate-limited. Sync is
-what the daily routine runs; you rarely need to call it by hand.
+Writes one markdown file per day, `YYYY-MM-DD.md`, and answers with the
+directory it wrote to (`dir`). Read those files directly for anything older than
+a few days — they are already on disk, and re-fetching history from Garmin is
+slow and rate-limited. Sync is what the daily routine runs; you rarely need to
+call it by hand.
 
 ## Interpreting it
 
@@ -99,37 +84,20 @@ rather than interpreting it yourself.
 
 ## When it is not connected
 
-Garmin has no public OAuth for third parties, so connecting needs a real
-email + password login against Garmin's SSO, plus an MFA code if the account has
-it on. **That login cannot happen here, and must not.**
-
-Tell the user to run this **on their own computer**, from a checkout of the
-openclaw-railway repo (the login command ships with this tool, and installing it
-locally is what makes it available there):
-
-```bash
-python3 -m venv ~/.venvs/orch-garmin
-~/.venvs/orch-garmin/bin/pip install ./tools/orch-garmin
-~/.venvs/orch-garmin/bin/orch-garmin login --email them@example.com
-```
-
-The venv is not optional politeness: a current macOS or Debian refuses a plain
-`pip install` into the system Python (PEP 668, "externally-managed-environment").
-Keep the venv — the tokens expire yearly and this is the command they re-run.
-
-It prompts for the password locally (never echoed, never stored) and for the MFA
-code, then prints one long token blob. They paste that blob into the portal
-under **Settings → Secrets → Add**, named **`GARMIN_TOKENS`**, kind *plain
-value* (the SDK needs the blob itself). That is the whole setup.
+A person connects Garmin in the portal: **Integrations → Garmin**. They type
+their Garmin Connect email and password there, and the 6-digit code Garmin
+sends them if the account has two-step verification on. The platform logs in
+once and keeps only the resulting token — the password is never stored. That is
+the whole setup; tell them exactly that.
 
 **Never ask the user for their Garmin password, and never accept it if offered.**
-Do not offer to run the login for them, do not suggest putting the password in an
-env var, and do not propose disabling their MFA. If they paste a password into
-the chat anyway, tell them plainly to change it — a password in a conversation
-log is a password that has leaked.
+The password goes into the portal's form and nowhere else. Do not offer to log in
+for them, and do not propose disabling their two-step verification. If they
+paste a password into the chat anyway, tell them plainly to change it — a
+password in a conversation log is a password that has leaked.
 
-The token blob expires roughly yearly, and a `Garmin tokens rejected` error means
-exactly that: they re-run the same local login and update the secret.
+The token expires roughly yearly, and a `Garmin tokens rejected` error means
+exactly that: they connect again in the same place.
 
 ## Keeping it current
 
@@ -139,7 +107,7 @@ with `orch-jobs` (ask them first — it is their data and their schedule):
 ```bash
 orch-jobs create \
   --name "Garmin daily sync" \
-  --message "Run: orch-garmin sync --days 2. Then read today's file in ~/.openclaw/workspace/health/ and note anything worth flagging — poor recovery, a resting HR jump, a heavy load ratio. Stay quiet if the day is unremarkable." \
+  --message "Run: orch-garmin sync --days 2. Then read today's file in the directory it reports and note anything worth flagging — poor recovery, a resting HR jump, a heavy load ratio. Stay quiet if the day is unremarkable." \
   --schedule "0 9 * * *" \
   --timezone "Europe/Madrid"
 ```
