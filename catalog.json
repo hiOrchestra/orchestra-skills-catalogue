@@ -1869,6 +1869,274 @@
           "summary": "First release."
         }
       ]
+    },
+    {
+      "slug": "hubspot-crm",
+      "name": "HubSpot CRM",
+      "description": "Work inside the person's HubSpot CRM through their connected account — find and read contacts, companies, deals, pipelines, notes and tasks; answer \"who/what/how many\" questions from live data; and create or update records, log notes and tasks, or merge duplicates only after the person approves the exact change, keeping a log of every write. Use when the user says \"HubSpot\", \"in the CRM\", \"update the deal\", \"log this call\", \"create a contact\", \"who owns\", \"deals closing this month\", \"find the company\". Needs HubSpot connected. Not for deciding what is dirty (crm-hygiene) or reviewing the pipeline (pipeline-review).",
+      "category": "crm",
+      "tags": [
+        "hubspot",
+        "crm",
+        "sales",
+        "contacts",
+        "deals"
+      ],
+      "path": "skills/hubspot-crm/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "integrations": [
+          "hubspot"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "crm-hygiene",
+      "name": "CRM Hygiene",
+      "description": "Audit a CRM's data the way a careful admin would — duplicate contacts and companies, records missing the fields the team relies on, deals with no next step or stuck past their stage's normal age, contacts with no owner, bad emails and phone formats — and turn it into a ranked list of fixes, each with the records and the proposed change, for approval in batches. Works with any CRM the agent can read (HubSpot, Pipedrive, Salesforce, an export). Use when the user says \"clean the CRM\", \"duplicates\", \"CRM hygiene\", \"data quality in HubSpot\", \"missing fields\", \"stale deals\". Not for the weekly pipeline conversation (pipeline-review).",
+      "category": "methodology",
+      "tags": [
+        "crm",
+        "data-quality",
+        "duplicates",
+        "sales-ops",
+        "behavioral"
+      ],
+      "path": "skills/crm-hygiene/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "pipeline-review",
+      "name": "Pipeline Review",
+      "description": "Run the weekly pipeline review from the CRM — what moved, what is stuck, what will really close this month versus what the CRM says, deals with no next step, and the three conversations worth having — with every number traced to the deals behind it. Works with any CRM the agent can read. Use when the user says \"pipeline review\", \"forecast this month\", \"what's closing\", \"which deals are stuck\", \"sales meeting prep\", \"how's the pipeline\". Not for cleaning the data (crm-hygiene).",
+      "category": "methodology",
+      "tags": [
+        "crm",
+        "pipeline",
+        "forecast",
+        "sales-ops",
+        "behavioral"
+      ],
+      "path": "skills/pipeline-review/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "shopify-store",
+      "name": "Shopify Store",
+      "description": "Work inside the person's Shopify store through their connected account — orders, fulfilment status, refunds, customers, products, variants and inventory levels; answer questions from live data (\"how did we sell this week\", \"where is order 1042\", \"what is low on stock\"); and change product details or inventory only after the person approves the exact change, keeping a log. Never cancels, refunds or fulfils orders. Use when the user says \"Shopify\", \"my store\", \"orders\", \"this order\", \"stock levels\", \"update the product\", \"best sellers\". Needs Shopify connected. Not for auditing listings (catalog-quality).",
+      "category": "ecommerce",
+      "tags": [
+        "shopify",
+        "ecommerce",
+        "orders",
+        "inventory",
+        "products"
+      ],
+      "path": "skills/shopify-store/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "integrations": [
+          "shopify"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "catalog-quality",
+      "name": "Catalog Quality",
+      "description": "Audit an online store's product catalogue the way a merchandiser and a shopper would — titles that say what the product is, descriptions that answer the buyer's questions, images, variants and options that make sense, prices and compare-at prices that are consistent, SEO titles and descriptions, products with no stock or no sales — and propose fixes in batches, written in the brand's voice. Use when the user says \"improve my product pages\", \"audit the catalogue\", \"product descriptions\", \"why don't these products sell\", \"SEO for products\". Not for orders or stock levels (shopify-store).",
+      "category": "methodology",
+      "tags": [
+        "ecommerce",
+        "products",
+        "merchandising",
+        "seo",
+        "behavioral"
+      ],
+      "path": "skills/catalog-quality/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "stripe-revenue",
+      "name": "Stripe Revenue",
+      "description": "Read the person's Stripe account through their connected access — customers, subscriptions, invoices, charges, payment intents, refunds, disputes and balance — to answer revenue questions from live data and to flag what needs attention: failed and retried payments, past-due invoices, disputes with a deadline, unusual refunds. Read-only: never creates charges, refunds, coupons or subscription changes. Use when the user says \"Stripe\", \"how much did we bill\", \"failed payments\", \"past due\", \"disputes\", \"who cancelled\", \"MRR from Stripe\". Needs Stripe connected. Not for defining the metrics themselves (revenue-metrics).",
+      "category": "finance",
+      "tags": [
+        "stripe",
+        "billing",
+        "subscriptions",
+        "payments",
+        "revenue"
+      ],
+      "path": "skills/stripe-revenue/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "integrations": [
+          "stripe"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "revenue-metrics",
+      "name": "Revenue Metrics",
+      "description": "Compute subscription revenue metrics correctly and explain them — MRR and ARR, new, expansion, contraction and churned MRR, logo and revenue churn, net revenue retention, ARPA, collection rate — from billing data (Stripe or an export), with every definition stated and every number reconcilable to the invoices behind it. Use when the user says \"MRR\", \"ARR\", \"churn rate\", \"net retention\", \"NRR\", \"SaaS metrics\", \"investor update numbers\", \"how is revenue growing\". Not for reading Stripe itself (stripe-revenue).",
+      "category": "methodology",
+      "tags": [
+        "saas",
+        "mrr",
+        "churn",
+        "nrr",
+        "behavioral"
+      ],
+      "path": "skills/revenue-metrics/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "notion-workspace",
+      "name": "Notion Workspace",
+      "description": "Work in the person's Notion workspace through their connected account — find pages and databases, read them, answer questions from them, and create pages, add database rows, append content or reorganise a section only after the person approves the exact change; and design a structure people can find things in (a wiki, a projects database, meeting notes, a CRM-lite) when they ask. Never deletes or archives without an explicit yes. Use when the user says \"Notion\", \"in our wiki\", \"add this to Notion\", \"find the page about\", \"organise our Notion\", \"Notion database\". Needs Notion connected.",
+      "category": "productivity",
+      "tags": [
+        "notion",
+        "wiki",
+        "docs",
+        "databases",
+        "knowledge"
+      ],
+      "path": "skills/notion-workspace/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "integrations": [
+          "notion"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "ga4-reporting",
+      "name": "GA4 Reporting",
+      "description": "Answer website and app traffic questions from the person's Google Analytics 4 property through their connected account — sessions, users, sources and channels, landing pages, conversions and key events, devices and countries, trends against the previous period — and explain what changed and the likely why, with every figure tied to the report that produced it. Read-only. Use when the user says \"Google Analytics\", \"GA4\", \"traffic\", \"where do visitors come from\", \"conversions\", \"what changed this week\", \"top pages\", \"bounce\", \"campaign performance\". Needs Google Analytics connected. Not for search queries (search-console).",
+      "category": "analytics",
+      "tags": [
+        "google-analytics",
+        "ga4",
+        "traffic",
+        "conversions",
+        "reporting"
+      ],
+      "path": "skills/ga4-reporting/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "integrations": [
+          "google_analytics"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "search-console",
+      "name": "Search Console",
+      "description": "Read the person's Google Search Console through their connected account — the queries people searched, clicks, impressions, click-through rate and average position by query, page, country and device; sitemaps and their status; and how Google sees a given URL (indexed or not, and why) — to explain organic search performance and find the queries and pages worth working on. Read-only except submitting a sitemap with the person's yes. Use when the user says \"Search Console\", \"what do people search to find us\", \"impressions\", \"position\", \"is this page indexed\", \"organic clicks dropped\". Needs Google Search Console connected. Not for on-site traffic after the click (ga4-reporting).",
+      "category": "analytics",
+      "tags": [
+        "google-search-console",
+        "seo",
+        "search",
+        "indexing",
+        "reporting"
+      ],
+      "path": "skills/search-console/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "integrations": [
+          "google_search_console"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
     }
   ]
 }
