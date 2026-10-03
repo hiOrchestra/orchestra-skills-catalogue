@@ -1337,6 +1337,257 @@
           "summary": "First release."
         }
       ]
+    },
+    {
+      "slug": "seo-audit",
+      "name": "SEO Audit",
+      "description": "Audit a live site the way a search engine and a searcher meet it — whether pages can be found and indexed, what each page tells search about itself (titles, descriptions, headings, canonicals), what is thin, duplicated or competing with itself, and what is slow or broken — and turn it into a short list of fixes ranked by impact, each with the page and the evidence. Use when the user says \"SEO audit\", \"why don't we rank\", \"check my site for SEO\", \"technical SEO\", \"indexing\", \"my traffic dropped\", \"crawl my site\". Not for writing or rewriting a piece (seo-writing) or choosing what to target (keyword-research).",
+      "category": "methodology",
+      "tags": [
+        "seo",
+        "audit",
+        "indexing",
+        "technical-seo",
+        "behavioral"
+      ],
+      "path": "skills/seo-audit/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "keyword-research",
+      "name": "Keyword Research",
+      "description": "Find the searches a business can realistically win and that bring the people it wants — the real queries behind its offer, grouped by intent, weighed by how hard the current results are to beat and how close the searcher is to buying — and turn them into a short list of pages to build or fix. Use when the user says \"keyword research\", \"what should we rank for\", \"what do people search\", \"topics for SEO\", \"find keywords\", \"content gaps\", \"what are competitors ranking for\". Not for writing the page (seo-writing), auditing the site (seo-audit) or planning a calendar (content-plan).",
+      "category": "methodology",
+      "tags": [
+        "seo",
+        "keywords",
+        "search",
+        "targeting",
+        "behavioral"
+      ],
+      "path": "skills/keyword-research/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "social-post",
+      "name": "Social Post",
+      "description": "Write a post that works on the network it is going to — LinkedIn, X, Instagram, Threads, Facebook, TikTok caption — with a first line that stops the scroll, the length and format that network rewards, one idea, a clear next step, in the brand's voice; and offer two or three variants to choose from. Use when the user says \"write a post\", \"LinkedIn post\", \"a tweet\", \"a thread\", \"caption for this\", \"social copy\", \"post about our launch\", \"hook\". Not for turning a long piece into many posts (repurpose-content) or planning the month (content-plan).",
+      "category": "methodology",
+      "tags": [
+        "social",
+        "linkedin",
+        "x",
+        "instagram",
+        "copywriting",
+        "behavioral"
+      ],
+      "path": "skills/social-post/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "knowledge-base",
+      "name": "Knowledge Base",
+      "description": "Build and keep the one set of answers support works from — what the product does, how to do things, policies (refunds, billing, shipping), known issues and their workarounds — written from the documents, FAQs and past replies the business already has, one article per question, each with its source and the date it was last confirmed; and grow it from every new question. Use when the user says \"knowledge base\", \"help center\", \"FAQ\", \"support docs\", \"write the answer down\", \"add this to the docs\", \"what do we tell customers about\". Not for drafting a reply to a customer (support-reply).",
+      "category": "methodology",
+      "tags": [
+        "support",
+        "help-center",
+        "faq",
+        "documentation",
+        "behavioral"
+      ],
+      "path": "skills/knowledge-base/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "support-reply",
+      "name": "Support Reply",
+      "description": "Answer a customer the way the best person on the team would — understand what they actually need, answer from the knowledge base and the policy, say what happens next and when, in the brand's voice — and escalate what should not be answered by an agent (refunds over a limit, legal, security, an angry customer, anything the base does not cover). Drafts for approval unless a rule says otherwise. Use when the user says \"reply to this customer\", \"answer this ticket\", \"draft a response\", \"handle this complaint\", \"what do I tell them\", or forwards a customer email. Not for writing the help center (knowledge-base).",
+      "category": "methodology",
+      "tags": [
+        "support",
+        "customer-service",
+        "tickets",
+        "escalation",
+        "behavioral"
+      ],
+      "path": "skills/support-reply/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "product-spec",
+      "name": "Product Spec",
+      "description": "Turn an idea, a request or a customer problem into a spec a team can build from — the problem and who has it, the evidence, the outcome that would prove it solved, what is in and explicitly out of scope, the user flows, acceptance criteria, risks and open questions — asking before assuming. Use when the user says \"write a spec\", \"PRD\", \"product requirements\", \"spec this feature\", \"user stories\", \"acceptance criteria\", \"what exactly should we build\", \"scope this\". Not for choosing between options (decision-brief), sequencing the work (plan-work) or the customer research itself (feedback-synthesis).",
+      "category": "methodology",
+      "tags": [
+        "product",
+        "prd",
+        "requirements",
+        "spec",
+        "behavioral"
+      ],
+      "path": "skills/product-spec/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "feedback-synthesis",
+      "name": "Feedback Synthesis",
+      "description": "Turn a pile of customer feedback — support tickets, reviews, survey answers, sales call notes, interview transcripts, feature requests — into the few themes that matter: what people struggle with or ask for, how often, who (which segment), in their own words, and what it suggests doing; every theme counted and quoted, never made up. Use when the user says \"what are customers saying\", \"synthesize feedback\", \"themes from these reviews\", \"analyze this survey\", \"top feature requests\", \"voice of the customer\", \"what should we build next\". Not for one interview's notes (meeting-notes) or a market study (research-brief).",
+      "category": "methodology",
+      "tags": [
+        "product",
+        "feedback",
+        "voice-of-customer",
+        "themes",
+        "behavioral"
+      ],
+      "path": "skills/feedback-synthesis/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "account-research",
+      "name": "Account Research",
+      "description": "Research a target company before anyone reaches out — what it does, its size and stage, what changed recently (funding, hires, launches, expansion, a new leader), the signs it has the problem the seller solves, who is likely to own that problem, and the honest reason to write now — from public sources, each fact linked; and score how well it fits the ideal customer. Use when the user says \"research this account\", \"prospect research\", \"find companies like\", \"is X a good fit\", \"build a target list\", \"account brief\", \"who should we contact at\". Not for writing the outreach (outreach-sequence) or a general market study (research-brief).",
+      "category": "methodology",
+      "tags": [
+        "sales",
+        "prospecting",
+        "accounts",
+        "icp",
+        "behavioral"
+      ],
+      "path": "skills/account-research/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "outreach-sequence",
+      "name": "Outreach Sequence",
+      "description": "Write a short outbound sequence to a prospect — a first message built on a real reason to write, two or three follow-ups that each add something new, and a polite close — personalised from the account research, in the seller's voice, under 120 words each, with one clear ask; for email or LinkedIn. Drafts for approval; never sends on its own. Use when the user says \"write a cold email\", \"outreach sequence\", \"follow-ups\", \"prospecting emails\", \"LinkedIn message to\", \"how do I reach out to\", \"sequence for these accounts\". Not for researching the account (account-research) or replying to a customer (support-reply).",
+      "category": "methodology",
+      "tags": [
+        "sales",
+        "outbound",
+        "email",
+        "prospecting",
+        "behavioral"
+      ],
+      "path": "skills/outreach-sequence/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "contract-review",
+      "name": "Contract Review",
+      "description": "Read a contract against the business's own playbook — the positions it wants, accepts and refuses on each clause (liability, indemnity, payment, term and renewal, termination, IP, confidentiality, data protection, governing law) — and return what deviates, how much it matters, the wording to propose instead, and the dates and obligations to track; always as preparation for a decision, never as legal advice. Use when the user says \"review this contract\", \"check this NDA\", \"redline\", \"what should I push back on\", \"is this MSA ok\", \"terms to negotiate\", \"when does this renew\". Not for drafting a contract from scratch or for any dispute or litigation matter — those go to counsel.",
+      "category": "methodology",
+      "tags": [
+        "legal",
+        "contracts",
+        "negotiation",
+        "obligations",
+        "behavioral"
+      ],
+      "path": "skills/contract-review/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
     }
   ]
 }
