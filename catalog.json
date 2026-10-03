@@ -1588,6 +1588,287 @@
           "summary": "First release."
         }
       ]
+    },
+    {
+      "slug": "account-health",
+      "name": "Account Health",
+      "description": "Score how healthy each customer account is from the signals the business already has — product usage, logins, seats used, support tickets and their tone, payments, contract dates, the last real conversation — and list the accounts at risk with the evidence and the date that makes it urgent. Use when the user says \"account health\", \"who is at risk\", \"churn risk\", \"which customers might leave\", \"health score\", \"renewals coming up\", \"customer health dashboard\". Not for what to do about a risky account (retention-play) or for reading feedback themes (feedback-synthesis).",
+      "category": "methodology",
+      "tags": [
+        "customer-success",
+        "churn",
+        "retention",
+        "health-score",
+        "behavioral"
+      ],
+      "path": "skills/account-health/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "retention-play",
+      "name": "Retention Play",
+      "description": "Decide and prepare what to do for one customer account at risk or up for renewal — what is really going wrong, who to talk to, what to offer within what the business allows, the message or the call plan, and how to know it worked — and prepare a renewal or business review with the value delivered. Use when the user says \"save this account\", \"they want to cancel\", \"prepare the renewal\", \"QBR\", \"business review\", \"what do I say to them\", \"win back\", \"they're unhappy\". Not for scoring the whole base (account-health).",
+      "category": "methodology",
+      "tags": [
+        "customer-success",
+        "retention",
+        "renewal",
+        "qbr",
+        "behavioral"
+      ],
+      "path": "skills/retention-play/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "invoice-capture",
+      "name": "Invoice Capture",
+      "description": "Read invoices and receipts — PDFs, photos, forwarded emails — and record each one exactly: supplier, tax ID, invoice number, dates, net, tax and total, currency, what was bought, due date; flag duplicates, missing fields and totals that do not add up; never guess a number. Use when the user says \"log these invoices\", \"enter this receipt\", \"process my bills\", \"extract the invoice data\", \"add to the books\", or sends invoices or receipts. Not for categorising bank movements (expense-categorize) or closing the month (month-end-close).",
+      "category": "methodology",
+      "tags": [
+        "finance",
+        "bookkeeping",
+        "invoices",
+        "receipts",
+        "behavioral"
+      ],
+      "path": "skills/invoice-capture/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "expense-categorize",
+      "name": "Expense Categorize",
+      "description": "Take a bank or card statement export and categorise every movement with the business's own chart of categories, match each one to its invoice or receipt, and list what has no document, what looks duplicated, and what is personal or unusual — learning the rules from the person's corrections. Use when the user says \"categorise my expenses\", \"reconcile the bank\", \"match receipts\", \"what's missing an invoice\", \"clean up the bank export\", or sends a bank CSV. Not for reading invoices (invoice-capture) or the monthly close (month-end-close).",
+      "category": "methodology",
+      "tags": [
+        "finance",
+        "bookkeeping",
+        "reconciliation",
+        "bank",
+        "behavioral"
+      ],
+      "path": "skills/expense-categorize/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "month-end-close",
+      "name": "Month-End Close",
+      "description": "Run the monthly close as a checklist: every bank account reconciled, every invoice in, bills to pay and invoices to chase listed, the month's profit and loss and cash position summarised, what changed versus last month explained, and a clean package for the accountant. Use when the user says \"close the month\", \"month end\", \"monthly numbers\", \"P&L for September\", \"what do I send my accountant\", \"cash position\", \"how did we do this month\". Not for single invoices (invoice-capture) or categorising one export (expense-categorize).",
+      "category": "methodology",
+      "tags": [
+        "finance",
+        "bookkeeping",
+        "close",
+        "pnl",
+        "behavioral"
+      ],
+      "path": "skills/month-end-close/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "inbox-triage",
+      "name": "Inbox Triage",
+      "description": "Go through the person's Gmail inbox and sort it: what needs them today, what can wait, what is waiting on someone else, what is noise — with a one-line summary of each that matters, replies drafted for their yes, and commitments pulled out to track. Never sends, archives or deletes without the rule or the yes. Use when the user says \"go through my inbox\", \"what needs me\", \"triage my email\", \"summarise my emails\", \"draft replies\", \"inbox zero\", \"what did I miss\". Needs Gmail connected. Not for customer support queues (support-reply).",
+      "category": "methodology",
+      "tags": [
+        "assistant",
+        "email",
+        "gmail",
+        "inbox",
+        "behavioral"
+      ],
+      "path": "skills/inbox-triage/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "integrations": [
+          "gmail"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "calendar-management",
+      "name": "Calendar Management",
+      "description": "Keep the person's Google Calendar working for them — the day and week ahead with what each meeting needs, conflicts and double bookings found, slots proposed for a meeting request, focus time protected by their rules, and events created or moved only with their yes. Use when the user says \"what's my day\", \"my week\", \"find a time\", \"schedule a meeting with\", \"move my 3pm\", \"am I free\", \"block time for\", \"prep me for my meetings\". Needs Google Calendar connected. Not for writing up a meeting afterwards (meeting-notes).",
+      "category": "methodology",
+      "tags": [
+        "assistant",
+        "calendar",
+        "scheduling",
+        "meetings",
+        "behavioral"
+      ],
+      "path": "skills/calendar-management/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "integrations": [
+          "googlecalendar"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "demand-forecast",
+      "name": "Demand Forecast",
+      "description": "Forecast how much of each product will sell in the coming weeks or months from the sales history — trend, seasonality, promotions and stock-outs accounted for — with a range, not a single number, and the accuracy of the method on past data shown. Use when the user says \"forecast demand\", \"how much will we sell\", \"sales forecast\", \"plan next quarter's volumes\", \"seasonality\", \"predict orders\". Not for deciding what to reorder (reorder-plan) or general data exploration (explore-dataset).",
+      "category": "methodology",
+      "tags": [
+        "supply-chain",
+        "forecast",
+        "inventory",
+        "sales",
+        "behavioral"
+      ],
+      "path": "skills/demand-forecast/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "reorder-plan",
+      "name": "Reorder Plan",
+      "description": "Decide what to reorder, how much and when — from current stock, open orders, the demand forecast, each supplier's lead time and minimum order — with reorder points and safety stock per product, the products at risk of running out, excess stock tying up cash, and purchase orders drafted for the person's yes. Use when the user says \"what should I reorder\", \"are we running out\", \"reorder points\", \"safety stock\", \"draft purchase orders\", \"overstock\", \"inventory planning\". Not for the forecast itself (demand-forecast).",
+      "category": "methodology",
+      "tags": [
+        "supply-chain",
+        "inventory",
+        "purchasing",
+        "stock",
+        "behavioral"
+      ],
+      "path": "skills/reorder-plan/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "policy-handbook",
+      "name": "Policy Handbook",
+      "description": "Build and keep the company's people handbook — time off, working hours and remote work, expenses and travel, equipment, benefits, conduct, how to raise a concern — from the policies and practices the business already has, one short section per topic, each with its source and the date it was approved, and answer employees' questions from it. Use when the user says \"employee handbook\", \"HR policies\", \"write our time-off policy\", \"what is our policy on\", \"people handbook\", \"update the remote work policy\". Not for handling a specific employee request (employee-requests) or for anything that needs an employment lawyer.",
+      "category": "methodology",
+      "tags": [
+        "people",
+        "hr",
+        "policies",
+        "handbook",
+        "behavioral"
+      ],
+      "path": "skills/policy-handbook/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
+    },
+    {
+      "slug": "employee-requests",
+      "name": "Employee Requests",
+      "description": "Handle the everyday requests and questions employees bring to people ops — time off and its balance, a certificate or letter, a change of personal details, an expense or equipment question, \"who do I ask about\" — by applying the approved handbook, keeping a register of requests and balances, drafting the reply or the letter for the person's yes, and escalating what is sensitive. Use when the user says \"log this time-off request\", \"how many days does X have left\", \"write an employment certificate\", \"an employee asked\", \"people requests\", \"leave tracker\". Not for writing the policy itself (policy-handbook).",
+      "category": "methodology",
+      "tags": [
+        "people",
+        "hr",
+        "time-off",
+        "requests",
+        "behavioral"
+      ],
+      "path": "skills/employee-requests/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": []
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-03",
+          "summary": "First release."
+        }
+      ]
     }
   ]
 }
