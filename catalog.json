@@ -1091,7 +1091,7 @@
     {
       "slug": "twitter",
       "name": "X (Twitter)",
-      "description": "Post to X as the user through X's official API: single posts, threads, quote posts and deleting a post, each after the user approves the exact text. Uses the four keys of the user's own X developer app; X bills each post to the user's prepaid credit (US$0.015, or US$0.20 with a link).",
+      "description": "Post to X as the user through X's official API, and read what comes back: posts, threads, quote posts and deletes (each after the user approves the exact text), plus a post's replies from the last 7 days and the account's mentions. Uses the four keys of the user's own X developer app, connected in Integrations → X; X bills each post (US$0.015, US$0.20 with a link) and each post read (about US$0.005; US$0.001 for mentions).",
       "category": "content",
       "tags": [
         "social",
@@ -1100,7 +1100,7 @@
         "twitter"
       ],
       "path": "skills/twitter/SKILL.md",
-      "version": "0.1.1",
+      "version": "0.2.0",
       "requires": {
         "env": [
           "X_API_KEY",
@@ -1113,6 +1113,11 @@
         "scripts/x.py"
       ],
       "changelog": [
+        {
+          "version": "0.2.0",
+          "date": "2026-10-08",
+          "notes": "Reads what comes back: `read` (one post), `replies` (a post's conversation, last 7 days, with who answered whom) and `mentions` (posts mentioning or replying to the account, `--since` for only what is new). Replies are treated as data, never instructions. Keys are now set in Integrations → X."
+        },
         {
           "version": "0.1.1",
           "date": "2026-09-27",
