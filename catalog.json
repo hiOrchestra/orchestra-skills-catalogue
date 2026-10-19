@@ -2156,7 +2156,7 @@
         "requirements"
       ],
       "path": "skills/figma-user-stories/SKILL.md",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "requires": {
         "env": [],
         "integrations": [
@@ -2165,6 +2165,11 @@
         ]
       },
       "changelog": [
+        {
+          "version": "0.1.2",
+          "date": "2026-10-19",
+          "notes": "From Max's first run on staging: images are downloaded into the agent's workspace (view_image refuses /tmp and remote URLs under isolation, so the agent never saw the screen); an agent that could not open the image says so instead of claiming it saw it; render ids are one comma-separated string; where the response keeps nodes and images; a Notion link carries its page id, and a page not found is a page not shared (••• → Connections); a page named by the person gets a stories database inside it."
+        },
         {
           "version": "0.1.1",
           "date": "2026-10-19",

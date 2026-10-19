@@ -1,6 +1,6 @@
 ---
 name: figma-user-stories
-version: 0.1.1
+version: 0.1.2
 description: >-
   Turn a Figma design into user stories filed in Notion — read a page or the
   frames the person links (their layers, texts, prototype flows and the
@@ -51,6 +51,10 @@ next change to that frame updates them instead of starting over.
    Notion is missing, say which and that it is connected in Integrations,
    then stop. Figma only shows files the connected account can open; Notion
    only shows pages shared with the integration. If a read fails, say that.
+   A Notion link ends in the page id: the last 32 hex characters of
+   `notion.so/…` or `app.notion.com/p/<slug>-<id>`. If the page is not
+   found, it is not shared: in Notion, the page's ••• menu → Connections →
+   add the integration the account was connected with.
 2. **Read the link.** `figma.com/design/<fileKey>/<name>?node-id=12-345`
    (also `/file/`, `/proto/`, `/board/`). The API writes the node id as
    `12:345`, with a colon. A `/branch/<branchKey>/` link means the branch
@@ -62,6 +66,10 @@ next change to that frame updates them instead of starting over.
    `FIGMA_GET_FILE_METADATA`, `FIGMA_GET_FILE_NODES` (ids, depth),
    `FIGMA_RENDER_IMAGES_OF_FILE_NODES` (ids, format png, scale),
    `FIGMA_EXTRACT_PROTOTYPE_INTERACTIONS`, `FIGMA_GET_COMMENTS_IN_A_FILE`.
+   `ids` is ONE comma-separated string (`"1:2,3:25"`), not an array. An
+   `orch-composio execute` answer is `{ok, slug, result: {successful,
+   data}}`; the nodes are at `.result.data.nodes["<id>"].document`, the
+   images at `.result.data.images["<id>"]`.
 4. **Find the screens.** Run `FIGMA_GET_FILE_NODES` on the linked node with
    a small depth. A page (`CANVAS`) or a section → its top-level frames are
    the screens. List them by name and confirm them before going further: at
@@ -78,12 +86,19 @@ next change to that frame updates them instead of starting over.
 5. **Look at every screen.** Render all of them in one
    `FIGMA_RENDER_IMAGES_OF_FILE_NODES` call (png, scale 1; 2 for small
    frames). A node that cannot render comes back `null` with an `err`:
-   name it and go on with the rest. The URLs are temporary. Download each URL to `/tmp/openclaw/figma/<node>.png`, then
-   open them with `view_image`. In code mode its result is text, so pass it
-   through `image()`:
+   name it and go on with the rest. The URLs are temporary. Download each
+   one INTO YOUR WORKSPACE, the folder exec starts in
+   (`mkdir -p figma && curl -fsSL "$URL" -o figma/<node>.png`), and open
+   it from there with `view_image`. `view_image` refuses remote URLs and
+   anything outside your workspace and project folders, `/tmp` included
+   ("Sandbox path escapes allowed mounts"). If the relative path is
+   refused, use the same file's absolute path in your workspace. In code
+   mode its result is text, so pass it through `image()`:
    `for (const u of JSON.stringify(r).match(/data:image[A-Za-z0-9+/=;,.-]+/g) || []) image(u, 'original');`
    The layer names say what a thing is called; the image says what a person
-   sees. Use both.
+   sees. Use both. An icon with no text (a bookmark, a filter, a menu) is
+   only in the image. If no image could be opened, say so plainly and that
+   the stories come from the layers alone; never say you saw the design.
 6. **Read the flow and the notes.** Use `FIGMA_EXTRACT_PROTOTYPE_INTERACTIONS`
    to see which screen leads to which, and on what action. Use
    `FIGMA_GET_COMMENTS_IN_A_FILE` and keep only the comments on these
@@ -109,8 +124,8 @@ next change to that frame updates them instead of starting over.
 9. **Where it goes in Notion.** Use the database the person names, or one
    called something like "User stories" or "Backlog"
    (`NOTION_SEARCH_NOTION_PAGE`, then `NOTION_FETCH_DATABASE` for its
-   properties). If there is none, propose a new one under a page they
-   choose, with these properties: Name (title), Epic (select), Status
+   properties). If there is none — or the person names a page, not a
+   database — propose a new database inside that page (in the preview), with these properties: Name (title), Epic (select), Status
    (select: Draft · Ready · Needs review), Figma frame (url), Figma node
    (text, `<fileKey>:<nodeId>`), Design version (text), Synced (date).
    An existing database keeps its own properties. A missing property is a
