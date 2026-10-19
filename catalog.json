@@ -2142,6 +2142,35 @@
           "summary": "First release."
         }
       ]
+    },
+    {
+      "slug": "figma-user-stories",
+      "name": "Figma → User Stories",
+      "description": "Turn a Figma design into user stories filed in Notion — read a page or the frames the person links (their layers, texts, prototype flows and the designers' comments), look at each screen as an image, ask the questions the design cannot answer, write stories with acceptance criteria, and after the person approves the preview add them to a Notion database, each linked to the frame it came from; later, from a frame's link again, update the stories that frame already has instead of duplicating them. Use when the user shares a figma.com link or says \"user stories from Figma\", \"turn this design into stories\", \"analyse this frame\", \"historias de usuario desde Figma\", \"update the stories for this screen\". Needs Figma and Notion connected. Not for a spec written from an idea with no design (product-spec) nor for general Notion work (notion-workspace).",
+      "category": "design",
+      "tags": [
+        "figma",
+        "notion",
+        "product",
+        "user stories",
+        "requirements"
+      ],
+      "path": "skills/figma-user-stories/SKILL.md",
+      "version": "0.1.0",
+      "requires": {
+        "env": [],
+        "integrations": [
+          "figma",
+          "notion"
+        ]
+      },
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "date": "2026-10-19",
+          "summary": "First release: reads a Figma page or frame (layers, texts, prototype flow, comments, a rendered image of each screen), asks what the design cannot answer, files approved stories in a Notion database linked to their frame, and updates them from the frame later."
+        }
+      ]
     }
   ]
 }
