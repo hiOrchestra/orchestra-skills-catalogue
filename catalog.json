@@ -2156,7 +2156,7 @@
         "requirements"
       ],
       "path": "skills/figma-user-stories/SKILL.md",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "requires": {
         "env": [],
         "integrations": [
@@ -2165,6 +2165,11 @@
         ]
       },
       "changelog": [
+        {
+          "version": "0.1.1",
+          "date": "2026-10-19",
+          "notes": "From the first run on a real file: the design version comes from the nodes call (metadata has none); empty frames are left out and a frame that cannot render is named, not fatal; repeated card texts are placeholder content and become a question; no prototype and no comments is normal for a draft."
+        },
         {
           "version": "0.1.0",
           "date": "2026-10-19",
