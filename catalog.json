@@ -2156,7 +2156,7 @@
         "requirements"
       ],
       "path": "skills/figma-user-stories/SKILL.md",
-      "version": "0.1.3",
+      "version": "0.1.4",
       "requires": {
         "env": [],
         "integrations": [
@@ -2165,6 +2165,11 @@
         ]
       },
       "changelog": [
+        {
+          "version": "0.1.4",
+          "date": "2026-10-19",
+          "notes": "Max never saw an image in three runs: every view_image call wrote its own handling (text(r), r.content) instead of the image() loop, and 'Loaded 1 image' read as success. The loop is now a code block to use unchanged, with a check (name something only the picture shows). No browser fallback to figma.com; rate-limited layers with a working render → draft from the images."
+        },
         {
           "version": "0.1.3",
           "date": "2026-10-19",

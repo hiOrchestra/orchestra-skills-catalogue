@@ -1,6 +1,6 @@
 ---
 name: figma-user-stories
-version: 0.1.3
+version: 0.1.4
 description: >-
   Turn a Figma design into user stories filed in Notion — read a page or the
   frames the person links (their layers, texts, prototype flows and the
@@ -73,8 +73,11 @@ next change to that frame updates them instead of starting over.
    Figma rate-limits a file's reads (429 "Rate limit exceeded"): make the
    calls one after another, never in parallel, and on a 429 wait about a
    minute and retry once. Never fall back to `FIGMA_GET_FILE_JSON` (the
-   whole file, same limit) or to the file's thumbnail: the thumbnail is a
-   small crop of the first frame, not the design.
+   whole file, same limit), to the file's thumbnail (a small crop of the
+   first frame, not the design) or to opening figma.com in a browser (it
+   is not signed in). If the layers stay rate-limited but the render
+   works, carry on from the images and say the layer texts are missing:
+   the picture is enough to draft from.
 4. **Find the screens.** Run `FIGMA_GET_FILE_NODES` on the linked node with
    a small depth. A page (`CANVAS`) or a section → its top-level frames are
    the screens. List them by name and confirm them before going further: at
@@ -98,9 +101,20 @@ next change to that frame updates them instead of starting over.
    it from there with `view_image`. `view_image` refuses remote URLs and
    anything outside your workspace and project folders, `/tmp` included
    ("Sandbox path escapes allowed mounts"). If the relative path is
-   refused, use the same file's absolute path in your workspace. In code
-   mode its result is text, so pass it through `image()`:
-   `for (const u of JSON.stringify(r).match(/data:image[A-Za-z0-9+/=;,.-]+/g) || []) image(u, 'original');`
+   refused, use the same file's absolute path in your workspace.
+   **In code mode the result is a STRING, and you see nothing until it goes
+   through `image()`.** Its "Loaded 1 image into private model context" is
+   not true until then; `text(r)` only prints base64 and `r.content` does
+   not exist. Use exactly this, unchanged:
+
+   ```js
+   const r = await tools.openclaw_direct__view_image({ path: "figma/3-25.png" });
+   for (const u of JSON.stringify(r).match(/data:image[A-Za-z0-9+/=;,.-]+/g) || []) image(u, 'original');
+   ```
+
+   Then check that you saw it: name one thing that is only in the picture
+   (an icon, a photo, a colour) and not in any text layer. If you cannot,
+   you did not see it.
    The layer names say what a thing is called; the image says what a person
    sees. Use both. An icon with no text (a bookmark, a filter, a menu) is
    only in the image. If no image could be opened, say so plainly and that
