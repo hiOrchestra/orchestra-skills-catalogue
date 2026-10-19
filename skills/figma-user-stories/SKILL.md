@@ -1,6 +1,6 @@
 ---
 name: figma-user-stories
-version: 0.1.2
+version: 0.1.3
 description: >-
   Turn a Figma design into user stories filed in Notion — read a page or the
   frames the person links (their layers, texts, prototype flows and the
@@ -70,6 +70,11 @@ next change to that frame updates them instead of starting over.
    `orch-composio execute` answer is `{ok, slug, result: {successful,
    data}}`; the nodes are at `.result.data.nodes["<id>"].document`, the
    images at `.result.data.images["<id>"]`.
+   Figma rate-limits a file's reads (429 "Rate limit exceeded"): make the
+   calls one after another, never in parallel, and on a 429 wait about a
+   minute and retry once. Never fall back to `FIGMA_GET_FILE_JSON` (the
+   whole file, same limit) or to the file's thumbnail: the thumbnail is a
+   small crop of the first frame, not the design.
 4. **Find the screens.** Run `FIGMA_GET_FILE_NODES` on the linked node with
    a small depth. A page (`CANVAS`) or a section → its top-level frames are
    the screens. List them by name and confirm them before going further: at
@@ -83,7 +88,8 @@ next change to that frame updates them instead of starting over.
    landing-page frame is ~300 KB); never read it whole into the
    conversation. The same response carries the file's `version`; keep it.
    A frame with no children is empty: leave it out and say so.
-5. **Look at every screen.** Render all of them in one
+5. **Look at every screen.** Render the screens — the frames, never the
+   page node itself — all of them in one
    `FIGMA_RENDER_IMAGES_OF_FILE_NODES` call (png, scale 1; 2 for small
    frames). A node that cannot render comes back `null` with an `err`:
    name it and go on with the rest. The URLs are temporary. Download each
@@ -114,12 +120,18 @@ next change to that frame updates them instead of starting over.
    yes. Typical gaps: who the user is and with what permission, the data
    rules (required, limits, formats), what an error or an empty state
    does, what is out of this version, and the epic the stories belong to.
-8. **Draft the stories.** Write one story per thing a person can do, not
-   one per screen. Use the form "As a {role}, I want {action}, so that
+8. **Draft the stories.** Before drafting, query the database (step 9)
+   for stories whose Figma node is one of these frames: if there are any,
+   this is an update (step 11), not a new set. The stories come from this
+   reading of the design, not from an earlier conversation, and an earlier
+   yes does not approve a new set. Write one story per thing a person can
+   do, not one per screen. Use the form "As a {role}, I want {action}, so that
    {outcome}". Give each 2–6 acceptance criteria in Given / When / Then,
    covering the happy path plus the error, empty and permission cases the
    design shows or the answers settled. Each story also carries the frame
-   or frames it comes from. Anything still unknown is marked as an open
+   or frames it comes from — the frame's node id (`3:25`), never the
+   page's (`0:1`), or the update in step 11 cannot find them. Anything
+   still unknown is marked as an open
    question on the story, never guessed.
 9. **Where it goes in Notion.** Use the database the person names, or one
    called something like "User stories" or "Backlog"

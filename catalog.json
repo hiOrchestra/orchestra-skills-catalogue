@@ -2156,7 +2156,7 @@
         "requirements"
       ],
       "path": "skills/figma-user-stories/SKILL.md",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "requires": {
         "env": [],
         "integrations": [
@@ -2165,6 +2165,11 @@
         ]
       },
       "changelog": [
+        {
+          "version": "0.1.3",
+          "date": "2026-10-19",
+          "notes": "From Max's second run: Figma calls one at a time with one retry after a 429, never the whole-file JSON or the thumbnail (a crop of the first frame — Max read only the cards and proposed leaving search and filters out); render and link the frames, not the page node; check the database for the frames' stories before drafting (a second request would have duplicated them), and draft from this reading, not from an earlier conversation's approval."
+        },
         {
           "version": "0.1.2",
           "date": "2026-10-19",
