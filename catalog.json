@@ -2156,7 +2156,7 @@
         "requirements"
       ],
       "path": "skills/figma-user-stories/SKILL.md",
-      "version": "0.1.4",
+      "version": "0.1.5",
       "requires": {
         "env": [],
         "integrations": [
@@ -2165,6 +2165,11 @@
         ]
       },
       "changelog": [
+        {
+          "version": "0.1.5",
+          "date": "2026-10-20",
+          "notes": "Figma's REST limits go by the file's plan and the seat: a free Starter / View / Collab seat gets 6 reads a month, so a run spends one nodes call and one render call, and a 429 that survives one retry is the plan's cap — said to the person, not retried."
+        },
         {
           "version": "0.1.4",
           "date": "2026-10-19",

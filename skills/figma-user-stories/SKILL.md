@@ -1,6 +1,6 @@
 ---
 name: figma-user-stories
-version: 0.1.4
+version: 0.1.5
 description: >-
   Turn a Figma design into user stories filed in Notion — read a page or the
   frames the person links (their layers, texts, prototype flows and the
@@ -70,9 +70,16 @@ next change to that frame updates them instead of starting over.
    `orch-composio execute` answer is `{ok, slug, result: {successful,
    data}}`; the nodes are at `.result.data.nodes["<id>"].document`, the
    images at `.result.data.images["<id>"]`.
-   Figma rate-limits a file's reads (429 "Rate limit exceeded"): make the
-   calls one after another, never in parallel, and on a 429 wait about a
-   minute and retry once. Never fall back to `FIGMA_GET_FILE_JSON` (the
+   Figma rate-limits a file's reads by the file's plan and the account's
+   seat, and the limits are small: a Full or Dev seat gets 10–20 reads a
+   minute, a View or Collab seat (any Starter-plan free account) 6 a
+   MONTH. The node, render and prototype reads all count. So spend them
+   carefully: one `FIGMA_GET_FILE_NODES` call for all the frames, one
+   render call for all of them, and nothing read twice. Make the calls one
+   after another, never in parallel. On a 429 wait about a minute and
+   retry once; if it is still 429, it is the plan's cap. Stop, tell the
+   person that their Figma plan or seat is out of API reads (a Full or Dev
+   seat on a paid plan lifts it), and do not keep trying. Never fall back to `FIGMA_GET_FILE_JSON` (the
    whole file, same limit), to the file's thumbnail (a small crop of the
    first frame, not the design) or to opening figma.com in a browser (it
    is not signed in). If the layers stay rate-limited but the render
