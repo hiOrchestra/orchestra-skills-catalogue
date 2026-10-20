@@ -2156,7 +2156,7 @@
         "requirements"
       ],
       "path": "skills/figma-user-stories/SKILL.md",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "requires": {
         "env": [],
         "integrations": [
@@ -2165,6 +2165,11 @@
         ]
       },
       "changelog": [
+        {
+          "version": "0.2.1",
+          "date": "2026-10-20",
+          "notes": "Notion access is chosen when the account is connected and inherited by every page inside the chosen ones, new pages included: a page the integration cannot reach is moved inside a chosen one (or a page already inside one is used), and reconnecting with a broad parent page is the last resort — not '••• → Connections'. The page is checked before the questions, not after the approval."
+        },
         {
           "version": "0.2.0",
           "date": "2026-10-20",

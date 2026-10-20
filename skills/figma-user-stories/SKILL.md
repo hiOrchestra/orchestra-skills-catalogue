@@ -1,6 +1,6 @@
 ---
 name: figma-user-stories
-version: 0.2.0
+version: 0.2.1
 description: >-
   Turn a Figma design into user stories filed in Notion — read a page or the
   frames the person links (their layers, texts, prototype flows and the
@@ -54,7 +54,7 @@ all count. Notion and Composio meter every call too. So a run spends, at most:
 
 | | Figma | Notion |
 |---|---|---|
-| New set | 1 nodes read + 1 render (+ 1 comments read) | 1 search + 1 query (+ 1 create database) + 1 insert per story |
+| New set | 1 nodes read + 1 render (+ 1 comments read) | 1 search + 1 query (+ 1 page check and 1 create database) + 1 insert per story |
 | Update from a frame | 1 nodes read + 1 render | 1 query + 1 update per changed story |
 
 - Nothing is read twice in a conversation: keep what you read in
@@ -74,7 +74,7 @@ all count. Notion and Composio meter every call too. So a run spends, at most:
 1. **Check both connections**: `orch-composio connections`. If Figma or
    Notion is missing, say which and that it is connected in Integrations,
    then stop. Figma only shows files the connected account can open; Notion
-   only shows pages shared with the integration.
+   only the pages chosen when it was connected and what is inside them.
 2. **Read the links — no call needed.**
    `figma.com/design/<fileKey>/<name>?node-id=12-345` (also `/file/`,
    `/proto/`, `/board/`); the API writes the node id as `12:345`. A
@@ -131,8 +131,16 @@ all count. Notion and Composio meter every call too. So a run spends, at most:
    "Backlog" (inside the page they named, if they named one). If found, one
    `NOTION_QUERY_DATABASE` (page_size 100) gives its rows: keep the ones
    whose Figma node is one of these frames. Any → this is an update (step
-   10), not a new set. Not found → the page is not shared: say so (page •••
-   → Connections → add the integration) and stop before writing anything.
+   10), not a new set. No database yet and they named a page → one
+   `NOTION_RETRIEVE_PAGE` on it, so you know now that you can write there.
+   A 404 means the integration cannot reach that page. Notion gives an
+   integration the pages chosen when it was connected AND everything inside
+   them, including pages created later. So say: move the page inside one
+   that was chosen when Notion was connected (drag it there, or ••• → Move
+   to), or name a page that is already inside one. Only if none fits:
+   reconnect Notion in Integrations and choose a broad parent page this time
+   (the product's or the team's top page), so future pages inherit access.
+   Stop before writing anything.
 7. **Ask once, briefly.** Show what was understood — the screens, the flow,
    the roles who appear to use them — then one grouped round of only what
    the design cannot answer, at most ~6 questions, each with your proposed
