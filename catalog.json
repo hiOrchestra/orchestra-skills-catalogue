@@ -2156,7 +2156,7 @@
         "requirements"
       ],
       "path": "skills/figma-user-stories/SKILL.md",
-      "version": "0.1.5",
+      "version": "0.2.0",
       "requires": {
         "env": [],
         "integrations": [
@@ -2165,6 +2165,11 @@
         ]
       },
       "changelog": [
+        {
+          "version": "0.2.0",
+          "date": "2026-10-20",
+          "notes": "A fixed call budget, because Figma gives a free or View/Collab seat 6 reads a month: one nodes read (whole subtree — texts, components and the prototype flow come with it) and one render per run, comments once, no metadata / whole-file / prototype-extraction calls, what was read kept in the workspace and never read twice. Notion: one search, one query, one insert per story with its body in child_blocks, no read-back."
+        },
         {
           "version": "0.1.5",
           "date": "2026-10-20",
