@@ -1,13 +1,14 @@
 ---
 name: wordpress
-version: 0.2.1
+version: 0.2.2
 description: >-
   Create and manage content on a WordPress site via the WordPress REST API
   (v2): draft/publish/update posts and pages, upload images to the media
   library and set featured images, manage categories & tags, and moderate
   comments. Authenticates with an Application Password using Basic auth — site
   URL in WORDPRESS_URL, username in WORDPRESS_USER, app password in
-  WORDPRESS_PWD. Use when the user says "wp", "blog post", "cms",
+  WORDPRESS_PWD — already set up on this workspace: use them directly, never
+  ask the person for them. Use when the user says "wp", "blog post", "cms",
   "article".
 metadata:
   openclaw:

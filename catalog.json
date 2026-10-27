@@ -1258,7 +1258,7 @@
         "publishing"
       ],
       "path": "skills/wordpress/SKILL.md",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "requires": {
         "env": [
           "WORDPRESS_URL",
@@ -1267,6 +1267,11 @@
         ]
       },
       "changelog": [
+        {
+          "version": "0.2.2",
+          "date": "2026-10-27",
+          "notes": "Says the site and its credentials are already set up, so agents use them instead of asking the person (Beon kept having to remind its agents)."
+        },
         {
           "version": "0.2.1",
           "date": "2026-09-16",
